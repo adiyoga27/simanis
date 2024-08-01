@@ -23,10 +23,10 @@ class AccountView extends GetView<AccountController> {
       {
         'title': 'Informasi',
         'options': [
-          [La.infoCircle, 'Tentang simanis App'],
+          [La.infoCircle, 'Tentang SIMANIS App'],
           [La.fileSignature, 'Kebijakan Privasi'],
           [La.fileInvoice, 'Syarat & Ketentuan'],
-          [La.bookOpen, 'Panduan'],
+          // [La.bookOpen, 'Panduan'],
           [La.star, 'Berikan Penilaian'],
           [La.comment, 'Kritik & Saran'],
           [La.phone, 'Kontak Kami']

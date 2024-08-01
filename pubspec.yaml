@@ -66,6 +66,10 @@ flutter:
     - assets/images/foot.png
     - assets/images/medicine.png
     - assets/images/book.png
+    - assets/images/intro1.png
+    - assets/images/intro2.png
+    - assets/images/intro3.png
+    - assets/images/intro4.png
     - assets/images/svg/rating.svg
 
 flutter_native_splash:
