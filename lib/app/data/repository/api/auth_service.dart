@@ -13,6 +13,29 @@ class AuthService {
     }
   }
 
+   static Future<ResponseHandler> registration(Map<String, dynamic> map) async {
+    try {
+      Response response = await Fetch.post('$serverApi/auth/registration', data: FormData.fromMap(map));
+
+      return await ResponseHandler.check(response);
+    } catch (e) {
+
+      return ResponseHandler.catchResponse(e);
+    }
+  }
+  static Future<ResponseHandler> verifyEmail(Map<String, dynamic> map) async {
+    try {
+      Response response = await Fetch.post('$serverApi/auth/resend-verification', data: FormData.fromMap(map));
+
+      return await ResponseHandler.check(response);
+    } catch (e) {
+
+      return ResponseHandler.catchResponse(e);
+    }
+  }
+
+
+
   // forget password
   static Future<ResponseHandler> requestOtp(Map<String, dynamic> map) async {
     try {

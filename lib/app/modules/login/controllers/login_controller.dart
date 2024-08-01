@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
@@ -40,6 +41,28 @@ class LoginController extends GetxController {
         state.submit();
         ResponseHandler res = await AuthService.login(form.value);
 
+        if(res.code == 403){
+                  final payload = {...form.value};
+                  payload['email'] = res.data?['email'];
+
+          Get.dialog(
+            LzConfirm(
+              title: "Verifikasi Email Anda !", 
+              message: "Silahkan check email ${res.data['email']} kotak masuk atau spam email anda !!!",
+              confirmText: "Kirim Ulang Verifikasi",
+              cancelText: "Batal",
+              onConfirm: ()  async {
+
+                  ResponseHandler res = await AuthService.verifyEmail(payload);
+                  if(res.status){
+                    Toasts.show(res.message);
+                  }
+                
+              },
+            )
+          );
+        }
+
         if (res.status) {
           Map<String, dynamic> data = res.data;
 
@@ -77,30 +100,7 @@ class LoginController extends GetxController {
   // OtpApi otpApi = OtpApi();
   Map<String, TextEditingController> fpForms = Forms.create(['username']);
 
-  // request otp code verification
-  Future requestOtp(LzButtonControl state) async {
-    try {
-      Map<String, dynamic> map = fpForms.toMap();
-
-      if (map['username'].toString().trim().isEmpty) {
-        return Toasts.show('Masukkan ID reseller Anda');
-      }
-
-      state.submit();
-      ResponseHandler res = await AuthService.requestOtp(map);
-      state.abort();
-
-      if (!res.status) {
-        return Toasts.show(res.message ?? 'Terjadi kesalahan');
-      }
-
-      String phone = res.data?['hp'] ?? '-';
-      Get.back(result: {'username': map['username'], 'phone': phone});
-    } catch (e, s) {
-      Errors.check(e, s);
-    }
-  }
-
+  
   Future<bool> verifyOtp(String otp, String username) async {
     bool ok = false;
 

@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
 
-    controller.forms.fill({'username': 'user', 'password': 'password'});
+    controller.forms.fill({'username': 'adiyoga27', 'password': 'adiyoga1996'});
 
     return Wrapper(
       child: Scaffold(

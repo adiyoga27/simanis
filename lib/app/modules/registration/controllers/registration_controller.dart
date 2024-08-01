@@ -5,6 +5,9 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/my_location.dart';
 import 'package:simanis/app/core/utils/procis/procis.dart';
 import 'package:simanis/app/core/utils/toast.dart';
+import 'package:simanis/app/data/repository/api/api.dart';
+import 'package:simanis/app/data/repository/api/response_handler.dart';
+import 'package:simanis/app/routes/app_pages.dart';
 
 class RegistrationController extends GetxController {
     final forms = LzForm.make([
@@ -69,6 +72,27 @@ class RegistrationController extends GetxController {
                 }
 
               Toasts.overlay('Memproses...');
+          final payload = {...form.value};
+          payload['role'] = 'user';
+          payload['password_confirmation'] = passwordk;
+          payload['province'] = payload['provinsi'];
+          payload['city'] = payload['kota'];
+          payload['subdistrict'] = payload['kecamatan'];
+          payload['village'] = payload['kelurahan'];
+          payload['kode_pos'] = payload['kode_pos'];
+          payload['is_smoke'] = payload['is_smoke'] == 'Merokok'? 1 : 0;
+
+          ResponseHandler res = await AuthService.registration(payload);
+          if (res.status) {
+            Toasts.dismiss();
+
+            Toasts.show(res.message);
+
+            Get.offAllNamed(Routes.LOGIN);
+          } else {
+            Toasts.dismiss();
+            Toasts.show(res.message);
+          }
 
 
               }else {
