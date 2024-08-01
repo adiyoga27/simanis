@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
 
-    controller.forms.fill({'username': 'adiyoga27', 'password': 'adiyoga1996'});
+    controller.forms.fill({'username': 'adiyoga27', 'password': 'Adiyoga1996'});
 
     return Wrapper(
       child: Scaffold(
@@ -64,29 +64,29 @@ class LoginView extends GetView<LoginController> {
                                                            outline: false,
                                                          ).sized(Get.width),
                              ),
-                          Touch(
-                              onTap: () {
-                                Get.bottomSheet(const ForgetPasswordView()).then((value) {
-                                  if (value != null) {
-                                    // String phone = value['phone'] ?? '';
-                                    // String username = value['username'] ?? '';
+                          // Touch(
+                          //     onTap: () {
+                          //       Get.bottomSheet(const ForgetPasswordView()).then((value) {
+                          //         if (value != null) {
+                          //           // String phone = value['phone'] ?? '';
+                          //           // String username = value['username'] ?? '';
 
-                                    // OtpView.open(
-                                    //     otpLength: 4,
-                                    //     title: 'Verifikasi Kode OTP',
-                                    //     message: 'Kode OTP telah dikirim ke nomor $phone',
-                                    //     onFilled: (String otp) async {
-                                    //       bool ok = await controller.verifyOtp(otp, username);
-                                    //       if (ok) {
-                                    //         Get.back();
-                                    //       } else {
-                                    //         OtpView.reset();
-                                    //       }
-                                    //     });
-                                  }
-                                });
-                              },
-                              child: Textr('Lupa kata sandi?', style: Gfont.fbold(true), padding: Ei.all(15),)),
+                          //           // OtpView.open(
+                          //           //     otpLength: 4,
+                          //           //     title: 'Verifikasi Kode OTP',
+                          //           //     message: 'Kode OTP telah dikirim ke nomor $phone',
+                          //           //     onFilled: (String otp) async {
+                          //           //       bool ok = await controller.verifyOtp(otp, username);
+                          //           //       if (ok) {
+                          //           //         Get.back();
+                          //           //       } else {
+                          //           //         OtpView.reset();
+                          //           //       }
+                          //           //     });
+                          //         }
+                          //       });
+                          //     },
+                          //     child: Textr('Lupa kata sandi?', style: Gfont.fbold(true), padding: Ei.all(15),)),
                         ],
                       ),
                     ),
