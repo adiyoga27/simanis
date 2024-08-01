@@ -14,6 +14,8 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   await AppConfig.init();
+  final controller = Get.put(DashboardController());
+controller.onAppInit();
   // check if user is logged in
   String? token = storage.read('token');
   bool isLogged = (token != null);

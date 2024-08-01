@@ -12,21 +12,19 @@ class HomeController extends GetxController {
   Future initHomePage() async {
     isLoading(true);
 
-    // logg('--- init token ${storage.read('token')}', limit: 90000);
-    // logg('--- init home ${storage.read('user')}');
 
     try {
 
    
 
       // get user details
-      await Get.find<AccountController>().getProfile();
+      // await Get.find<AccountController>().getProfile();
 
       // set data user
       user = await Auth.user();
 
      
-      update(['appbar', 'profile']);
+      update(['appbar']);
 
    
     } catch (e, s) {

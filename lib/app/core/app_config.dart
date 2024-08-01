@@ -40,7 +40,6 @@ class AppConfig {
     storage = GetStorage();
 
     // listen to firestore app config
-    Get.lazyPut<DashboardController>(() => DashboardController(),);
 
 
 
