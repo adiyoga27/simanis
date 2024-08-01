@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:simanis/app/modules/login/controllers/login_controller.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -13,6 +14,10 @@ class HomeBinding extends Bindings {
 
     Get.lazyPut<HomeController>(
       () => HomeController(),
+    );
+
+    Get.lazyPut<LoginController>(
+      () => LoginController(),
     );
   }
 }

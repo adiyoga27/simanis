@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
 import 'package:simanis/app/data/repository/api/response_handler.dart';
+import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/modules/home/controllers/home_controller.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 import 'package:simanis/app/widgets/forms/forms.dart';
 
-class LoginController extends GetxController {
+class LoginController extends GetxController  {
   final forms = LzForm.make(['username', 'password']);
   // Map<String, TextEditingController> forms = Forms.create(['username', 'password']);
   // Map<String, FocusNode> nodes = Forms.createNodes(['username', 'password']);
@@ -29,6 +29,7 @@ class LoginController extends GetxController {
 
   // login with username and password
   Future login(LzButtonControl state) async {
+
     try {
       final form = LzForm.validate(forms,
           required: ['*'],
@@ -131,9 +132,9 @@ class LoginController extends GetxController {
   Future logout() async {
     try {
       Toasts.overlay('Logging out...');
-
+      final auth = await Auth.user();
       // remove user data from local storage
-      await Storage.remove(only: ['token', '_vmoney_pin_applied']);
+      await Storage.remove(only: ['token', 'user']);
 
       // unsubscribe to topic by username, and all
       // await FbMessaging.unsubscribeTopic(['${auth.idmember}', 'all']);

@@ -87,7 +87,7 @@ class AccountController extends GetxController {
       Get.back();
 
       // go to login page
-      await Storage.remove(only: ['token', '_vmoney_pin_applied']);
+      await Storage.remove(only: ['token']);
 
       Get.delete<HomeController>();
 

@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/core/utils/toast.dart';
 
 class DashboardController extends GetxController {
   RxDouble headerHeight = 370.0.obs;
@@ -24,11 +28,23 @@ class DashboardController extends GetxController {
     }
   }
 
+  Future onAppInit() async {
+    isLoading.value = true;
+    Toasts.show('Loading data...');
+      Timer(2.s, () {
+        Toasts.dismiss();
+      });
+    // if selected client is empty, show dialog
+   
+    isLoading.value = false;
+  }
+
 @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+    onAppInit();
     isLoading.value = false;
+
   }
 
 

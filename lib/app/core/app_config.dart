@@ -39,13 +39,7 @@ class AppConfig {
 
     // listen to firestore app config
 
-    // remove all data in local storage that is not needed
-    await Storage.remove(
-        only: ['_invoice', '_member_id_registration', '_register_type']);
-    await Storage.remove(only: ['_new_member', '_register_type']);
 
-    // clean all local storage data we want when the app is opened at the first time
-    storage.remove('banks');
 
     Utils.orientation(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

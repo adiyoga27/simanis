@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simanis/app/core/theme/theme.dart';
-import 'package:simanis/app/core/utils/refrestordit.dart';
 import 'package:simanis/app/core/utils/shortcut.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:simanis/app/modules/home/views/widgets/appbar.dart';

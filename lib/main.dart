@@ -19,7 +19,7 @@ void main() async {
   bool isLogged = (token != null);
 
   f.Fetchly.init(
-      baseUrl: 'https://master.saddannusantara.com/api/v1/',
+      baseUrl: 'https://simanis.codingaja.my.id/api/',
       onRequest: RequestHandler.onRequest,
       config: FetchlyConfig(printLimit: 5000));
 
@@ -39,7 +39,7 @@ void main() async {
     GetMaterialApp(
       title: "Simanis",
       theme: appTheme,
-      initialRoute: isLogged ? Routes.HOME : AppPages.INITIAL,
+      initialRoute: isLogged ? Routes.APPINTRO : AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
       builder: (BuildContext context, Widget? child) {

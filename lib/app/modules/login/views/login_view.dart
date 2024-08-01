@@ -6,13 +6,12 @@ import 'package:simanis/app/core/values/value.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
-import 'forgot_password_view.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
+Get.lazyPut(()=>LoginController());
     controller.forms.fill({'username': 'adiyoga27', 'password': 'Adiyoga1996'});
 
     return Wrapper(
