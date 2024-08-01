@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lazyui/lazyui.dart';
 
 class Toasts {

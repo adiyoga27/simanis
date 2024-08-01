@@ -1,4 +1,4 @@
-part of skeleton;
+part of 'skeleton.dart';
 
 class SkWidListAddress extends StatelessWidget {
   const SkWidListAddress({super.key});

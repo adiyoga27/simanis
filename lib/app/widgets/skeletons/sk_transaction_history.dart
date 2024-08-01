@@ -1,6 +1,7 @@
-part of skeleton;
+part of 'skeleton.dart';
 
 class SkTransactionHistory extends StatelessWidget {
+  // ignore: use_super_parameters
   const SkTransactionHistory({Key? key}) : super(key: key);
 
   @override

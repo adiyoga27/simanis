@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/data/models/user_model.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
-import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/modules/account/controllers/account_controller.dart';
 
 class HomeController extends GetxController {

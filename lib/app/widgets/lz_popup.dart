@@ -1,4 +1,4 @@
-part of widget;
+part of 'widget.dart';
 
 class LzPopup {
   static void show(BuildContext? context,

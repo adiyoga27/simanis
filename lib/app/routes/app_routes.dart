@@ -8,6 +8,8 @@ abstract class Routes {
   static const APPINTRO = _Paths.APP_INTRO;
   static const ACCOUNT = _Paths.ACCOUNT;
   static const WEBVIEW = _Paths.WEBVIEW;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const EDUCATION = _Paths.EDUCATION;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const APP_INTRO = '/app-intro';
   static const ACCOUNT = '/account';
   static const WEBVIEW = '/webview';
+  static const DASHBOARD = '/dashboard';
+  static const EDUCATION = '/education';
 }

@@ -1,6 +1,7 @@
-part of skeleton;
+part of 'skeleton.dart';
 
 class SkUiShop extends StatelessWidget {
+  // ignore: use_super_parameters
   const SkUiShop({Key? key}) : super(key: key);
 
   @override

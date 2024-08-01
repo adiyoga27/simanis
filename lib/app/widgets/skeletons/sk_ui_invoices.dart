@@ -1,4 +1,4 @@
-part of skeleton;
+part of 'skeleton.dart';
 
 class SkUiInvoices extends StatelessWidget {
   const SkUiInvoices({super.key});

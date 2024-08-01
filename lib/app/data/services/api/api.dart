@@ -2,10 +2,6 @@ library api2;
 
 import 'package:dio/dio.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
-import 'package:simanis/app/core/values/value.dart';
-import 'package:simanis/app/data/services/storage/storage.dart';
-
-import '../../repository/api/api.dart';
 
 part 'account.dart';
 // part 'achievement.dart';

@@ -17,7 +17,7 @@ void main() async {
     GetMaterialApp(
       title: "Simanis",
       theme: appTheme,
-      initialRoute: isLogged ? Routes.ACCOUNT : AppPages.LOGIN,
+      initialRoute: isLogged ? Routes.HOME : AppPages.LOGIN,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
       builder: (BuildContext context, Widget? child) {

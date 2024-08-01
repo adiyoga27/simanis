@@ -4,6 +4,8 @@ import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
 import '../modules/app_intro/bindings/app_intro_binding.dart';
 import '../modules/app_intro/views/app_intro_view.dart';
+import '../modules/education/bindings/education_binding.dart';
+import '../modules/education/views/education_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -45,6 +47,11 @@ class AppPages {
       name: _Paths.WEBVIEW,
       page: () => const WebviewView(),
       binding: WebviewBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDUCATION,
+      page: () => const EducationView(),
+      binding: EducationBinding(),
     ),
   ];
 }

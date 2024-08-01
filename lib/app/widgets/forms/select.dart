@@ -28,6 +28,7 @@ class Select extends StatelessWidget {
   final TextStyle? textStyle;
   final List<Option> options;
 
+  // ignore: use_super_parameters
   const Select({
     Key? key,
     required this.label,
@@ -127,6 +128,7 @@ class SelectWidget extends StatefulWidget {
   final List<Option> options;
   final Function(Option?, void Function(Option))? onTap;
 
+  // ignore: use_super_parameters
   const SelectWidget(
       {Key? key,
       required this.label,

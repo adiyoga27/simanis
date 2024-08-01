@@ -59,6 +59,14 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/logo.png
+    - assets/images/t_splash.png
+    - assets/images/profile.png
+    - assets/images/blood.png
+    - assets/images/foot.png
+    - assets/images/medicine.png
+    - assets/images/book.png
+    - assets/images/svg/rating.svg
 
 flutter_native_splash:
   color: "#ffffff"
