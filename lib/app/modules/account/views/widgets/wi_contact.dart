@@ -1,4 +1,5 @@
-part of account;
+part of '../account.dart';
+
 
 class WiContact extends StatelessWidget {
   const WiContact({Key? key}) : super(key: key);

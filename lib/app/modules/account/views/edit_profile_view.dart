@@ -1,4 +1,4 @@
-part of account;
+part of 'account.dart';
 
 class EditProfileView extends GetView<AccountUpdateController> {
   final Map<String, String?> data;

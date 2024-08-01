@@ -1,4 +1,4 @@
-part of widget;
+part of 'widget.dart';
 
 class FetcherController<T> {
   final Function() refresh;

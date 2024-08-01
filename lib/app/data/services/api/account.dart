@@ -1,4 +1,4 @@
-part of api2;
+part of 'api.dart';
 
 class AccountApi extends Fetch {
   Future<ResHandler> getProfile() async => await get('/consumer/profile');

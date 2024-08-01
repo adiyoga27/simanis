@@ -32,8 +32,8 @@ class DashboardView extends GetView<DashboardController> {
                          Expanded(
                           child: Container(
                             padding: Ei.only(h: 20, t: 350 / 3),
-                            child: Center(
-                              child: const Column(
+                            child: const Center(
+                              child: Column(
                                 mainAxisAlignment: Maa.center,
                                 children: [],
                               ),
@@ -45,8 +45,8 @@ class DashboardView extends GetView<DashboardController> {
                           child: Obx(() {
                             bool isLoading = controller.isLoading.value;
                             return Column(children: [
-                              Padding(
-                                padding: const EdgeInsets.all(25.0),
+                             const Padding(
+                                padding: EdgeInsets.all(25.0),
                                 child: Textr(
                                   'Menu',
                                   style: TextStyle(
@@ -97,8 +97,8 @@ class DashboardView extends GetView<DashboardController> {
                                                               children: [
                                                                 
                                                                 LzImage( icons[i], size: 45, radius: 50),
-                                                                SizedBox(width: 14),
-                                                                Textr(item, style: TextStyle(fontWeight: FontWeight.bold),
+                                                                const SizedBox(width: 14),
+                                                                Textr(item, style: const TextStyle(fontWeight: FontWeight.bold),
                                                                   ),
                                                               ],
                                                             ),

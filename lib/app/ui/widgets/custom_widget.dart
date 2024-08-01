@@ -1,4 +1,4 @@
-part of widget;
+part of 'widget.dart';
 
 class WidVersionInfo extends StatelessWidget {
   final String? title, message;

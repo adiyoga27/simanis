@@ -1,5 +1,4 @@
-part of widget;
-
+part of 'widget.dart';
 class SizeTransitionAnimate extends StatelessWidget {
   final Widget child;
   final int duration;

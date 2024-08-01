@@ -1,4 +1,4 @@
-part of account;
+part of '../account.dart';
 
 class WiAccountOption extends GetView<AccountController> {
   final String label;

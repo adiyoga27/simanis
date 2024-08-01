@@ -1,4 +1,4 @@
-part of account;
+part of '../account.dart';
 
 class WiAccountProfile extends StatelessWidget {
   final Function()? onTapImage;
@@ -22,7 +22,7 @@ class WiAccountProfile extends StatelessWidget {
                           height: 130,
                           padding: Ei.all(5),
                           decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, border: Br.all(color: AppColor.primary, width: 1)),
-                          child: ClipRRect(borderRadius: Br.circle, child: LzImage("", fit: BoxFit.cover))),
+                          child: ClipRRect(borderRadius: Br.circle, child: const LzImage("", fit: BoxFit.cover))),
                     ),
                     Column(
                       children: [

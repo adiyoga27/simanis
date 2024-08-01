@@ -1,4 +1,4 @@
-part of widget;
+part of 'widget.dart';
 
 class DateTimeCountDown extends StatelessWidget {
   final DateTime expiredTime;

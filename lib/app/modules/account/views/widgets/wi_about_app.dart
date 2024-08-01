@@ -1,4 +1,5 @@
-part of account;
+part of '../account.dart';
+
 
 class WiAboutApp extends StatelessWidget {
   const WiAboutApp({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-part of widget;
+part of 'widget.dart';
 
 // class TextInputTransparent extends StatelessWidget {
 //   final String? hint;

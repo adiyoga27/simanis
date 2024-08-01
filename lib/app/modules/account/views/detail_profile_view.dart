@@ -1,4 +1,4 @@
-part of account;
+part of 'account.dart';
 
 class DetailProfileView extends GetView<AccountDetailController> {
   const DetailProfileView({Key? key}) : super(key: key);

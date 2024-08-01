@@ -1,4 +1,5 @@
-part of account;
+part of '../account.dart';
+
 
 class WiPhotoChangePreview extends StatelessWidget {
   final String path;

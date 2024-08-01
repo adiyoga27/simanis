@@ -1,4 +1,4 @@
-part of account;
+part of 'account.dart';
 
 class ChangePasswordView extends GetView<AccountController> {
   const ChangePasswordView({Key? key}) : super(key: key);
