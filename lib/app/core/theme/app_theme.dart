@@ -18,3 +18,4 @@ ThemeData appTheme = ThemeData(
 );
 
 Color primaryColor = Utils.hex('121212');
+Color secondaryColor = Utils.hex('f7f7f7');

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/core/theme/theme.dart';
 import 'package:simanis/app/core/utils/refrestordit.dart';
 import 'package:simanis/app/core/utils/shortcut.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
@@ -14,6 +15,7 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     List<String> shortcuts = ['Screening Kaki', 'Pilar Tata Laksana', 'Farmakologi', 'Pemantauan Gula Darah' ];
     return Scaffold(
+      backgroundColor: secondaryColor,
       body: Stack(
         children: [
           const Header(),
@@ -42,9 +44,7 @@ class DashboardView extends GetView<DashboardController> {
                         ),
                         Container(
                           padding: Ei.all(35),
-                          child: Obx(() {
-                            bool isLoading = controller.isLoading.value;
-                            return Column(children: [
+                          child: Column(children: [
                              const Padding(
                                 padding: EdgeInsets.all(25.0),
                                 child: Textr(
@@ -64,7 +64,6 @@ class DashboardView extends GetView<DashboardController> {
                                               'book.png',
                                               'medicine.png',
                                               'blood.png',
-
                                               ];
                                               return Container(
                                                 margin: Ei.only(b: 5),
@@ -75,7 +74,7 @@ class DashboardView extends GetView<DashboardController> {
                                                   ],
                                                       borderRadius: Br.radius(7)),
                                                       child: InkTouch(
-                                                        onTap: isLoading ? null : () {
+                                                        onTap:  () {
                                                            if (i == 0) {
                                                               return Get.toNamed(
                                                                   Routes
@@ -83,9 +82,12 @@ class DashboardView extends GetView<DashboardController> {
                                                             } else if (i == 1) {
                                                               Get.toNamed(Routes
                                                                   .EDUCATION);
-                                                            } else {
+                                                            } else if (i == 2) {
                                                               Get.toNamed(Routes
-                                                                  .HOME);
+                                                                  .EDUCATION);
+                                                            }else {
+                                                              Get.toNamed(Routes
+                                                                  .ACCOUNT);
                                                             }
                                                         },
                                                           padding: Ei.sym(v: 15, h: 15),
@@ -108,8 +110,8 @@ class DashboardView extends GetView<DashboardController> {
                                   })
                                 ,
                               )
-                            ],);
-                          },),
+                            ],)
+                          
                         )
                     ],),
                   ),

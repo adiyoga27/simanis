@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:simanis/app/modules/login/controllers/login_controller.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
 
@@ -37,7 +38,7 @@ class Appbar extends GetView<DashboardController> {
                             
                             children: [
                               InkWell(
-                                onTap: ()=> Get.toNamed(Routes.HOME),
+                                onTap: ()=> Get.toNamed(Routes.ACCOUNT),
                                 child: const LzImage('profile.png',
                                     size: 45, radius: 50),
                               ),
@@ -71,7 +72,8 @@ class Appbar extends GetView<DashboardController> {
                                             message:
                                                 'Are you sure want to logout from this account?',
                                             onConfirm: () {
-                                                
+                                                final LoginController c = Get.put(LoginController());
+                                                c.logout();
                                           })
                                     );
                                      

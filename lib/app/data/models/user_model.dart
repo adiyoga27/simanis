@@ -6,7 +6,7 @@ class UserModel {
   String? role;
   String? tokenType;
   String? accessToken;
-  Null? avatar;
+  String? avatar;
   String? expiresAt;
 
   UserModel(
@@ -33,7 +33,7 @@ class UserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['username'] = username;
