@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart' hide Errors;
 import 'package:simanis/app/core/values/colors.dart';
 import 'package:simanis/app/core/values/value.dart';
+import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
 import 'forgot_password_view.dart';
@@ -51,6 +52,18 @@ class LoginView extends GetView<LoginController> {
                             onTap: (state) => controller.login(state),
                             outline: false,
                           ).sized(Get.width),
+                     
+                             Padding(
+                               padding:  Ei.only(l:25.0, r: 25.0, t: 5.0),
+                               child: LzButton(
+                                
+                                                           color: const Color.fromARGB(195, 255, 52, 52),
+                                                           textColor: Colors.white,
+                                                           text: 'DAFTAR BARU',
+                                                           onTap: (state) => Get.toNamed(Routes.REGISTRATION),
+                                                           outline: false,
+                                                         ).sized(Get.width),
+                             ),
                           Touch(
                               onTap: () {
                                 Get.bottomSheet(const ForgetPasswordView()).then((value) {
