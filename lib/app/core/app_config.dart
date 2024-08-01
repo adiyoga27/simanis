@@ -1,8 +1,10 @@
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
+import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 
 class AppConfig {
   /* ------------------------------------------------------------
@@ -38,6 +40,7 @@ class AppConfig {
     storage = GetStorage();
 
     // listen to firestore app config
+    Get.lazyPut<DashboardController>(() => DashboardController(),);
 
 
 

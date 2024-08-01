@@ -30,7 +30,7 @@ class DashboardController extends GetxController {
 
   Future onAppInit() async {
     isLoading.value = true;
-    Toasts.show('Loading data...');
+    // Toasts.show('Loading data...');
       Timer(2.s, () {
         Toasts.dismiss();
       });
@@ -43,7 +43,7 @@ class DashboardController extends GetxController {
   void onInit() {
     super.onInit();
     onAppInit();
-    isLoading.value = false;
+    // isLoading.value = false;
 
   }
 
