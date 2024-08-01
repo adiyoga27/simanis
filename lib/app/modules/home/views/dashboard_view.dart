@@ -15,13 +15,39 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     List<String> shortcuts = ['Screening Kaki', 'Pilar Tata Laksana', 'Farmakologi', 'Pemantauan Gula Darah' ];
     return Scaffold(
-      backgroundColor: secondaryColor,
-      body: Stack(
+      body:   Stack(
         children: [
-          const Header(),
-          Refreshtordit(
-            onRefresh: () => controller.onScroll,
-            child: LzListView(
+           Stack(
+          children: [
+            Container(
+              width: Get.width,
+              height: controller.headerHeight.value,
+              color: Colors.blueGrey,
+              margin: Ei.only(b: 30),
+            ),
+            Positioned(
+                bottom: 120,
+                right: -70,
+                child:
+                    const Icon(Ti.fingerprint, color: Colors.white12, size: 250)
+                        .lz
+                        .rotate(25)),
+            Positioned(
+              bottom: 12,
+              right: -10,
+              left: -10,
+              child: Container(
+                width: Get.width,
+                height: 30,
+                color: Colors.blueGrey,
+              ).lz.rotate(3),
+            )
+          ],
+        ),
+          // Refreshtordit(
+            // onRefresh: () => controller.onScroll,
+            // child: 
+            LzListView(
                 padding: Ei.zero,
               scrollLimit: const [50, 150],
               children: [
@@ -118,12 +144,14 @@ class DashboardView extends GetView<DashboardController> {
                 )
               ],
             ),
-          ),
+          // ),
         const Appbar()
 
         ],
       )
-    );
+      );
+      
+      
   }
 }
 
@@ -132,7 +160,9 @@ class Header extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Stack(
+    return 
+    // Obx(() => 
+    Stack(
           children: [
             Container(
               width: Get.width,
@@ -158,6 +188,7 @@ class Header extends GetView<DashboardController> {
               ).lz.rotate(3),
             )
           ],
-        ));
+        );
+        // )
   }
 }
