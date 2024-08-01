@@ -13,6 +13,8 @@ class DashboardView extends GetView<DashboardController> {
   const DashboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => DashboardController());
+
     List<String> shortcuts = ['Screening Kaki', 'Pilar Tata Laksana', 'Farmakologi', 'Pemantauan Gula Darah' ];
     return Scaffold(
       body:   Stack(
