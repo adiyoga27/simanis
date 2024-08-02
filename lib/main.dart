@@ -13,12 +13,12 @@ import 'app/data/services/storage/storage.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
   await AppConfig.init();
-  final controller = Get.put(DashboardController());
-controller.onAppInit();
+
   // check if user is logged in
   String? token = storage.read('token');
-  bool isLogged = (token != null);
 
   f.Fetchly.init(
       baseUrl: 'https://simanis.codingaja.my.id/api/',
@@ -39,14 +39,13 @@ controller.onAppInit();
 
   runApp(
     GetMaterialApp(
-      title: "Simanis",
-      theme: appTheme,
-      initialRoute: isLogged ? Routes.HOME : AppPages.INITIAL,
-      getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
-      builder: (BuildContext context, Widget? child) {
-        return LazyUi.builder(context, child);
-      },
+      title: "Simanis",
+      defaultTransition: Transition.cupertino,
+      theme: appTheme,
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      builder: LazyUi.builder,
     ),
   );
 }

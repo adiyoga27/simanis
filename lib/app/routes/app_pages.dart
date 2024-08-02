@@ -8,6 +8,8 @@ import '../modules/education/bindings/education_binding.dart';
 import '../modules/education/views/education_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/initial/bindings/initial_binding.dart';
+import '../modules/initial/views/initial_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
@@ -20,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.INITIAL;
   static const LOGIN = Routes.LOGIN;
   static const APPINTRO = Routes.APPINTRO;
 
@@ -59,6 +61,11 @@ class AppPages {
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
       binding: RegistrationBinding(),
+    ),
+    GetPage(
+      name: _Paths.INITIAL,
+      page: () => const InitialView(),
+      binding: InitialBinding(),
     ),
   ];
 }
