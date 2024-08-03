@@ -10,8 +10,8 @@ class WiContact extends StatelessWidget {
         values = [
           'Jalan. Ahmad Yani Utara, Gang Sriti No. 88, Kel. Peguyangan, Kec. Denpasar Utara, Kota Denpasar, Bali 80115.',
           '+62 3619 0083 84',
-          'varashsaddannusantara@gmail.com',
-          'https://saddannusantara.com/'
+          'adiyoga27@codingaja.com',
+          'https://codingaja.com/'
         ];
 
     return Container(
@@ -34,7 +34,7 @@ class WiContact extends StatelessWidget {
                       physics: BounceScroll(),
                       child: Col(
                         children: List.generate(labels.length, (i) {
-                          List<String> links = ['tel:+623619008384', 'mailto:itvarash@gmail.com', 'https://saddannusantara.com/'];
+                          List<String> links = ['tel:+623619008384', 'mailto:adiyoga27@codingaja.com', 'https://codingaja.com/'];
 
                           return InkTouch(
                             onTap: () {

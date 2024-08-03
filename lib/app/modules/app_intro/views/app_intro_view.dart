@@ -27,16 +27,16 @@ class AppIntroView extends GetView<AppIntroController> {
       'intro4.png'
     ];
     List<String> labels = [
-      'Selamat Datang di Varash!',
+      'Selamat Datang di SIMANIS!',
       'Promo Belanja!',
       'Semua Bisa Menjadi Nyata!',
       'Tunggu Apalagi?'
     ];
     List<String> descriptions = [
-      'Aplikasi yang memudahkan Anda dalam melakukan pembelian semua produk dan layanan Varash.',
-      'Temukan banyak promo belanja mulai dari awal bulan hingga akhir bulan, hanya dalam satu genggaman!',
-      'Wujudkan impian Anda sekarang bersama Varash!',
-      'Ayo pakai aplikasi Varash dan rasakan semua manfaatnya!'
+      'Aplikasi yang membantu anda dalam menangani diabetes',
+      'Rawat Kaki anda agar mengatasi kanker kaki',
+      'Lakukan olahraga teratur',
+      'Cek nutrisi yang dibutuhkan',
     ];
 
     Widget bubble(double size, [Color? color]) => Container(

@@ -24,7 +24,7 @@ class WidVersionInfo extends StatelessWidget {
                     children: [
                       SvgPicture.asset('$assetImage/maintenance.svg', height: 90, width: 90),
                       Textr(
-                          'Terdapat pembaruan pada aplikasi Varash, versi yang Anda gunakan saat ini adalah $version, silakan perbarui aplikasi Anda.',
+                          'Terdapat pembaruan pada aplikasi SIMANIS, versi yang Anda gunakan saat ini adalah $version, silakan perbarui aplikasi Anda.',
                           style: Gfont.muted,
                           margin: Ei.only(t: 25),
                           textAlign: Ta.center),

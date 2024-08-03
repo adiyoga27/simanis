@@ -16,7 +16,7 @@ class AppConfig {
   static const bool botActive = true;
   static const String botToken =
       '5935937070:AAEJZqlHTleJAwxFAiDknaii1F85oAve520';
-  static const String botChatId = '-1002180107037'; // Varash Bot
+  static const String botChatId = '-1002180107037'; // SIMANIS Bot
 
   /* ------------------------------------------------------------
   | Server Base URL
