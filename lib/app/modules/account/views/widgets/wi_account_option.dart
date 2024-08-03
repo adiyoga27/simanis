@@ -40,16 +40,16 @@ class WiAccountOption extends GetView<AccountController> {
         break;
 
    
-      case 'Tentang Varash App':
+      case 'Tentang SIMANIS App':
         Helpers.bottomSheet(const WiAboutApp(), dragable: true);
         break;
 
       case 'Kebijakan Privasi':
-        Get.toNamed(Routes.WEBVIEW, arguments: Webview(title: label, url: 'https://reseller.saddannusantara.com/privacy-policy.php'));
+        Get.toNamed(Routes.WEBVIEW, arguments: Webview(title: label, url: 'https://flutter.dev'));
         break;
 
       case 'Syarat & Ketentuan':
-        Get.toNamed(Routes.WEBVIEW, arguments: Webview(title: label, url: 'https://reseller.saddannusantara.com/terms.php'));
+        Get.toNamed(Routes.WEBVIEW, arguments: Webview(title: label, url: 'https://flutter.dev'));
         break;
 
 

@@ -73,6 +73,10 @@ flutter:
     - assets/images/intro2.png
     - assets/images/intro3.png
     - assets/images/intro4.png
+    - assets/images/edukasi.png
+    - assets/images/foot.png
+    - assets/images/nutrisi.png
+    - assets/images/sport.png
     - assets/images/svg/rating.svg
 
 flutter_native_splash:

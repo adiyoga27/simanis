@@ -33,7 +33,7 @@ class EducationView extends GetView<EducationController> {
                       column: 2,
                       children: List.generate(4, (i) {
                         List<String> labels = ['Edukasi', 'TNM', 'Latihan Fisik', 'Perawatan Kaki'],
-                            icons = ['svg/rating.svg','svg/rating.svg','svg/rating.svg','svg/rating.svg'];
+                            icons = ['edukasi.png','nutrisi.png','sport.png','foot.png'];
                         // List<String> desc = ['Lihat promo kompetisi Anda.'];
           
                         return InkTouch(

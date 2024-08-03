@@ -26,22 +26,12 @@ class AccountView extends GetView<AccountController> {
           [La.infoCircle, 'Tentang SIMANIS App'],
           [La.fileSignature, 'Kebijakan Privasi'],
           [La.fileInvoice, 'Syarat & Ketentuan'],
-          // [La.bookOpen, 'Panduan'],
           [La.star, 'Berikan Penilaian'],
           [La.comment, 'Kritik & Saran'],
           [La.phone, 'Kontak Kami']
         ]
       },
-      // {
-      //   'title': 'Pengaturan',
-      //   'options': [
-      //     [
-      //       La.cog,
-      //       'Pengaturan Data',
-      //       {'key': GlobalKey()}
-      //     ],
-      //   ]
-      // },
+    
       {
         'title': 'Akun',
         'options': [
@@ -56,7 +46,7 @@ class AccountView extends GetView<AccountController> {
           AppBar(title: const Text('Profil Saya'), centerTitle: true,
            leading: IconButton(
     icon: const Icon(Icons.arrow_back, color: Colors.black),
-    onPressed: () => Get.offAllNamed(Routes.HOME),
+    onPressed: () => {},
   ), ),
       backgroundColor: Colors.white,
       body: Refreshtor(

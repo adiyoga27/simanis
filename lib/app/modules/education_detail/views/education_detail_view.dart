@@ -3,6 +3,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/widgets/detail_card_widget.dart';
 import 'package:simanis/app/widgets/widget.dart';
 
 import '../controllers/education_detail_controller.dart';
@@ -23,6 +24,14 @@ class EducationDetailView extends GetView<EducationDetailController> {
               onInit: controller.getData,
               onLoading: () => LzLoader.bar(message: 'Memuat informasi...'),
               onData: (control) {
+                final data = controller.data;
+
+                 if (data.isEmpty) {
+                  return LzNoData(
+                    message: 'Tidak ada data apapun',
+                    onTap: () => control.refresh(),
+                  );
+                }
                 return Refreshtor(
                   onRefresh: () => controller.getCategory(),
                   child: LzListView(
@@ -37,56 +46,7 @@ class EducationDetailView extends GetView<EducationDetailController> {
                       String? image = info.image.orIf();
                       String? content = info.content.orIf();
           
-                      return InkTouch(
-                        onTap: () {
-                          // Helpers.bottomSheet(InformationDetailView(info));
-                          context.dialog(
-                            Column(
-                              children: [
-                                const SizedBox(height: 100.0,),
-                                Container(
-                                    width: 350,
-                                    margin: Ei.only(b: 7),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white, borderRadius: Br.radius(7)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: HtmlWidget(content),
-                                    )),
-                                Textr('Tutup',
-                                        style: Gfont.white.bold.copyWith(letterSpacing: 3),
-                                        margin: Ei.only(t: 15))
-                                    .lz
-                                    .ignore()
-                              ],
-                            )
-                          );
-                        },
-                        color: Colors.white,
-                        padding: Ei.all(20),
-                        border: Br.all(),
-                        radius: Br.radius(5),
-                        margin: Ei.only(b: 10),
-                        child: Row(
-                          children: [
-                            LzImage(
-                              image,
-                              radius: 5,
-                              size: 70,
-                            )
-                                .lz
-                                .border(Br.all(), radius: Br.radius(5))
-                                .margin(r: 15),
-                            Flexible(
-                              child: Col(
-                                children: [
-                                  Text(title.ucwords),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                      return DetailCardWidget(content: content, image: image, title: title);
                     }),
                   ),
                 );

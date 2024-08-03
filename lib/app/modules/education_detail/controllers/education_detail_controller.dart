@@ -31,7 +31,7 @@ class EducationDetailController extends GetxController {
 
     Future getCategory() async {
     try {
-      ResHandler res = await api.getFootCare();
+      ResHandler res = await api.getEduaction();
       List data = res.data ?? [];
 
       this.data.value = [...data.map((e) => Education.fromJson(e))];

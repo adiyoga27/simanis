@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/data/models/education_category_model.dart';
 import 'package:simanis/app/data/services/api/api.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class PhysicalTrainingController extends GetxController {
     final api = EducationApi();

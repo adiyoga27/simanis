@@ -28,6 +28,7 @@ class DetailProfileView extends GetView<AccountDetailController> {
     final key = GlobalKey();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Profil Saya'),
         centerTitle: true,
@@ -77,14 +78,7 @@ class DetailProfileView extends GetView<AccountDetailController> {
             ]
           },
           
-          {
-            'label': 'Informasi Bank',
-            'data': [
-              ['Bank', data.username.orIf()],
-              ['No. Rekening', data.username.orIf()],
-              ['Nama Nasabah', data.username.orIf()],
-            ]
-          },
+         
          
         ];
 
