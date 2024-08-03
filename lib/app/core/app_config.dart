@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -5,6 +6,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:simanis/firebase_options.dart';
 
 class AppConfig {
   /* ------------------------------------------------------------
@@ -37,6 +39,8 @@ class AppConfig {
   static init() async {
     // initialize get storage
     await GetStorage.init();
+    await Firebase.initializeApp();
+
     storage = GetStorage();
 
     // listen to firestore app config
@@ -79,5 +83,8 @@ class AppConfig {
 
           Bot.sendMessage(errorList.join('\n'), botToken, botChatId);
         });
+
+        
   }
+  
 }

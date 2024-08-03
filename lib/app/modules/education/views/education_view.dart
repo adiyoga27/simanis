@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:masonry_grid/masonry_grid.dart';
 import 'package:simanis/app/core/theme/theme.dart';
+import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/education_controller.dart';
 
@@ -37,15 +38,18 @@ class EducationView extends GetView<EducationController> {
           
                         return InkTouch(
                           onTap: () {
-                            // switch (i) {
-                            //   case 0:
-                            //     Get.lazyPut<AchievementController>(
-                            //       () => AchievementController(),
-                            //     );
-                            //     Helpers.bottomSheet(
-                            //         const CompetitionPromoView());
-                            //     break;
-                            // }
+                            switch (i) {
+                              case 0:
+                                Get.toNamed(Routes.EDUCATION_DETAIL);
+                                break;
+                               case 2:
+                                Get.toNamed(Routes.PHYSICAL_TRAINING);
+                                break;
+                                 case 3:
+                                Get.toNamed(Routes.FOOT_CARE);
+                                break;
+                            }
+                            
                           },
                           color: Colors.white,
                           border: Br.all(),

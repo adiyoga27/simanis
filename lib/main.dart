@@ -1,4 +1,5 @@
 import 'package:fetchly/models/config.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fetchly/fetchly.dart' as f;
 
@@ -9,12 +10,15 @@ import 'package:simanis/app/core/theme/theme.dart';
 import 'package:simanis/app/core/utils/fetchly_request_handler.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
+import 'package:simanis/firebase_options.dart';
 import 'app/data/services/storage/storage.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
-
+await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+      );
   await AppConfig.init();
 
   // check if user is logged in

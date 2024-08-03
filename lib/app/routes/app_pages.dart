@@ -6,12 +6,18 @@ import '../modules/app_intro/bindings/app_intro_binding.dart';
 import '../modules/app_intro/views/app_intro_view.dart';
 import '../modules/education/bindings/education_binding.dart';
 import '../modules/education/views/education_view.dart';
+import '../modules/education_detail/bindings/education_detail_binding.dart';
+import '../modules/education_detail/views/education_detail_view.dart';
+import '../modules/foot_care/bindings/foot_care_binding.dart';
+import '../modules/foot_care/views/foot_care_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/initial/bindings/initial_binding.dart';
 import '../modules/initial/views/initial_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/physical_training/bindings/physical_training_binding.dart';
+import '../modules/physical_training/views/physical_training_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
 import '../modules/webview/bindings/webview_binding.dart';
@@ -58,6 +64,11 @@ class AppPages {
       binding: EducationBinding(),
     ),
     GetPage(
+      name: _Paths.EDUCATION_DETAIL,
+      page: () => const EducationDetailView(),
+      binding: EducationDetailBinding(),
+    ),
+    GetPage(
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
       binding: RegistrationBinding(),
@@ -66,6 +77,16 @@ class AppPages {
       name: _Paths.INITIAL,
       page: () => const InitialView(),
       binding: InitialBinding(),
+    ),
+    GetPage(
+      name: _Paths.PHYSICAL_TRAINING,
+      page: () => const PhysicalTrainingView(),
+      binding: PhysicalTrainingBinding(),
+    ),
+    GetPage(
+      name: _Paths.FOOT_CARE,
+      page: () => const FootCareView(),
+      binding: FootCareBinding(),
     ),
   ];
 }

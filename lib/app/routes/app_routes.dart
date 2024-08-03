@@ -12,6 +12,9 @@ abstract class Routes {
   static const EDUCATION = _Paths.EDUCATION;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const INITIAL = _Paths.INITIAL;
+  static const EDUCATION_DETAIL = _Paths.EDUCATION_DETAIL;
+  static const PHYSICAL_TRAINING = _Paths.PHYSICAL_TRAINING;
+  static const FOOT_CARE = _Paths.FOOT_CARE;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const EDUCATION = '/education';
   static const REGISTRATION = '/registration';
   static const INITIAL = '/initial';
+  static const EDUCATION_DETAIL = '/education-detail';
+  static const PHYSICAL_TRAINING = '/physical-training';
+  static const FOOT_CARE = '/foot-care';
 }
