@@ -69,7 +69,7 @@ class AppConfig {
             info.error,
             '',
             '<b>App, User & Device</b>',
-            'Varash App, v$version $buildDate',
+            'Simanis, v$version $buildDate',
             '$name$userId, ${info.device ?? '-'}',
           ];
 

@@ -7,7 +7,7 @@ class WiAboutApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String appDescription = '''
-merupakan aplikasi berbasis mobile yang dibuat untuk memudahkan semua reseller dalam melakukan proses belanja produk, kontrol jaringan, dll. Adanya aplikasi ini diharapkan dapat membantu semua reseller untuk semakin tumbuh dan berkembang bersama Varash.
+SIMANIS, kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluruh. Aplikasi kami dirancang khusus untuk membantu Anda mengelola diabetes dengan mudah dan efektif .
 ''';
 
     String galkaIconUrl = 'https://galkasoft.id/wp-content/uploads/elementor/thumbs/image-1-prcv4dq55z29cspaxaknlxr85m4mdqrm52ymq7w00w.png';
@@ -34,10 +34,10 @@ merupakan aplikasi berbasis mobile yang dibuat untuk memudahkan semua reseller d
                             fit: BoxFit.contain,
                           ).margin(v: 35),
                           RichText(
-                              text: TextSpan(text: 'Varash App ', style: Gfont.bold, children: [
+                              text: TextSpan(text: 'Simanis ', style: Gfont.bold, children: [
                             TextSpan(text: appDescription, style: Gfont.normal),
                           ])),
-                          Textr('#sehatkayabahagia', style: Gfont.muted, margin: Ei.only(t: 25)),
+                          Textr('#ayosehat', style: Gfont.muted, margin: Ei.only(t: 25)),
                           Textr('v${AppConfig.version} ${AppConfig.buildDate}', style: Gfont.muted, margin: Ei.only(t: 5)),
                         ],
                       ),
@@ -59,7 +59,7 @@ merupakan aplikasi berbasis mobile yang dibuat untuk memudahkan semua reseller d
                               ).margin(r: 10),
                               RichText(
                                   text: TextSpan(text: 'Developed by ', style: Gfont.normal, children: [
-                                TextSpan(text: 'Galkasoft', style: Gfont.bold),
+                                TextSpan(text: 'Codingaja', style: Gfont.bold),
                               ])),
                             ],
                           )

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/refrestordit.dart';
 import 'package:simanis/app/core/utils/shortcut.dart';
+import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:simanis/app/modules/home/views/widgets/appbar.dart';
 import 'package:simanis/app/routes/app_pages.dart';
@@ -83,18 +84,23 @@ class DashboardView extends GetView<DashboardController> {
                                                         child: InkTouch(
                                                           onTap:  () {
                                                              if (i == 0) {
-                                                                return Get.toNamed(
-                                                                    Routes
-                                                                        .HOME);
+                                                                // return Get.toNamed(
+                                                                //     Routes
+                                                                //         .HOME);
+                                                                Toasts.show('Sedang Dalam Pengerjaan...',);
                                                               } else if (i == 1) {
                                                                 Get.toNamed(Routes
                                                                     .EDUCATION);
                                                               } else if (i == 2) {
-                                                                Get.toNamed(Routes
-                                                                    .EDUCATION);
+                                                                // Get.toNamed(Routes
+                                                                //     .EDUCATION);
+                                                                Toasts.show('Sedang Dalam Pengerjaan...',);
+
                                                               }else {
-                                                                Get.toNamed(Routes
-                                                                    .ACCOUNT);
+                                                                // Get.toNamed(Routes
+                                                                //     .ACCOUNT);
+                                                                Toasts.show('Sedang Dalam Pengerjaan...',);
+
                                                               }
                                                           },
                                                             padding: Ei.sym(v: 15, h: 15),
