@@ -42,6 +42,7 @@ class BloodSugarView extends GetView<BloodSugarController> {
               ),
               CardListBloodSugar(
                 title: "Check Gula Darah Sewaktu (GDS)",
+                onTap: () => Get.toNamed(Routes.GDS),
               ),
             ],
           ),

@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
 
 class BloodSugarController extends GetxController {
-  //TODO: Implement BloodSugarController
+  final forms = LzForm.make(['data']);
 
   final count = 0.obs;
   @override
@@ -19,5 +20,7 @@ class BloodSugarController extends GetxController {
     super.onClose();
   }
 
+  void onSubmitGDP() {}
+  void onSubmitGDS() {}
   void increment() => count.value++;
 }
