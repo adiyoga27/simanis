@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
+import 'package:simanis/app/modules/blood_sugar/views/gdp_view.dart';
+import 'package:simanis/app/modules/blood_sugar/views/gds_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
 import '../modules/app_intro/bindings/app_intro_binding.dart';
 import '../modules/app_intro/views/app_intro_view.dart';
+import '../modules/blood_sugar/bindings/blood_sugar_binding.dart';
+import '../modules/blood_sugar/views/blood_sugar_view.dart';
 import '../modules/education/bindings/education_binding.dart';
 import '../modules/education/views/education_view.dart';
 import '../modules/education_detail/bindings/education_detail_binding.dart';
@@ -88,5 +92,21 @@ class AppPages {
       page: () => const FootCareView(),
       binding: FootCareBinding(),
     ),
+    GetPage(
+        name: _Paths.BLOOD_SUGAR,
+        page: () => const BloodSugarView(),
+        binding: BloodSugarBinding(),
+        children: [
+          GetPage(
+            name: _Paths.GDP,
+            page: () => const GdpView(),
+            binding: BloodSugarBinding(),
+          ),
+          GetPage(
+            name: _Paths.GDS,
+            page: () => const GdsView(),
+            binding: BloodSugarBinding(),
+          ),
+        ]),
   ];
 }

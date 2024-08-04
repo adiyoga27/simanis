@@ -15,6 +15,9 @@ abstract class Routes {
   static const EDUCATION_DETAIL = _Paths.EDUCATION_DETAIL;
   static const PHYSICAL_TRAINING = _Paths.PHYSICAL_TRAINING;
   static const FOOT_CARE = _Paths.FOOT_CARE;
+  static const BLOOD_SUGAR = _Paths.BLOOD_SUGAR;
+  static const GDP = _Paths.GDP;
+  static const GDS = _Paths.GDS;
 }
 
 abstract class _Paths {
@@ -31,4 +34,7 @@ abstract class _Paths {
   static const EDUCATION_DETAIL = '/education-detail';
   static const PHYSICAL_TRAINING = '/physical-training';
   static const FOOT_CARE = '/foot-care';
+  static const BLOOD_SUGAR = '/blood-sugar';
+  static const GDP = '/gdp';
+  static const GDS = '/gds';
 }
