@@ -30,9 +30,20 @@ class GdsView extends GetView<BloodSugarController> {
                     model: controller.forms['data']),
               ]),
               LzButton(
-                text: 'Daftar',
+                text: 'Check',
                 onTap: (control) => controller.onSubmitGDS(),
-              ).dark().style(LzButtonStyle.shadow, spacing: 20)
+              ).dark().style(LzButtonStyle.shadow, spacing: 20),
+              Container(
+                decoration:  BoxDecoration(
+                        border: Br.all(color: Colors.black12),
+                        borderRadius: Br.radius(LazyUi.radius))
+                ,
+                child: Column(
+                  children: [
+                    Text("Check ke rumah sakit")
+                  ],
+                ).lz.clip(all: LazyUi.radius),
+              )
               // CardListBloodSugar(
               //   title: "Tutorial Cara Melakukan Cek Gula Darah Mandiri",
               //   onTap: () => Get.toNamed(Routes.WEBVIEW,

@@ -22,7 +22,7 @@ class AppConfig {
   | Server Base URL
   | */
 
-  static const String baseUrl = 'https://simanis.codingaja.my.id/';
+  static const String baseUrl = 'https://simanis.codingaja.com/';
 
   /* ------------------------------------------------------------
   | Version

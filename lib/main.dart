@@ -25,7 +25,7 @@ await Firebase.initializeApp(
   String? token = storage.read('token');
 
   f.Fetchly.init(
-      baseUrl: 'https://simanis.codingaja.my.id/api/',
+      baseUrl: 'https://simanis.codingaja.com/api/',
       onRequest: RequestHandler.onRequest,
       config: FetchlyConfig(printLimit: 5000));
 

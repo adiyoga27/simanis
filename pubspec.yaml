@@ -77,6 +77,9 @@ flutter:
     - assets/images/foot.png
     - assets/images/nutrisi.png
     - assets/images/sport.png
+    - assets/images/warning.png
+    - assets/images/close.png
+    - assets/images/good.png
     - assets/images/svg/rating.svg
 
 flutter_native_splash:

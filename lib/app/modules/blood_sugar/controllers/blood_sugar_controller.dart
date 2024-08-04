@@ -3,24 +3,27 @@ import 'package:lazyui/lazyui.dart';
 
 class BloodSugarController extends GetxController {
   final forms = LzForm.make(['data']);
-
+  bool isLoading = false;
+  late final int calculate;
+  late final String title;
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+ 
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  void onSubmitGDP() {
+    isLoading = true;
+    calculate = forms.value['data'] ;
+    if(forms.value['data'] >= 300) {
+      title = "TERLALU TINGGI";
+    } else if(forms.value['data'] >= 180) {
+      title = "TINGGI";
 
-  @override
-  void onClose() {
-    super.onClose();
+    }else if(forms.value['data'] >= 80) {
+      title = "NORMAL";
+    }else if(forms.value['data'] < 80) {
+      title = "RENDAH";
+    }
+    isLoading = false;
   }
-
-  void onSubmitGDP() {}
   void onSubmitGDS() {}
   void increment() => count.value++;
 }

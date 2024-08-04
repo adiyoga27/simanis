@@ -92,21 +92,20 @@ class AppPages {
       page: () => const FootCareView(),
       binding: FootCareBinding(),
     ),
-    GetPage(
-        name: _Paths.BLOOD_SUGAR,
-        page: () => const BloodSugarView(),
-        binding: BloodSugarBinding(),
-        children: [
-          GetPage(
+     GetPage(
             name: _Paths.GDP,
             page: () => const GdpView(),
             binding: BloodSugarBinding(),
           ),
-          GetPage(
+           GetPage(
             name: _Paths.GDS,
             page: () => const GdsView(),
             binding: BloodSugarBinding(),
           ),
-        ]),
+    GetPage(
+        name: _Paths.BLOOD_SUGAR,
+        page: () => const BloodSugarView(),
+        binding: BloodSugarBinding(),
+    )
   ];
 }
