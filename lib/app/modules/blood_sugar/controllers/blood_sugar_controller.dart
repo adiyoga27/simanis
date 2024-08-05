@@ -3,27 +3,58 @@ import 'package:lazyui/lazyui.dart';
 
 class BloodSugarController extends GetxController {
   final forms = LzForm.make(['data']);
-  bool isLoading = false;
-  late final int calculate;
-  late final String title;
+  RxBool isLoading = false.obs;
+  RxBool isSubmit = false.obs;
+
+  late int calculate = 0;
+  late String title = "";
   final count = 0.obs;
- 
 
   void onSubmitGDP() {
-    isLoading = true;
-    calculate = forms.value['data'] ;
-    if(forms.value['data'] >= 300) {
-      title = "TERLALU TINGGI";
-    } else if(forms.value['data'] >= 180) {
-      title = "TINGGI";
+    if (forms.value['data'].isEmpty) {
+      return LzToast.show('Wajib di isi tools check !');
+    }
+    isLoading.value = true;
+    isSubmit.value = false;
 
-    }else if(forms.value['data'] >= 80) {
+    calculate = int.parse(forms.value['data']);
+    // calculate = forms.value['data'];
+    if (calculate >= 300) {
+      title = "TERLALU TINGGI";
+    } else if (calculate > 130) {
+      title = "TINGGI";
+    } else if (calculate >= 80) {
       title = "NORMAL";
-    }else if(forms.value['data'] < 80) {
+    } else if (calculate < 80) {
       title = "RENDAH";
     }
-    isLoading = false;
+    isSubmit.value = true;
+
+    isLoading.value = false;
   }
-  void onSubmitGDS() {}
-  void increment() => count.value++;
+
+  void onSubmitGDS() {
+    if (forms.value['data'].isEmpty) {
+      return LzToast.show('Wajib di isi tools check !');
+    }
+    isSubmit.value = false;
+
+    isLoading.value = true;
+
+    calculate = int.parse(forms.value['data']);
+    // calculate = forms.value['data'];
+    if (calculate >= 300) {
+      title = "TERLALU TINGGI";
+    } else if (calculate >= 180) {
+      title = "TINGGI";
+    } else if (calculate >= 80) {
+      title = "NORMAL";
+    } else if (calculate >= 70) {
+      title = "RENDAH";
+    } else if (calculate < 70) {
+      title = "TERLALU RENDAH";
+    }
+    isLoading.value = false;
+    isSubmit.value = true;
+  }
 }
