@@ -1,3 +1,4 @@
+import 'package:alarm/alarm.dart';
 import 'package:fetchly/models/config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,12 @@ import 'app/data/services/storage/storage.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-      );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await AppConfig.init();
-
+  await Alarm.init();
   // check if user is logged in
   String? token = storage.read('token');
 
@@ -39,7 +40,6 @@ await Firebase.initializeApp(
   }
 
   LzConfirm.config(confirm: 'Ya, Hapus', cancel: 'Batal');
-
 
   runApp(
     GetMaterialApp(

@@ -83,6 +83,7 @@ flutter:
     - assets/images/close.png
     - assets/images/good.png
     - assets/images/svg/rating.svg
+    - assets/alarm.wav
 
 flutter_native_splash:
   color: "#ffffff"
