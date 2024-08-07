@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart' hide Errors;
 import 'package:simanis/app/core/app_config.dart';
-import 'package:simanis/app/routes/app_pages.dart';
 import 'package:simanis/app/widgets/widget.dart';
 
 import '../controllers/account_controller.dart';

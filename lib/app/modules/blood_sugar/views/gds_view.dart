@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/modules/blood_sugar/controllers/blood_sugar_controller.dart';
 import 'package:simanis/app/modules/blood_sugar/views/blood_sugar_view.dart';
-import 'package:simanis/app/modules/blood_sugar/views/gdp_view.dart';
 import 'package:simanis/app/modules/webview/views/webview_view.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
@@ -48,7 +47,7 @@ class GdsView extends GetView<BloodSugarController> {
                   onTap: (control) => controller.onSubmitGDS(),
                 ).dark().style(LzButtonStyle.shadow, spacing: 20),
                 !controller.isSubmit.value
-                    ? SizedBox(
+                    ? const SizedBox(
                         height: 10.0,
                       )
                     : StatusGulaDarahGDSWidget(
@@ -100,7 +99,7 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 padding: Ei.only(t: 8.0, b: 8.0),
                 child: Text(
                   title!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const Text(
@@ -130,7 +129,7 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 padding: Ei.only(t: 8.0, b: 8.0),
                 child: Text(
                   title!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -138,7 +137,7 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 "Tes Gula Darah Sewaktu anda memasuki gejala hiperglikemia. Silahkan lakukan perawatan hiperglikemia",
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               CardListBloodSugar(
@@ -171,7 +170,7 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 padding: Ei.only(t: 8.0, b: 8.0),
                 child: Text(
                   title!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const Text(
@@ -201,14 +200,14 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 padding: Ei.only(t: 8.0, b: 8.0),
                 child: Text(
                   title!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const Text(
                 "Tes Gula Darah Sewaktu anda memasuki gejala hipoglekimia. Silahkan lakukan perawatan hipoglekimia",
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               CardListBloodSugar(
@@ -241,7 +240,7 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
                 padding: Ei.only(t: 8.0, b: 8.0),
                 child: Text(
                   title!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const Text(
@@ -254,6 +253,5 @@ class StatusGulaDarahGDSWidget extends StatelessWidget {
       );
     }
 
-    return Container();
   }
 }

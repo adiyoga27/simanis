@@ -29,7 +29,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                   controller.selectedTime != null
                       ? 'Alarm set for: ${controller.selectedTime!.hour}:${controller.selectedTime!.minute}'
                       : 'No alarm set',
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 );
               }),
               ElevatedButton(
@@ -56,6 +56,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
 
       controller.setAlarm(selectedTime);
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Alarm set for ${picked.format(context)}')),
       );

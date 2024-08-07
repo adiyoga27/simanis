@@ -10,7 +10,6 @@ class AppIntroController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     bool hadIntro = storage.read('guide_app_intro') ?? false;
 

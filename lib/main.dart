@@ -10,7 +10,6 @@ import 'package:simanis/app/core/app_config.dart';
 import 'package:simanis/app/core/theme/theme.dart';
 import 'package:simanis/app/core/utils/fetchly_request_handler.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
-import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:simanis/firebase_options.dart';
 import 'app/data/services/storage/storage.dart';
 import 'app/routes/app_pages.dart';

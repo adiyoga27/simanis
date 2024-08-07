@@ -2,9 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/toast.dart';
-import 'package:simanis/app/data/repository/api/api.dart';
-import 'package:simanis/app/data/repository/api/response_handler.dart';
-import 'package:simanis/app/routes/app_pages.dart';
 
 class FootScreeningController extends GetxController {
   final forms = LzForm.make([

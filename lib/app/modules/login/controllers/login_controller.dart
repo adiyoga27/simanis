@@ -8,7 +8,6 @@ import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
 import 'package:simanis/app/data/repository/api/response_handler.dart';
-import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/modules/home/controllers/home_controller.dart';
 import 'package:simanis/app/routes/app_pages.dart';
@@ -132,7 +131,6 @@ class LoginController extends GetxController  {
   Future logout() async {
     try {
       Toasts.overlay('Logging out...');
-      final auth = await Auth.user();
       // remove user data from local storage
       await Storage.remove(only: ['token', 'user']);
 

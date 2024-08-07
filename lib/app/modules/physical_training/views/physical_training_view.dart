@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simanis/app/core/values/colors.dart';
 import 'package:simanis/app/widgets/detail_card_widget.dart';
 import 'package:simanis/app/widgets/widget.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../controllers/physical_training_controller.dart';
 

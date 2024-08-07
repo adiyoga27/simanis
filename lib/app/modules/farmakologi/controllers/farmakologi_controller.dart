@@ -2,7 +2,6 @@ import 'package:alarm/alarm.dart';
 import 'package:get/get.dart';
 
 class FarmakologiController extends GetxController {
-  //TODO: Implement FarmakologiController
   DateTime? selectedTime;
   RxBool isLoading = false.obs;
 

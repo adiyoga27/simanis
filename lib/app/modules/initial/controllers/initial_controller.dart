@@ -1,11 +1,7 @@
-import 'dart:async';
 
 import 'package:fetchly/fetchly.dart';
 import 'package:get/get.dart';
-import 'package:lazyui/lazyui.dart';
-import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
-import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
 class InitialController extends GetxController {

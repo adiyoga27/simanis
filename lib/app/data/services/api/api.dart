@@ -2,7 +2,6 @@ library api2;
 
 import 'package:dio/dio.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
-import 'package:simanis/app/data/repository/api/response_handler.dart';
 
 part 'account.dart';
 part 'education.dart';

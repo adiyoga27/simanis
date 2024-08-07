@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/toast.dart';
