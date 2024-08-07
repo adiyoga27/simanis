@@ -18,6 +18,8 @@ abstract class Routes {
   static const BLOOD_SUGAR = _Paths.BLOOD_SUGAR;
   static const GDP = _Paths.GDP;
   static const GDS = _Paths.GDS;
+  static const FOOT_SCREENING = _Paths.FOOT_SCREENING;
+  static const FARMAKOLOGI = _Paths.FARMAKOLOGI;
 }
 
 abstract class _Paths {
@@ -37,4 +39,6 @@ abstract class _Paths {
   static const BLOOD_SUGAR = '/blood-sugar';
   static const GDP = '/gdp';
   static const GDS = '/gds';
+  static const FOOT_SCREENING = '/foot-screening';
+  static const FARMAKOLOGI = '/farmakologi';
 }

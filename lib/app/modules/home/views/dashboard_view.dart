@@ -84,20 +84,18 @@ class DashboardView extends GetView<DashboardController> {
                                         child: InkTouch(
                                             onTap: () {
                                               if (i == 0) {
-                                                // return Get.toNamed(
-                                                //     Routes
-                                                //         .HOME);
-                                                Toasts.show(
-                                                  'Sedang Dalam Pengerjaan...',
-                                                );
+                                                Get.toNamed(
+                                                    Routes.FOOT_SCREENING);
+                                                // Toasts.show(
+                                                //   'Sedang Dalam Pengerjaan...',
+                                                // );
                                               } else if (i == 1) {
                                                 Get.toNamed(Routes.EDUCATION);
                                               } else if (i == 2) {
-                                                // Get.toNamed(Routes
-                                                //     .EDUCATION);
-                                                Toasts.show(
-                                                  'Sedang Dalam Pengerjaan...',
-                                                );
+                                                Get.toNamed(Routes.FARMAKOLOGI);
+                                                // Toasts.show(
+                                                //   'Sedang Dalam Pengerjaan...',
+                                                // );
                                               } else {
                                                 // Get.toNamed(Routes
                                                 //     .ACCOUNT);

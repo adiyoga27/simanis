@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:simanis/app/modules/blood_sugar/views/gdp_view.dart';
-import 'package:simanis/app/modules/blood_sugar/views/gds_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
@@ -8,12 +6,18 @@ import '../modules/app_intro/bindings/app_intro_binding.dart';
 import '../modules/app_intro/views/app_intro_view.dart';
 import '../modules/blood_sugar/bindings/blood_sugar_binding.dart';
 import '../modules/blood_sugar/views/blood_sugar_view.dart';
+import '../modules/blood_sugar/views/gdp_view.dart';
+import '../modules/blood_sugar/views/gds_view.dart';
 import '../modules/education/bindings/education_binding.dart';
 import '../modules/education/views/education_view.dart';
 import '../modules/education_detail/bindings/education_detail_binding.dart';
 import '../modules/education_detail/views/education_detail_view.dart';
+import '../modules/farmakologi/bindings/farmakologi_binding.dart';
+import '../modules/farmakologi/views/farmakologi_view.dart';
 import '../modules/foot_care/bindings/foot_care_binding.dart';
 import '../modules/foot_care/views/foot_care_view.dart';
+import '../modules/foot_screening/bindings/foot_screening_binding.dart';
+import '../modules/foot_screening/views/foot_screening_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/initial/bindings/initial_binding.dart';
@@ -92,20 +96,30 @@ class AppPages {
       page: () => const FootCareView(),
       binding: FootCareBinding(),
     ),
-     GetPage(
-            name: _Paths.GDP,
-            page: () => const GdpView(),
-            binding: BloodSugarBinding(),
-          ),
-           GetPage(
-            name: _Paths.GDS,
-            page: () => const GdsView(),
-            binding: BloodSugarBinding(),
-          ),
     GetPage(
-        name: _Paths.BLOOD_SUGAR,
-        page: () => const BloodSugarView(),
-        binding: BloodSugarBinding(),
-    )
+      name: _Paths.GDP,
+      page: () => const GdpView(),
+      binding: BloodSugarBinding(),
+    ),
+    GetPage(
+      name: _Paths.GDS,
+      page: () => const GdsView(),
+      binding: BloodSugarBinding(),
+    ),
+    GetPage(
+      name: _Paths.BLOOD_SUGAR,
+      page: () => const BloodSugarView(),
+      binding: BloodSugarBinding(),
+    ),
+    GetPage(
+      name: _Paths.FOOT_SCREENING,
+      page: () => const FootScreeningView(),
+      binding: FootScreeningBinding(),
+    ),
+    GetPage(
+      name: _Paths.FARMAKOLOGI,
+      page: () => const FarmakologiView(),
+      binding: FarmakologiBinding(),
+    ),
   ];
 }
