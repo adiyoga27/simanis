@@ -1,16 +1,25 @@
 import 'dart:async';
 
 import 'package:alarm/alarm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:lazyui/lazyui.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:simanis/app/data/repository/firestore/fs_notification.dart';
+import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/modules/farmakologi/views/edit_alarm.dart';
 import 'package:simanis/app/modules/farmakologi/views/ring.dart';
 
 class FarmakologiController extends GetxController {
     late List<AlarmSettings> alarms;
     RxBool isLoading = false.obs;
+      final forms = LzForm.make([
+      'title', 'dosis','start_at','description']);
+      
+ final _fireStore = FirebaseFirestore.instance;
+
 
   static StreamSubscription<AlarmSettings>? subscription;
 
@@ -25,6 +34,47 @@ class FarmakologiController extends GetxController {
     subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
 
   }
+
+void onSubmit() async {
+  isLoading.value = true;
+   final form = LzForm.validate(forms,
+          required: ['*','kode_pos'],
+          messages: FormMessages(required: {
+            'title': 'Wajib memberikan judul',
+            'description': 'Deskripsi wajib diisi',
+            'start_at': 'Masukkan jam waktu pertama minum obat',
+            'dosis': 'Masukkan dosis minum obat',
+           
+
+          }));
+
+
+      if (form.ok) {
+        final auth = await Auth.user();
+        _fireStore.collection('todo').add({
+                              'title': form.value['title'],
+                              'description': form.value['description'],
+                              'start_at': form.value['start_at'],
+                              'dosis': form.value['dosis'],
+                              'create_by': auth.username,
+                              'alarm_id' : [],
+                              'created': Timestamp.now(),
+                            });
+      }
+
+  isLoading.value = false;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
