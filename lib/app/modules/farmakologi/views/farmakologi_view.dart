@@ -69,7 +69,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                               LzForm.select(
                                   labelStyle: const LzFormLabelStyle(
                                       fontWeight: FontWeight.bold),
-                                  label: 'Jumlah Sehari untuk Diminum *',
+                                  label: 'Dosis Perhari *',
                                   initValue: const Option(option: '1 Kali'),
                                   options: [
                                     '1 Kali',

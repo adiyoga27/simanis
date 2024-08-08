@@ -30,7 +30,6 @@ class AccountView extends GetView<AccountController> {
           [La.phone, 'Kontak Kami']
         ]
       },
-    
       {
         'title': 'Akun',
         'options': [
@@ -41,12 +40,14 @@ class AccountView extends GetView<AccountController> {
     ];
 
     return Scaffold(
-      appBar:
-          AppBar(title: const Text('Profil Saya'), centerTitle: true,
-           leading: IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.black),
-    onPressed: () => {},
-  ), ),
+      appBar: AppBar(
+        title: const Text('Profil Saya'),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => {},
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Refreshtor(
         onRefresh: () async {
@@ -59,7 +60,7 @@ class AccountView extends GetView<AccountController> {
             children: [
               Col(
                 children: [
-                  const WiAccountProfile(),
+                  // const WiAccountProfile(),
                   Container(
                     padding: Ei.all(20),
                     child: Col(

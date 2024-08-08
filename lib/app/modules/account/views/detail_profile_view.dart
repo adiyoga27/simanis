@@ -35,11 +35,11 @@ class DetailProfileView extends GetView<AccountDetailController> {
         actions: [
           IconButton(
               onPressed: () {
-                DropX.show(key, useCaret: false, options: ['Ganti Foto Profil', 'Edit Profil'].options(
-                  icons: [La.image, La.user]
-                ), 
-                    onSelect: (value) async {
-                      logg(value.index);
+                DropX.show(key,
+                    useCaret: false,
+                    options: ['Ganti Foto Profil', 'Edit Profil'].options(
+                        icons: [La.image, La.user]), onSelect: (value) async {
+                  logg(value.index);
                   if (value.index == 0) {
                     changePhoto();
                   } else {
@@ -51,7 +51,9 @@ class DetailProfileView extends GetView<AccountDetailController> {
                     };
 
                     Get.put(AccountUpdateController());
-                    Helpers.bottomSheet(EditProfileView(data: data), dragable: true, onClose: (_) => Get.delete<AccountUpdateController>());
+                    Helpers.bottomSheet(EditProfileView(data: data),
+                        dragable: true,
+                        onClose: (_) => Get.delete<AccountUpdateController>());
                   }
                 });
               },
@@ -77,9 +79,6 @@ class DetailProfileView extends GetView<AccountDetailController> {
               ['No. Telepon', data.username.orIf()],
             ]
           },
-          
-         
-         
         ];
 
         ScrollController scrollController = ScrollController();
@@ -90,11 +89,11 @@ class DetailProfileView extends GetView<AccountDetailController> {
             physics: BounceScroll(),
             controller: scrollController,
             children: [
-              WiAccountProfile(
-                onTapImage: () {
-                  changePhoto();
-                },
-              ),
+              // WiAccountProfile(
+              //   onTapImage: () {
+              //     changePhoto();
+              //   },
+              // ),
               // const WiAccountVerified(),
               Container(
                 padding: Ei.all(20),
@@ -103,13 +102,25 @@ class DetailProfileView extends GetView<AccountDetailController> {
                     Map item = tiles[i];
                     String label = item['label'];
                     List options = item['data'];
-                    List<IconData> icons = [La.user, La.userTie, La.wallet, La.userTag];
-                    List<GlobalKey> keys = [GlobalKey(), GlobalKey(), GlobalKey(), GlobalKey()];
+                    List<IconData> icons = [
+                      La.user,
+                      La.userTie,
+                      La.wallet,
+                      La.userTag
+                    ];
+                    List<GlobalKey> keys = [
+                      GlobalKey(),
+                      GlobalKey(),
+                      GlobalKey(),
+                      GlobalKey()
+                    ];
 
                     return StickyHeader(
                         header: InkTouch(
                           onTap: () {
-                            Scrollable.ensureVisible(keys[i].currentContext!, duration: const Duration(milliseconds: 300), alignment: .19);
+                            Scrollable.ensureVisible(keys[i].currentContext!,
+                                duration: const Duration(milliseconds: 300),
+                                alignment: .19);
                           },
                           border: Br.all(),
                           color: Colors.white,
@@ -139,7 +150,10 @@ class DetailProfileView extends GetView<AccountDetailController> {
                         content: Container(
                           margin: Ei.only(b: 5),
                           key: keys[i],
-                          decoration: BoxDecoration(color: Colors.white, border: Br.all(color: AppColor.border), borderRadius: Br.radius(5)),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Br.all(color: AppColor.border),
+                              borderRadius: Br.radius(5)),
                           child: Col(
                             children: List.generate(options.length, (j) {
                               List option = options[j];
@@ -147,11 +161,13 @@ class DetailProfileView extends GetView<AccountDetailController> {
                               String value = option[1];
 
                               bool danger = options[j].length > 2;
-                              Color color = danger ? Colors.red : Colors.black87;
+                              Color color =
+                                  danger ? Colors.red : Colors.black87;
 
                               return Container(
                                 padding: Ei.sym(v: 15, h: 20),
-                                decoration: BoxDecoration(border: Br.only(['t'], except: j == 0)),
+                                decoration: BoxDecoration(
+                                    border: Br.only(['t'], except: j == 0)),
                                 child: Row(
                                   children: [
                                     Col(
