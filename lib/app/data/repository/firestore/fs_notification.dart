@@ -9,14 +9,14 @@ class FsNotification {
   static final FsNotification instance = FsNotification._();
 
   final CollectionReference _collection =
-      FirebaseFirestore.instance.collection('notifications');
+      FirebaseFirestore.instance.collection('alarms');
   List docIds = [];
 
   // count all of notifications
   Stream<int>? countNotification(String username) {
     try {
       return _collection
-          .where('to', arrayContainsAny: ['all', username])
+          .where('created_by', isEqualTo: [ username])
           .snapshots()
           .map((event) {
             docIds.clear();
@@ -132,12 +132,14 @@ class FsNotification {
   | NOTIFICATION 2.0
   --------------------------------------------- */
 
-  Future listenToNotifs(
+  Future listenToAlarms(
       String username, Function(Stream<QuerySnapshot<Object?>> query) onData,
       {int limit = 10, DocumentSnapshot? lastDocument}) async {
-    Query<Object?> query = _collection
-        .where('to', arrayContainsAny: ['all', username]).orderBy('timestamp',
-            descending: true);
+    // Query<Object?> query = _collection
+    //     .where('created_by', arrayContainsAny: [ username]).orderBy('timestamp',
+    //         descending: true);
+       Query<Object?> query = _collection
+        .where('created_by', isEqualTo: username);
 
     if (lastDocument != null) {
       query = query.startAfterDocument(lastDocument);

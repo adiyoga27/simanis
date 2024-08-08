@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:ffi';
+import 'dart:io';
 
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,17 +15,23 @@ import 'package:simanis/app/modules/farmakologi/views/edit_alarm.dart';
 import 'package:simanis/app/modules/farmakologi/views/ring.dart';
 
 class FarmakologiController extends GetxController {
-    late List<AlarmSettings> alarms;
-    RxBool isLoading = false.obs;
-      final forms = LzForm.make([
-      'title', 'dosis','start_at','description']);
-      
- final _fireStore = FirebaseFirestore.instance;
+  late List<AlarmSettings> alarms;
+  RxBool isLoading = false.obs;
+  final forms =
+      LzForm.make(['title', 'dosis', 'date_at', 'time_at', 'description']);
+  late DateTime selectedDateTime;
 
+  final _fireStore = FirebaseFirestore.instance;
 
   static StreamSubscription<AlarmSettings>? subscription;
 
-@override
+    StreamController<List<Map>> alarmStreamController =
+      StreamController<List<Map>>.broadcast();
+  Stream<List<Map>> get alarmList => alarmStreamController.stream;
+  List<Map> alarm = [];
+
+
+  @override
   void onInit() {
     super.onInit();
     if (Alarm.android) {
@@ -32,65 +40,199 @@ class FarmakologiController extends GetxController {
     }
     loadAlarms();
     subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
-
+    getAlarms();
+    
   }
 
-void onSubmit() async {
-  isLoading.value = true;
-   final form = LzForm.validate(forms,
-          required: ['*','kode_pos'],
-          messages: FormMessages(required: {
-            'title': 'Wajib memberikan judul',
-            'description': 'Deskripsi wajib diisi',
-            'start_at': 'Masukkan jam waktu pertama minum obat',
-            'dosis': 'Masukkan dosis minum obat',
-           
+   @override
+  void onClose() {
+    super.onClose();
+    alarmStreamController.close();
+  }
 
-          }));
+  void onSubmit() async {
+    isLoading.value = true;
+    final form = LzForm.validate(forms,
+        required: ['*', 'kode_pos'],
+        messages: FormMessages(required: {
+          'title': 'Wajib memberikan judul',
+          'description': 'Deskripsi wajib diisi',
+          'date_at': 'Masukkan tanggal waktu pertama minum obat',
+          'time_at': 'Masukkan waktu pertama minum obat',
+          'dosis': 'Masukkan dosis minum obat',
+        }));
 
+    if (form.ok) {
+      final auth = await Auth.user();
+      String dosis = form.value['dosis'];
+      int hours = int.parse(form.value['time_at'].split(':')[0]);
+      int minutes = int.parse(form.value['time_at'].split(':')[1]);
+      int interval = int.parse(dosis.replaceAll(' Kali', ""));
+      int duration = 24 ~/ interval;
+      final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
+      var startAt = DateTime.now().copyWith(
+        hour: hours.toInt(),
+        minute: minutes.toInt(),
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
+      final dateNow = DateTime.now();
 
-      if (form.ok) {
-        final auth = await Auth.user();
-        _fireStore.collection('todo').add({
-                              'title': form.value['title'],
-                              'description': form.value['description'],
-                              'start_at': form.value['start_at'],
-                              'dosis': form.value['dosis'],
-                              'create_by': auth.username,
-                              'alarm_id' : [],
-                              'created': Timestamp.now(),
-                            });
+      if(dateNow.hour < hours.toInt()){
+        startAt = startAt.add(Duration(hours: duration));
       }
 
-  isLoading.value = false;
-}
+      Alarm.set(
+          alarmSettings: AlarmSettings(
+              id: id,
+              dateTime: startAt,
+              loopAudio: true,
+              vibrate: true,
+              volume: 1,
+              assetAudioPath: 'assets/alarm.wav',
+              notificationTitle: form.value['title'],
+              notificationBody: 'Your alarm ($id) is ringing, Ayoo minum obat!',
+              enableNotificationOnKill: Platform.isIOS));
 
+      _fireStore.collection('alarms').add({
+        'title': form.value['title'],
+        'description': form.value['description'],
+        'dosis': form.value['dosis'],
+        'created_by': auth.username,
+        'created_at': Timestamp.now(),
+        'alarm_id': id,
+        'date_at': form.value['date_at'],
+        'time_at': form.value['time_at'],
+        'duration': duration,
+      });
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
- void loadAlarms() {
-   // Fetching alarms from the server or local storage here
-    isLoading.value = true;
-      alarms = Alarm.getAlarms();
-      alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
     isLoading.value = false;
+    getAlarms();
+    Get.back();
+  }
 
+  /* ----------------------------------------------------------
+  | GET ALARMS LIST
+  --------------------------------------------- */
+  String? username;
+  RxBool isLoadMore = false.obs;
+  bool isMax = false;
+  DocumentSnapshot? lastDoc;
+
+  Future getAlarms({bool pagination = false}) async {
+            logg('Get Alarm');
+
+    if (isLoadMore.value || isMax) return;
+    isLoadMore.value = pagination;
+
+    try {
+      final auth = await Auth.user();
+      username = auth.username;
+
+      FsNotification.instance.listenToAlarms(auth.username!, (query) {
+        query.listen(
+          (e) {
+            isMax = e.docs.isEmpty && pagination;
+
+            if (e.docs.isEmpty && !pagination) return sink([]);
+
+            // set last document (for pagination purpose)
+            lastDoc = e.docs.last;
+
+            // if data is not empty, listen to changes
+            handleChanges(e);
+          },
+        );
+      }, limit: 15, lastDocument: lastDoc);
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+  
+  /* ----------------------------------------------------------
+  | HANDLE NOTIFICATION CHANGES
+  --------------------------------------------- */
+  List ids = [];
+
+  void handleChanges(QuerySnapshot<Object?> changes) {
+    try {
+      for (DocumentChange<Object?> change in changes.docChanges) {
+        ids = alarm.map((e) => e['id']).toList();
+        String id = change.doc.id;
+
+        Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
+
+        // List<Map> grouping(List<Map> list) {
+        //   return list.groupBy('created_by', wrap: (data) {
+        //     return [...data];
+        //   }, groupKey: 'created_at');
+        // }
+
+        switch (change.type) {
+          case DocumentChangeType.added:
+
+            // periksa jika id sudah ada
+            if (!ids.contains(id)) {
+              ids.add(id);
+              data['id'] = id;
+
+              alarm.add(data);
+              // data['created_at'] =
+              //     DateTime.fromMillisecondsSinceEpoch(data['timestamp'])
+              //         .format();
+
+              List<Map> group = alarm;
+              sink(group);
+            }
+
+            break;
+
+          case DocumentChangeType.modified:
+            int io = alarm.indexWhere((e) => e['id'] == id);
+            if (io != -1) {
+              Map<String, dynamic> data =
+                  change.doc.data() as Map<String, dynamic>;
+              alarm[io]['read_by'] = data['read_by'];
+
+              List<Map> group = alarm;
+              sink(group);
+            }
+
+            break;
+
+          default:
+            alarm.removeWhere((e) => e['id'] == id);
+            sink(alarm);
+            break;
+        }
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+ void sink(List<Map> values) {
+    if (!alarmStreamController.isClosed) alarmStreamController.sink.add(values);
+  }
+
+  void loadAlarms() {
+    // Fetching alarms from the server or local storage here
+    isLoading.value = true;
+    alarms = Alarm.getAlarms();
+    alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
+    isLoading.value = false;
   }
 
   Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
-    await  Get.to(ExampleAlarmRingScreen(alarmSettings: alarmSettings,));
-    
-    
+    await Get.to(ExampleAlarmRingScreen(
+      alarmSettings: alarmSettings,
+    ));
+  
+  loadAlarms();
+
     // Navigator.push(
     //   context,
     //   MaterialPageRoute<void>(
@@ -98,27 +240,25 @@ void onSubmit() async {
     //         ExampleAlarmRingScreen(alarmSettings: alarmSettings),
     //   ),
     // );
-    loadAlarms();
   }
 
   Future<void> navigateToAlarmScreen(AlarmSettings? settings) async {
     isLoading.value = true;
-    
-  final res = await Get.bottomSheet<bool?>(
-    backgroundColor: Colors.white,
-    FractionallySizedBox(
-      heightFactor: 0.75,
-      child: ExampleAlarmEditScreen(alarmSettings: settings),
-    ),
-    isScrollControlled: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  );
 
-  if (res != null && res == true) loadAlarms();
+    final res = await Get.bottomSheet<bool?>(
+      backgroundColor: Colors.white,
+      FractionallySizedBox(
+        heightFactor: 0.75,
+        child: ExampleAlarmEditScreen(alarmSettings: settings),
+      ),
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+
+    if (res != null && res == true) loadAlarms();
     isLoading.value = false;
-
   }
 
   Future<void> checkAndroidNotificationPermission() async {
