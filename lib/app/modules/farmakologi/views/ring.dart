@@ -1,5 +1,7 @@
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
 
 class ExampleAlarmRingScreen extends StatelessWidget {
   const ExampleAlarmRingScreen({required this.alarmSettings, super.key});
@@ -34,7 +36,7 @@ class ExampleAlarmRingScreen extends StatelessWidget {
                           now.minute,
                         ).add(const Duration(minutes: 1)),
                       ),
-                    ).then((_) => Navigator.pop(context));
+                    ).then((_) => Get.back());
                   },
                   child: Text(
                     'Snooze',
@@ -42,9 +44,24 @@ class ExampleAlarmRingScreen extends StatelessWidget {
                   ),
                 ),
                 RawMaterialButton(
-                  onPressed: () {
-                    Alarm.stop(alarmSettings.id)
-                        .then((_) => Navigator.pop(context));
+                  onPressed: () async {
+                    logg(alarmSettings.id);
+                    await Alarm.stop(alarmSettings.id)
+                        .then((_) {
+                    final now = DateTime.now();
+
+                              Alarm.set(
+                      alarmSettings: alarmSettings.copyWith(
+                        dateTime: DateTime(
+                          now.year,
+                          now.month,
+                          now.day,
+                          now.hour,
+                          now.minute,
+                        ).add(const Duration(hours: 3)),
+                      ),
+                    ).then((_) => Get.back());
+                        });
                   },
                   child: Text(
                     'Stop',

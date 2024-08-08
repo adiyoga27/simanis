@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:simanis/app/modules/farmakologi/views/edit_alarm.dart';
 import 'package:simanis/app/modules/farmakologi/views/ring.dart';
 
 class FarmakologiController extends GetxController {
     late List<AlarmSettings> alarms;
+    RxBool isLoading = false.obs;
 
   static StreamSubscription<AlarmSettings>? subscription;
 
@@ -27,8 +29,12 @@ class FarmakologiController extends GetxController {
 
 
  void loadAlarms() {
+   // Fetching alarms from the server or local storage here
+    isLoading.value = true;
       alarms = Alarm.getAlarms();
       alarms.sort((a, b) => a.dateTime.isBefore(b.dateTime) ? 0 : 1);
+    isLoading.value = false;
+
   }
 
   Future<void> navigateToRingScreen(AlarmSettings alarmSettings) async {
@@ -46,8 +52,10 @@ class FarmakologiController extends GetxController {
   }
 
   Future<void> navigateToAlarmScreen(AlarmSettings? settings) async {
+    isLoading.value = true;
     
   final res = await Get.bottomSheet<bool?>(
+    backgroundColor: Colors.white,
     FractionallySizedBox(
       heightFactor: 0.75,
       child: ExampleAlarmEditScreen(alarmSettings: settings),
@@ -59,6 +67,8 @@ class FarmakologiController extends GetxController {
   );
 
   if (res != null && res == true) loadAlarms();
+    isLoading.value = false;
+
   }
 
   Future<void> checkAndroidNotificationPermission() async {
