@@ -37,24 +37,24 @@ class DetailProfileView extends GetView<AccountDetailController> {
               onPressed: () {
                 DropX.show(key,
                     useCaret: false,
-                    options: ['Ganti Foto Profil', 'Edit Profil'].options(
-                        icons: [La.image, La.user]), onSelect: (value) async {
+                    options: ['Edit Profil'].options(icons: [La.user]),
+                    onSelect: (value) async {
                   logg(value.index);
-                  if (value.index == 0) {
-                    changePhoto();
-                  } else {
-                    Map<String, String?> data = {
-                      // 'nik_waris': controller.user.nikWaris,
-                      // 'waris': controller.user.waris,
-                      // 'hubungan': controller.user.hubungan,
-                      // 'npwp': controller.user.npwp,
-                    };
+                  // if (value.index == 0) {
+                  //   changePhoto();
+                  // } else {
+                  Map<String, String?> data = {
+                    // 'nik_waris': controller.user.nikWaris,
+                    // 'waris': controller.user.waris,
+                    // 'hubungan': controller.user.hubungan,
+                    // 'npwp': controller.user.npwp,
+                  };
 
-                    Get.put(AccountUpdateController());
-                    Helpers.bottomSheet(EditProfileView(data: data),
-                        dragable: true,
-                        onClose: (_) => Get.delete<AccountUpdateController>());
-                  }
+                  Get.put(AccountUpdateController());
+                  Helpers.bottomSheet(EditProfileView(data: data),
+                      dragable: true,
+                      onClose: (_) => Get.delete<AccountUpdateController>());
+                  // }
                 });
               },
               icon: Icon(La.bars, key: key))
@@ -67,16 +67,34 @@ class DetailProfileView extends GetView<AccountDetailController> {
           return LzLoader.bar(message: 'Memuat profil...');
         }
 
-        UserModel data = controller.user;
+        ProfileModel data = controller.profile;
 
         List tiles = [
           {
             'label': 'Informasi Pribadi',
             'data': [
-              ['ID Anda', data.username.orIf()],
-              ['Nama Lengkap', data.username.orIf()],
-              ['Alamat', data.username.orIf()],
-              ['No. Telepon', data.username.orIf()],
+              ['Nama', data.name.orIf()],
+              ['Jenis Kelamin', data.jk.orIf()],
+              ['Username', data.username.orIf()],
+            ]
+          },
+          {
+            'label': 'Kontak',
+            'data': [
+              ['No. Telepon', data.phone.orIf()],
+              ['Email', data.phone.orIf()],
+              ['Kota/Kabupaten', data.city.orIf()],
+              ['Kecamatan', data.subdistrict.orIf()],
+              ['Kelurahan', data.village.orIf()],
+              ['Alamat', data.address.orIf()],
+              ['Kode Pos', data.kodePos.orIf()],
+            ]
+          },
+          {
+            'label': 'Kesehatan',
+            'data': [
+              ['Merokok', int.parse(data.isSmoke.orIf()) == 1 ? 'Ya' : 'Tidak'],
+              ['Riwayat', data.medicalHistory.orIf()],
             ]
           },
         ];
@@ -104,9 +122,9 @@ class DetailProfileView extends GetView<AccountDetailController> {
                     List options = item['data'];
                     List<IconData> icons = [
                       La.user,
-                      La.userTie,
-                      La.wallet,
-                      La.userTag
+                      La.telegram,
+                      La.bookMedical,
+                      // La.userTag
                     ];
                     List<GlobalKey> keys = [
                       GlobalKey(),

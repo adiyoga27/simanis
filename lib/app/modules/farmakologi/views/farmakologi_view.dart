@@ -49,7 +49,6 @@ class FarmakologiView extends GetView<FarmakologiController> {
                         children: [
                           LzFormGroup(
                             keepLabel: true,
-                            label: 'Kesehatan *',
                             prefixIcon: La.userTie,
                             children: [
                               LzForm.input(

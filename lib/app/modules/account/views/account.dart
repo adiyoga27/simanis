@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/data/models/profile_model.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:simanis/app/core/app_config.dart';
 import 'package:simanis/app/core/utils/custom_helper.dart';

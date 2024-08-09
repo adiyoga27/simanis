@@ -5,6 +5,7 @@ import 'package:get/get.dart' hide GetStringUtils;
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/core/utils/toast.dart';
+import 'package:simanis/app/data/models/profile_model.dart';
 import 'package:simanis/app/data/models/user_model.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
@@ -15,7 +16,7 @@ import '../../../data/services/api/api.dart';
 class AccountDetailController extends GetxController {
   AccountApi api = AccountApi();
   RxBool isLoading = true.obs;
-  UserModel user = UserModel();
+  ProfileModel profile = ProfileModel();
 
   Map<String, dynamic> account = {};
 
@@ -24,15 +25,15 @@ class AccountDetailController extends GetxController {
 
     try {
       ResHandler res = await api.getProfile();
-      user = UserModel.fromJson(res.data);
+      profile = ProfileModel.fromJson(res.data);
 
       // update image in auth storage
       Map<String, dynamic> userMap = auth.toJson();
-      userMap['image'] = user.avatar;
+      // userMap['image'] = profile.avatar;
       await storage.write('user', userMap);
 
       // trigger user photo to update
-      Get.find<HomeController>().update(['appbar', 'profile']);
+      // Get.find<HomeController>().update(['appbar', 'profile']);
 
       // await checkAccountVerified();
     } catch (e, s) {
@@ -59,7 +60,6 @@ class AccountDetailController extends GetxController {
   Option? selectedCallingCode;
   List<Option> callingCodes = [];
 
-
   Future changePhoto(File file) async {
     try {
       final auth = await Auth.user();
@@ -82,5 +82,4 @@ class AccountDetailController extends GetxController {
       Errors.check(e, s);
     }
   }
-
 }

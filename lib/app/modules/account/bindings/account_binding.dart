@@ -14,10 +14,10 @@ class AccountBinding extends Bindings {
     Get.lazyPut<WebViewController>(
       () => WebViewController(),
     );
-       Get.lazyPut<HomeController>(
+    Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-        Get.lazyPut<DashboardController>(
+    Get.lazyPut<DashboardController>(
       () => DashboardController(),
     );
   }
