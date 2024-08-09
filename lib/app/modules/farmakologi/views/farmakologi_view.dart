@@ -1,4 +1,5 @@
 import 'package:alarm/alarm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -7,6 +8,7 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/modules/farmakologi/views/shortcut_button.dart';
 import 'package:simanis/app/modules/farmakologi/views/widgets/tile.dart';
+import 'package:simanis/app/widgets/widget.dart';
 
 import '../controllers/farmakologi_controller.dart';
 
@@ -16,7 +18,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
   @override
   Widget build(BuildContext context) {
     final forms = controller.forms;
-
+    final _fireStore = FirebaseFirestore.instance;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('Farmakologi')),
@@ -26,8 +28,191 @@ class FarmakologiView extends GetView<FarmakologiController> {
         if (isLoading) {
           return LzLoader.bar(message: 'Sedang Memuat...');
         }
+        return StreamBuilder(
+            stream: controller.alarmList,
+            builder: (context, AsyncSnapshot<List<Map>> snapshot) {
+              List<Map> docs = snapshot.data ?? [];
+              // if connection is waiting
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return LzLoader.bar(message: 'Memuat alarm...');
+              }
+
+              // if there is no notification
+              else if (!snapshot.hasData || docs.isEmpty) {
+                return const LzNoData(
+                    message: 'Tidak Ada Jadwal Obat Yang disetting.');
+              }
+              logg(docs.length);
+              return ListView.builder(
+                itemCount: docs.length,
+                itemBuilder: (context, index) {
+                  Map data = docs[index];
+                  return Touch(
+                    onTap: (){
+                      // show dialog to edit alarm data
+                      Get.dialog(
+                  name: "Edit Jadwal Obat",
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: InkWell(
+                      onTap: () => Get.back(),
+                      child: ListView(
+                        children: [
+                          LzFormGroup(
+                            keepLabel: true,
+                            label: 'Kesehatan *',
+                            prefixIcon: La.userTie,
+                            children: [
+                              LzForm.input(
+                                
+                                labelStyle: const LzFormLabelStyle(
+                                    fontWeight: FontWeight.bold),
+                                label: 'Judul *',
+                                hint: 'Berikan judul tentang obat ....',
+                                model: forms['title'],
+                              ),
+                              LzForm.input(
+                                labelStyle: const LzFormLabelStyle(
+                                    fontWeight: FontWeight.bold),
+                                label: 'Deskripsi *',
+                                hint: 'Tuliskan deskripsi tentang obat....',
+                                model: forms['description'],
+                              ),
+                              LzForm.select(
+                                  labelStyle: const LzFormLabelStyle(
+                                      fontWeight: FontWeight.bold),
+                                  label: 'Dosis Perhari *',
+                                  initValue: const Option(option: '1 Kali'),
+                                  options: [
+                                    '1 Kali',
+                                    '2 Kali',
+                                    '3 Kali',
+                                    '4 Kali'
+                                  ].generate((data, i) => Option(option: data)),
+                                  model: forms['dosis']),
+                              LzForm.input(
+                                  labelStyle: const LzFormLabelStyle(
+                                      fontWeight: FontWeight.bold),
+                                  label: 'Tanggal Mulai *',
+                                  hint: 'Tanggal waktu dimulainya minum obat ',
+                                  model: controller.forms['date_at'],
+                                  suffixIcon: La.calendar,
+                                  onTap: (model) {
+                                    LzPicker.datePicker(
+                                      context,
+                                      initialDate: DateTime.now(),
+                                      minDate: DateTime(2024),
+                                    ).then((value) {
+                                      if (value != null) {
+                                        model.text = value.format('yyyy-MM-dd');
+                                      }
+                                    });
+                                  }),
+                              LzForm.input(
+                                  labelStyle: const LzFormLabelStyle(
+                                      fontWeight: FontWeight.bold),
+                                  label: 'Waktu Mulai *',
+                                  hint: 'Masukkan waktu dimulainya minum obat ',
+                                  model: controller.forms['time_at'],
+                                  suffixIcon: La.calendar,
+                                  onTap: (model) {
+                                    LzPicker.timePicker(
+                                      context,
+                                      initialDate: DateTime.now(),
+                                      minDate: DateTime(2024),
+                                    ).then((value) {
+                                      logg(value);
+                                      if (value != null) {
+                                        model.text = value.format('kk:mm');
+                                      }
+                                    });
+                                  }),
+                            ],
+                          ),
+                         
+                          LzButton(
+                            text: 'Ubah',
+                            onTap: (control) {
+                              controller.onSubmit();
+                            },
+                          ),
+                           Padding(
+                             padding: Ei.sym(v:10.0, h:25.0),
+                             child: LzButton(
+                              color: Colors.red,
+                              textColor: Colors.white,
+                              text: 'Hapus',
+                              onTap: (control) {
+                                controller.onSubmit();
+                              },
+                                                       ),
+                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Center(
+                                child: Text(
+                              'Tutup',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+                    },
+                    child: Padding(
+                      padding: Ei.sym(h:15),
+                      child: Card(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: Ei.sym(h:18.0, v:20.0),
+                          child: Row(
+                            children: [
+                            
+                              Flexible(
+                                child: Col(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: Maa.spaceBetween,
+                                      children: [
+                                        Text(data['title'], style: TextStyle(fontWeight: FontWeight.bold),),
+                                       
+                                      ],
+                                    ),
+                                    Container(
+                                      margin: Ei.only(t: 5),
+                                      child: Row(
+                                        mainAxisAlignment: Maa.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: Text(
+                                              data['description'],
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              style: Gfont.muted,
+                                            ),
+                                          ),
+                                         
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                                Textr(data['time_at'],
+                                    style: Gfont.fs(25.0), margin: Ei.only()),
+                                      SizedBox(width: 10.0,),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            });
         // return StreamBuilder(stream: stream, builder: builder)
-        return SizedBox();
       }),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(10),
@@ -37,6 +222,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
             ExampleAlarmHomeShortcutButton(
                 refreshAlarms: controller.loadAlarms),
             FloatingActionButton(
+              backgroundColor: Colors.white,
               // onPressed: () => controller.navigateToAlarmScreen(null),
               onPressed: () {
                 Get.dialog(
@@ -78,9 +264,29 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                   ].generate((data, i) => Option(option: data)),
                                   model: forms['dosis']),
                               LzForm.input(
+                                  labelStyle: const LzFormLabelStyle(
+                                      fontWeight: FontWeight.bold),
+                                  label: 'Tanggal Mulai *',
+                                  hint: 'Tanggal waktu dimulainya minum obat ',
+                                  model: controller.forms['date_at'],
+                                  suffixIcon: La.calendar,
+                                  onTap: (model) {
+                                    LzPicker.datePicker(
+                                      context,
+                                      initialDate: DateTime.now(),
+                                      minDate: DateTime(2024),
+                                    ).then((value) {
+                                      if (value != null) {
+                                        model.text = value.format('yyyy-MM-dd');
+                                      }
+                                    });
+                                  }),
+                              LzForm.input(
+                                  labelStyle: const LzFormLabelStyle(
+                                      fontWeight: FontWeight.bold),
                                   label: 'Waktu Mulai *',
                                   hint: 'Masukkan waktu dimulainya minum obat ',
-                                  model: controller.forms['start_at'],
+                                  model: controller.forms['time_at'],
                                   suffixIcon: La.calendar,
                                   onTap: (model) {
                                     LzPicker.timePicker(
@@ -117,7 +323,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                 );
               },
 
-              child: const Icon(Icons.alarm_add_rounded, size: 33),
+              child: const Icon(Icons.alarm_add_rounded, size: 25),
             ),
           ],
         ),
