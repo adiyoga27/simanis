@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide Response, FormData;
 import 'package:lazyui/lazyui.dart' hide Response;
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
+import 'package:simanis/app/data/services/storage/storage.dart';
 
 bool _dismissOverlay = true;
 
@@ -71,13 +72,14 @@ extension ListFetchExtension on List<Future<ResHandler>> {
     return result;
   }
 }
+    String? token = storage.read('token') ?? "";
 
 BaseOptions _options = BaseOptions(
     followRedirects: false,
     baseUrl: serverApi,
     connectTimeout: const Duration(seconds: 60),
     receiveTimeout: const Duration(seconds: 200),
-    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+    headers: {'Accept': 'application/json', 'Content-Type': 'application/json', 'authorization': 'Bearer $token'},
     responseType: ResponseType.plain,
     validateStatus: (status) => status! <= 598);
 

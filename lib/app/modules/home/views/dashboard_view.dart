@@ -48,7 +48,8 @@ class DashboardView extends GetView<DashboardController> {
                               child: const Center(
                                 child: Column(
                                   mainAxisAlignment: Maa.center,
-                                  children: [],
+                                  children: [
+                                  ],
                                 ),
                               ),
                             ),
@@ -57,9 +58,10 @@ class DashboardView extends GetView<DashboardController> {
                               padding: Ei.all(35),
                               child: Column(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(25.0),
-                                    child: Textr(
+                                  //  LzImage('logo.png',),
+                                   Padding(
+                                    padding: Ei.only(b:25.0, t:10.0),
+                                    child: const Textr(
                                       'Menu',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,

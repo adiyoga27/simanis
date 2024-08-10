@@ -6,10 +6,8 @@ import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/models/profile_model.dart';
-import 'package:simanis/app/data/models/user_model.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
-import 'package:simanis/app/modules/home/controllers/home_controller.dart';
 
 import '../../../data/services/api/api.dart';
 
@@ -24,13 +22,15 @@ class AccountDetailController extends GetxController {
     isLoading(true);
 
     try {
+          String? token = storage.read('token');
       ResHandler res = await api.getProfile();
+      logg(res);
       profile = ProfileModel.fromJson(res.data);
 
       // update image in auth storage
       Map<String, dynamic> userMap = auth.toJson();
       // userMap['image'] = profile.avatar;
-      await storage.write('user', userMap);
+      await storage.write('profile', profile);
 
       // trigger user photo to update
       // Get.find<HomeController>().update(['appbar', 'profile']);

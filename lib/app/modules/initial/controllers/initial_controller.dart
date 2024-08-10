@@ -1,6 +1,9 @@
-
-import 'package:fetchly/fetchly.dart';
+import 'package:fetchly/fetchly.dart' as f;
+import 'package:fetchly/models/config.dart';
 import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/core/utils/fetchly_request_handler.dart';
+import 'package:simanis/app/data/repository/api/api.dart';
 import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
@@ -13,9 +16,17 @@ RxBool isLogged = false.obs;
 
     // check existing token
     String? token = storage.read('token');
-
+    logg(token);
+    f.Fetchly.init(
+      baseUrl: 'https://simanis.codingaja.my.id/api/',
+      onRequest: RequestHandler.onRequest,
+      config: FetchlyConfig(printLimit: 5000));
     if (token != null) {
-      Fetchly.setToken(token);
+      f.Fetchly.setToken(token);
+      dio.options.headers['authorization'] = 'Bearer $token';
+          dio.setToken(token);
+          f.dio.options.headers['Authorization'] = 'Bearer $token';
+          f.dio.setToken(token);
       isLogged.value = true;
     }
   }
@@ -24,7 +35,7 @@ RxBool isLogged = false.obs;
     String? token = storage.read('token');
 
     if (token != null) {
-      Fetchly.setToken(token);
+      f.Fetchly.setToken(token);
       Get.offAllNamed(Routes.HOME);
     }else{
       Get.toNamed(Routes.LOGIN);

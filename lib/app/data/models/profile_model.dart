@@ -1,49 +1,50 @@
+
 class ProfileModel {
-  int? id;
-  String? name;
-  String? email;
-  DateTime? emailVerifiedAt;
-  String? username;
-  String? role;
-  dynamic avatar;
-  DateTime? birthdate;
-  String? phone;
-  String? jk;
-  String? isSmoke;
-  String? medicalHistory;
-  String? province;
-  String? city;
-  String? subdistrict;
-  String? village;
-  String? address;
-  String? kodePos;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+    int? id;
+    String? name;
+    String? email;
+    DateTime? emailVerifiedAt;
+    String? username;
+    String? role;
+    dynamic? avatar;
+    DateTime? birthdate;
+    String? phone;
+    String? jk;
+    int? isSmoke;
+    String? medicalHistory;
+    String? province;
+    String? city;
+    String? subdistrict;
+    String? village;
+    String? address;
+    int? kodePos;
+    DateTime? createdAt;
+    DateTime? updatedAt;
 
-  ProfileModel({
-    this.id,
-    this.name,
-    this.email,
-    this.emailVerifiedAt,
-    this.username,
-    this.role,
-    this.avatar,
-    this.birthdate,
-    this.phone,
-    this.jk,
-    this.isSmoke,
-    this.medicalHistory,
-    this.province,
-    this.city,
-    this.subdistrict,
-    this.village,
-    this.address,
-    this.kodePos,
-    this.createdAt,
-    this.updatedAt,
-  });
+    ProfileModel({
+        this.id,
+        this.name,
+        this.email,
+        this.emailVerifiedAt,
+        this.username,
+        this.role,
+        this.avatar,
+        this.birthdate,
+        this.phone,
+        this.jk,
+        this.isSmoke,
+        this.medicalHistory,
+        this.province,
+        this.city,
+        this.subdistrict,
+        this.village,
+        this.address,
+        this.kodePos,
+        this.createdAt,
+        this.updatedAt,
+    });
 
-  factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
+    factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         id: json["id"],
         name: json["name"],
         email: json["email"],
@@ -64,9 +65,9 @@ class ProfileModel {
         kodePos: json["kode_pos"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "email": email,
@@ -74,8 +75,7 @@ class ProfileModel {
         "username": username,
         "role": role,
         "avatar": avatar,
-        "birthdate":
-            "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
+        "birthdate": "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
         "phone": phone,
         "jk": jk,
         "is_smoke": isSmoke,
@@ -88,5 +88,5 @@ class ProfileModel {
         "kode_pos": kodePos,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
-      };
+    };
 }

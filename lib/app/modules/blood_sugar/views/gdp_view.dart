@@ -144,7 +144,7 @@ class StatusGulaDarahWidget extends StatelessWidget {
                 onTap: () => Get.toNamed(Routes.WEBVIEW,
                     arguments: Webview(
                         title: 'Tutorial Cara Perawatan Hiperglikemia',
-                        url: 'https://flutter.dev')),
+                        url: 'https://simanis.codingaja.my.id/tutorial-cara-perawatan-hiperglikemia')),
               ),
             ],
           ).lz.clip(all: LazyUi.radius),
@@ -214,7 +214,7 @@ class StatusGulaDarahWidget extends StatelessWidget {
                 onTap: () => Get.toNamed(Routes.WEBVIEW,
                     arguments: Webview(
                         title: 'Tutorial Cara Perawatan Hipoglekimia',
-                        url: 'https://flutter.dev')),
+                        url: 'https://simanis.codingaja.my.id/tutorial-cara-perawatan-hipoglekimia')),
               ),
             ],
           ).lz.clip(all: LazyUi.radius),

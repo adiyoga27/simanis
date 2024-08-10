@@ -28,7 +28,6 @@ class DetailProfileView extends GetView<AccountDetailController> {
     final key = GlobalKey();
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Profil Saya'),
         centerTitle: true,
@@ -93,7 +92,7 @@ class DetailProfileView extends GetView<AccountDetailController> {
           {
             'label': 'Kesehatan',
             'data': [
-              ['Merokok', int.parse(data.isSmoke.orIf()) == 1 ? 'Ya' : 'Tidak'],
+              ['Merokok', data.isSmoke! > 0 ? 'Ya' : 'Tidak'],
               ['Riwayat', data.medicalHistory.orIf()],
             ]
           },
@@ -176,7 +175,7 @@ class DetailProfileView extends GetView<AccountDetailController> {
                             children: List.generate(options.length, (j) {
                               List option = options[j];
                               String label = option[0];
-                              String value = option[1];
+                              String value =  option[1].toString();
 
                               bool danger = options[j].length > 2;
                               Color color =

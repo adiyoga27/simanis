@@ -43,10 +43,7 @@ class AccountView extends GetView<AccountController> {
       appBar: AppBar(
         title: const Text('Profil Saya'),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => {},
-        ),
+       
       ),
       backgroundColor: Colors.white,
       body: Refreshtor(

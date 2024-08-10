@@ -23,6 +23,16 @@ class AuthService {
       return ResponseHandler.catchResponse(e);
     }
   }
+     static Future<ResponseHandler> updateProfile(Map<String, dynamic> map) async {
+    try {
+      Response response = await Fetch.post('$serverApi/user', data: FormData.fromMap(map));
+
+      return await ResponseHandler.check(response);
+    } catch (e) {
+
+      return ResponseHandler.catchResponse(e);
+    }
+  }
   static Future<ResponseHandler> verifyEmail(Map<String, dynamic> map) async {
     try {
       Response response = await Fetch.post('$serverApi/auth/resend-verification', data: FormData.fromMap(map));
