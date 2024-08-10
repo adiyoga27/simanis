@@ -20,7 +20,6 @@ class FarmakologiView extends GetView<FarmakologiController> {
     final forms = controller.forms;
     final _fireStore = FirebaseFirestore.instance;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(title: const Text('Farmakologi')),
       body: Obx(() {
         bool isLoading = controller.isLoading.value;

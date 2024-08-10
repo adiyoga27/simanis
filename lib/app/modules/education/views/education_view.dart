@@ -13,9 +13,7 @@ class EducationView extends GetView<EducationController> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
-      backgroundColor: secondaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
           title: const Text('Pilar Tata Laksana'),
           centerTitle: true,
         ),

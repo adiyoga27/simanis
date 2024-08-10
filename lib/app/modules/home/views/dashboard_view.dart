@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/core/app_config.dart';
 import 'package:simanis/app/core/utils/shortcut.dart';
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:simanis/app/modules/home/views/widgets/appbar.dart';
@@ -133,7 +134,12 @@ class DashboardView extends GetView<DashboardController> {
               ),
             ),
             // ),
-            const Appbar()
+            const Appbar(),
+            const Positioned(
+              bottom: 20.0,
+              left: 10.0,
+              right: 10.0,
+              child: Center(child: Text("v${AppConfig.version} ${AppConfig.buildDate}")))
           ],
         ));
   }
@@ -149,7 +155,7 @@ class Header extends GetView<DashboardController> {
             Container(
               width: Get.width,
               height: controller.headerHeight.value,
-              color: Colors.blueGrey,
+              color: Utils.hex('018fe3'),
               margin: Ei.only(b: 30),
             ),
             Positioned(
@@ -166,7 +172,7 @@ class Header extends GetView<DashboardController> {
               child: Container(
                 width: Get.width,
                 height: 30,
-                color: Colors.blueGrey,
+                color: Utils.hex('018fe3'),
               ).lz.rotate(3),
             )
           ],
