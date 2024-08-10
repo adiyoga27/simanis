@@ -24,7 +24,6 @@ class AccountDetailController extends GetxController {
     try {
           String? token = storage.read('token');
       ResHandler res = await api.getProfile();
-      logg(res);
       profile = ProfileModel.fromJson(res.data);
 
       // update image in auth storage

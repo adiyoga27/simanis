@@ -41,142 +41,194 @@ class FarmakologiView extends GetView<FarmakologiController> {
                 return const LzNoData(
                     message: 'Tidak Ada Jadwal Obat Yang disetting.');
               }
-              logg(docs.length);
               return ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {
                   Map data = docs[index];
+
                   return Touch(
-                    onTap: (){
+                    onTap: () {
+                      forms.fill({
+                        'alarm_id': data['alarm_id'],
+                        'title': data['title'],
+                        'description': data['description'],
+                        'date_at': data['date_at'],
+                        'dosis': data['dosis'],
+                        'time_at': data['time_at'],
+                      });
                       // show dialog to edit alarm data
                       Get.dialog(
-                  name: "Edit Jadwal Obat",
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: InkWell(
-                      onTap: () => Get.back(),
-                      child: ListView(
-                        children: [
-                          LzFormGroup(
-                            keepLabel: true,
-                            label: 'Kesehatan *',
-                            prefixIcon: La.userTie,
-                            children: [
-                              LzForm.input(
-                                
-                                labelStyle: const LzFormLabelStyle(
-                                    fontWeight: FontWeight.bold),
-                                label: 'Judul *',
-                                hint: 'Berikan judul tentang obat ....',
-                                model: forms['title'],
-                              ),
-                              LzForm.input(
-                                labelStyle: const LzFormLabelStyle(
-                                    fontWeight: FontWeight.bold),
-                                label: 'Deskripsi *',
-                                hint: 'Tuliskan deskripsi tentang obat....',
-                                model: forms['description'],
-                              ),
-                              LzForm.select(
-                                  labelStyle: const LzFormLabelStyle(
-                                      fontWeight: FontWeight.bold),
-                                  label: 'Dosis Perhari *',
-                                  initValue: const Option(option: '1 Kali'),
-                                  options: [
-                                    '1 Kali',
-                                    '2 Kali',
-                                    '3 Kali',
-                                    '4 Kali'
-                                  ].generate((data, i) => Option(option: data)),
-                                  model: forms['dosis']),
-                              LzForm.input(
-                                  labelStyle: const LzFormLabelStyle(
-                                      fontWeight: FontWeight.bold),
-                                  label: 'Tanggal Mulai *',
-                                  hint: 'Tanggal waktu dimulainya minum obat ',
-                                  model: controller.forms['date_at'],
-                                  suffixIcon: La.calendar,
-                                  onTap: (model) {
-                                    LzPicker.datePicker(
-                                      context,
-                                      initialDate: DateTime.now(),
-                                      minDate: DateTime(2024),
-                                    ).then((value) {
-                                      if (value != null) {
-                                        model.text = value.format('yyyy-MM-dd');
-                                      }
-                                    });
-                                  }),
-                              LzForm.input(
-                                  labelStyle: const LzFormLabelStyle(
-                                      fontWeight: FontWeight.bold),
-                                  label: 'Waktu Mulai *',
-                                  hint: 'Masukkan waktu dimulainya minum obat ',
-                                  model: controller.forms['time_at'],
-                                  suffixIcon: La.calendar,
-                                  onTap: (model) {
-                                    LzPicker.timePicker(
-                                      context,
-                                      initialDate: DateTime.now(),
-                                      minDate: DateTime(2024),
-                                    ).then((value) {
-                                      logg(value);
-                                      if (value != null) {
-                                        model.text = value.format('kk:mm');
-                                      }
-                                    });
-                                  }),
-                            ],
+                        name: "Edit Jadwal Obat",
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: InkWell(
+                            onTap: () => Get.back(),
+                            child: ListView(
+                              children: [
+                                LzFormGroup(
+                                  keepLabel: true,
+                                  label: 'Kesehatan *',
+                                  prefixIcon: La.userTie,
+                                  children: [
+                                    LzForm.input(
+                                      labelStyle: const LzFormLabelStyle(
+                                          fontWeight: FontWeight.bold),
+                                      label: 'Judul *',
+                                      hint: 'Berikan judul tentang obat ....',
+                                      model: forms['title'],
+                                    ),
+                                    LzForm.input(
+                                      labelStyle: const LzFormLabelStyle(
+                                          fontWeight: FontWeight.bold),
+                                      label: 'Deskripsi *',
+                                      hint:
+                                          'Tuliskan deskripsi tentang obat....',
+                                      model: forms['description'],
+                                    ),
+                                    LzForm.select(
+                                        labelStyle: const LzFormLabelStyle(
+                                            fontWeight: FontWeight.bold),
+                                        label: 'Dosis Perhari *',
+                                        initValue:
+                                            const Option(option: '1 Kali'),
+                                        options: [
+                                          '1 Kali',
+                                          '2 Kali',
+                                          '3 Kali',
+                                          '4 Kali'
+                                        ].generate(
+                                            (data, i) => Option(option: data)),
+                                        model: forms['dosis']),
+                                    LzForm.input(
+                                        labelStyle: const LzFormLabelStyle(
+                                            fontWeight: FontWeight.bold),
+                                        label: 'Tanggal Mulai *',
+                                        hint:
+                                            'Tanggal waktu dimulainya minum obat ',
+                                        model: controller.forms['date_at'],
+                                        suffixIcon: La.calendar,
+                                        onTap: (model) {
+                                          LzPicker.datePicker(
+                                            context,
+                                            initialDate: DateTime.now(),
+                                            minDate: DateTime(2024),
+                                          ).then((value) {
+                                            if (value != null) {
+                                              model.text =
+                                                  value.format('yyyy-MM-dd');
+                                            }
+                                          });
+                                        }),
+                                    LzForm.input(
+                                        labelStyle: const LzFormLabelStyle(
+                                            fontWeight: FontWeight.bold),
+                                        label: 'Waktu Mulai *',
+                                        hint:
+                                            'Masukkan waktu dimulainya minum obat ',
+                                        model: controller.forms['time_at'],
+                                        suffixIcon: La.calendar,
+                                        onTap: (model) {
+                                          LzPicker.timePicker(
+                                            context,
+                                            initialDate: DateTime.now(),
+                                            minDate: DateTime(2024),
+                                          ).then((value) {
+                                            logg(value);
+                                            if (value != null) {
+                                              model.text =
+                                                  value.format('kk:mm');
+                                            }
+                                          });
+                                        }),
+                                  ],
+                                ),
+                                LzButton(
+                                  text: 'Ubah',
+                                  onTap: (control) {
+                                    controller.onSubmit();
+                                  },
+                                ),
+                                Padding(
+                                  padding: Ei.sym(v: 10.0, h: 25.0),
+                                  child: LzButton(
+                                    color: Colors.red,
+                                    textColor: Colors.white,
+                                    text: 'Hapus',
+                                    onTap: (control) async {
+                                      logg(data['alarm_id']);
+                                      await Alarm.stop(data['alarm_id'])
+                                          .then((_) {
+                                        logg(
+                                            "success berhasil mengubah jadwal obat");
+
+                                        FirebaseFirestore firestore =
+                                            FirebaseFirestore.instance;
+
+                                        firestore
+                                            .collection('alarms')
+                                            .where('alarm_id',
+                                                isEqualTo: data['alarm_id'])
+                                            .get()
+                                            .then(
+                                                (QuerySnapshot querySnapshot) {
+                                          querySnapshot.docs.forEach((doc) {
+                                            logg(doc);
+
+                                            // Menghapus dokumen yang ditemukan
+                                            firestore
+                                                .collection('alarms')
+                                                .doc(doc.id)
+                                                .delete()
+                                                .then((_) {
+                                              Toasts.show(
+                                                  "Berhasil Menghapus Jadwal Obat");
+                                              logg(
+                                                  "Document with id ${doc.id} deleted");
+
+                                              Get.back();
+                                            }).catchError((error) {
+                                              logg(
+                                                  "Failed to delete document: $error");
+                                            });
+                                          });
+                                        });
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Center(
+                                      child: Text(
+                                    'Tutup',
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                                )
+                              ],
+                            ),
                           ),
-                         
-                          LzButton(
-                            text: 'Ubah',
-                            onTap: (control) {
-                              controller.onSubmit();
-                            },
-                          ),
-                           Padding(
-                             padding: Ei.sym(v:10.0, h:25.0),
-                             child: LzButton(
-                              color: Colors.red,
-                              textColor: Colors.white,
-                              text: 'Hapus',
-                              onTap: (control) {
-                                controller.onSubmit();
-                              },
-                                                       ),
-                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Center(
-                                child: Text(
-                              'Tutup',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                        ),
+                      );
                     },
                     child: Padding(
-                      padding: Ei.sym(h:15),
+                      padding: Ei.sym(h: 15),
                       child: Card(
                         color: Colors.white,
                         child: Padding(
-                          padding: Ei.sym(h:18.0, v:20.0),
+                          padding: Ei.sym(h: 18.0, v: 20.0),
                           child: Row(
                             children: [
-                            
                               Flexible(
                                 child: Col(
                                   children: [
                                     Row(
                                       mainAxisAlignment: Maa.spaceBetween,
                                       children: [
-                                        Text(data['title'], style: TextStyle(fontWeight: FontWeight.bold),),
-                                       
+                                        Text(
+                                          data['title'],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ],
                                     ),
                                     Container(
@@ -192,16 +244,25 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                               style: Gfont.muted,
                                             ),
                                           ),
-                                         
                                         ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                                Textr(data['time_at'],
-                                    style: Gfont.fs(25.0), margin: Ei.only()),
-                                      SizedBox(width: 10.0,),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Textr(DateTime.parse(data['date_at']).format('dd MMMM yyyy'),
+                                      style: Gfont.fs(15.0), margin: Ei.only()),
+                                  Textr(data['time_at'],
+                                      style: Gfont.fs(15.0), margin: Ei.only()),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
                             ],
                           ),
                         ),

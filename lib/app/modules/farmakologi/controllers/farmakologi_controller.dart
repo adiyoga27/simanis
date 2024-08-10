@@ -23,7 +23,7 @@ class FarmakologiController extends GetxController {
 
   final _fireStore = FirebaseFirestore.instance;
 
-  static StreamSubscription<AlarmSettings>? subscription;
+  // static StreamSubscription<AlarmSettings>? subscription;
 
     StreamController<List<Map>> alarmStreamController =
       StreamController<List<Map>>.broadcast();
@@ -39,7 +39,7 @@ class FarmakologiController extends GetxController {
       checkAndroidScheduleExactAlarmPermission();
     }
     loadAlarms();
-    subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
+    // subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
     getAlarms();
     
   }
@@ -297,7 +297,7 @@ class FarmakologiController extends GetxController {
 
   @override
   void dispose() {
-    subscription?.cancel();
+    // subscription?.cancel();
     super.dispose();
   }
 }

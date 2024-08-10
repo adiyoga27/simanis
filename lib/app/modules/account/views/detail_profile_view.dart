@@ -92,7 +92,7 @@ class DetailProfileView extends GetView<AccountDetailController> {
           {
             'label': 'Kesehatan',
             'data': [
-              ['Merokok', data.isSmoke! > 0 ? 'Ya' : 'Tidak'],
+              ['Merokok', data.isSmoke.orIf() > 0 ? 'Ya' : 'Tidak'],
               ['Riwayat', data.medicalHistory.orIf()],
             ]
           },

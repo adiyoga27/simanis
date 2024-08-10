@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alarm/alarm.dart';
 import 'package:fetchly/models/config.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,9 +12,11 @@ import 'package:simanis/app/core/app_config.dart';
 import 'package:simanis/app/core/theme/theme.dart';
 import 'package:simanis/app/core/utils/fetchly_request_handler.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
+import 'package:simanis/app/modules/farmakologi/views/ring.dart';
 import 'package:simanis/firebase_options.dart';
 import 'app/data/services/storage/storage.dart';
 import 'app/routes/app_pages.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +25,8 @@ void main() async {
   );
   await AppConfig.init();
   await Alarm.init();
+   
+
   // check if user is logged in
   String? token = storage.read('token');
 
@@ -52,3 +58,4 @@ void main() async {
     ),
   );
 }
+

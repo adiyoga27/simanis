@@ -6,7 +6,7 @@ class ProfileModel {
     DateTime? emailVerifiedAt;
     String? username;
     String? role;
-    dynamic? avatar;
+    dynamic avatar;
     DateTime? birthdate;
     String? phone;
     String? jk;
@@ -17,7 +17,7 @@ class ProfileModel {
     String? subdistrict;
     String? village;
     String? address;
-    int? kodePos;
+    String? kodePos;
     DateTime? createdAt;
     DateTime? updatedAt;
 
