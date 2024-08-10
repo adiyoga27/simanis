@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/repository/firestore/fs_notification.dart';
 import 'package:simanis/app/data/repository/storage/auth_storage.dart';
 import 'package:simanis/app/modules/farmakologi/views/edit_alarm.dart';
@@ -106,6 +107,96 @@ class FarmakologiController extends GetxController {
         'time_at': form.value['time_at'],
         'duration': duration,
       });
+    }
+
+    isLoading.value = false;
+    getAlarms();
+    Get.back();
+  }
+
+  
+  void onUpdate(int alarmID) async {
+    isLoading.value = true;
+    final form = LzForm.validate(forms,
+        required: ['*', 'kode_pos'],
+        messages: FormMessages(required: {
+          'title': 'Wajib memberikan judul',
+          'description': 'Deskripsi wajib diisi',
+          'date_at': 'Masukkan tanggal waktu pertama minum obat',
+          'time_at': 'Masukkan waktu pertama minum obat',
+          'dosis': 'Masukkan dosis minum obat',
+        }));
+
+    if (form.ok) {
+      final auth = await Auth.user();
+      String dosis = form.value['dosis'];
+      int hours = int.parse(form.value['time_at'].split(':')[0]);
+      int minutes = int.parse(form.value['time_at'].split(':')[1]);
+      int interval = int.parse(dosis.replaceAll(' Kali', ""));
+      int duration = 24 ~/ interval;
+      final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
+      var startAt = DateTime.now().copyWith(
+        hour: hours.toInt(),
+        minute: minutes.toInt(),
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
+      final dateNow = DateTime.now();
+
+      if(dateNow.hour < hours.toInt()){
+        startAt = startAt.add(Duration(hours: duration));
+      }
+
+
+
+await Alarm.stop(alarmID).then((_) {
+                      final now = DateTime.now();
+                      _fireStore
+                          .collection('alarms')
+                          .where('alarm_id', isEqualTo: alarmID)
+                          .get()
+                          .then((QuerySnapshot querySnapshot) {
+                        querySnapshot.docs.forEach((doc) {
+                     
+                     int duration = doc['duration'];
+
+                          // Mengupdate field 'time_at' dengan nilai baru
+            
+                          _fireStore.collection('alarms').doc(doc.id).update({
+                            'title': form.value['title'],
+                            'description': form.value['description'],
+                            'dosis': form.value['dosis'],
+                            'created_by': auth.username,
+                            'created_at': Timestamp.now(),
+                            'alarm_id': id,
+                            'date_at': form.value['date_at'],
+                            'time_at': form.value['time_at'],
+                            'duration': duration,
+                          }).then((_) {
+                            Toasts.show(
+                                "Alarm akan berbunyi kembali dalam kurun waktu $duration jam");
+
+                            Alarm.set(
+                              alarmSettings:AlarmSettings(
+                              id: id,
+                              dateTime: startAt,
+                              loopAudio: true,
+                              vibrate: true,
+                              volume: 1,
+                              assetAudioPath: 'assets/alarm.wav',
+                              notificationTitle: form.value['title'],
+                              notificationBody: 'Your alarm ($id) is ringing, Ayoo minum obat!',
+                              enableNotificationOnKill: Platform.isIOS),
+                            );
+                          }).catchError((error) {
+                            Toasts.show("Gagal setting alarm");
+                          });
+                        });
+                      });
+                    });
+                  
+
     }
 
     isLoading.value = false;

@@ -145,7 +145,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                 LzButton(
                                   text: 'Ubah',
                                   onTap: (control) {
-                                    controller.onSubmit();
+                                    controller.onUpdate(data['alarm_id']);
                                   },
                                 ),
                                 Padding(
