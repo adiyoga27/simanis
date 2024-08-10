@@ -144,7 +144,7 @@ class StatusGulaDarahWidget extends StatelessWidget {
                 onTap: () => Get.toNamed(Routes.WEBVIEW,
                     arguments: Webview(
                         title: 'Tutorial Cara Perawatan Hiperglikemia',
-                        url: 'https://simanis.codingaja.my.id/tutorial-cara-perawatan-hiperglikemia')),
+                        url: 'https://simanis.codingaja.com/tutorial-cara-perawatan-hiperglikemia')),
               ),
             ],
           ).lz.clip(all: LazyUi.radius),
@@ -214,7 +214,7 @@ class StatusGulaDarahWidget extends StatelessWidget {
                 onTap: () => Get.toNamed(Routes.WEBVIEW,
                     arguments: Webview(
                         title: 'Tutorial Cara Perawatan Hipoglekimia',
-                        url: 'https://simanis.codingaja.my.id/tutorial-cara-perawatan-hipoglekimia')),
+                        url: 'https://simanis.codingaja.com/tutorial-cara-perawatan-hipoglekimia')),
               ),
             ],
           ).lz.clip(all: LazyUi.radius),

@@ -24,19 +24,19 @@ class AppIntroView extends GetView<AppIntroController> {
       'intro1.png',
       'intro2.png',
       'intro3.png',
-      'intro4.png'
+      'intro1.png'
     ];
     List<String> labels = [
       'Selamat Datang di SIMANIS!',
-      'Promo Belanja!',
-      'Semua Bisa Menjadi Nyata!',
+      'Edukasi!',
+      'Hidup Sehat!',
       'Tunggu Apalagi?'
     ];
     List<String> descriptions = [
       'Aplikasi yang membantu anda dalam menangani diabetes',
       'Rawat Kaki anda agar mengatasi kanker kaki',
       'Lakukan olahraga teratur',
-      'Cek nutrisi yang dibutuhkan',
+      'Cek screening kaki anda untuk mengetahui kesehatan DM',
     ];
 
     Widget bubble(double size, [Color? color]) => Container(
@@ -83,7 +83,7 @@ class AppIntroView extends GetView<AppIntroController> {
       Positioned(
         left: -70,
         bottom: -50,
-        child: bubble(300, Colors.green.withOpacity(.4))
+        child: bubble(300, Colors.blue.withOpacity(.4))
             .animate(onPlay: (o) => o.repeat(reverse: true))
             .moveY(duration: 5.s, begin: -55, end: 100)
             .moveX(duration: 5.s, begin: -55, end: 100)
@@ -123,9 +123,9 @@ class AppIntroView extends GetView<AppIntroController> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.green.shade700,
-                    Colors.green.shade400,
-                    Colors.green.shade200,
+                    Colors.blue.shade700,
+                    Colors.blue.shade400,
+                    Colors.blue.shade200,
                   ],
                 )),
               ),
@@ -202,7 +202,7 @@ class AppIntroView extends GetView<AppIntroController> {
         LineProgressIndicator(
           repeat: true,
           duration: 10.s,
-          progressColor: Colors.green,
+          progressColor: Colors.blue,
           onComplete: () {
             controller.carouselController.nextPage();
           },

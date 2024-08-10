@@ -32,8 +32,8 @@ BaseOptions dioOptions(String baseUrl, String token) => BaseOptions(
 
 final Dio dio = Dio(dioOptions(AppConfig.baseUrl, ''));
 
-String localBaseUrl = 'https://simanis.codingaja.my.id/api',
-    serverApi = 'https://simanis.codingaja.my.id/api';
+String localBaseUrl = 'https://simanis.codingaja.com/api',
+    serverApi = 'https://simanis.codingaja.com/api';
 
 /*
   # NOTE 
@@ -42,7 +42,7 @@ String localBaseUrl = 'https://simanis.codingaja.my.id/api',
   Untuk native sendiri permission akses datanya dengan param idmember,
   sedangkan laravel dengan token
 
- https://simanis.codingaja.my.id/api/v1/ -> 
+ https://simanis.codingaja.com/api/v1/ -> 
 */
 
 class UtilRh {

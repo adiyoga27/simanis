@@ -19,14 +19,14 @@ class AppConfig {
   | Server Base URL
   | */
 
-  static const String baseUrl = 'https://simanis.codingaja.my.id/api/';
+  static const String baseUrl = 'https://simanis.codingaja.com/api/';
 
   /* ------------------------------------------------------------
   | Version
   | */
 
   static const String version = '1.0.0';
-  static const String buildDate = '26072024.1'; 
+  static const String buildDate = '10082024.1'; 
 
 
   /* ------------------------------------------------------------

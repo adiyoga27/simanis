@@ -18,7 +18,7 @@ RxBool isLogged = false.obs;
     String? token = storage.read('token');
     logg(token);
     f.Fetchly.init(
-      baseUrl: 'https://simanis.codingaja.my.id/api/',
+      baseUrl: 'https://simanis.codingaja.com/api/',
       onRequest: RequestHandler.onRequest,
       config: FetchlyConfig(printLimit: 5000));
     if (token != null) {

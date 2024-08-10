@@ -32,7 +32,7 @@ class BloodSugarView extends GetView<BloodSugarController> {
                 onTap: () => Get.toNamed(Routes.WEBVIEW,
                     arguments: Webview(
                         title: 'Cara Melakukan Cek Gula Darah',
-                        url: 'https://simanis.codingaja.my.id/tutorial-check-gula-darah')),
+                        url: 'https://simanis.codingaja.com/tutorial-check-gula-darah')),
               ),
               CardListBloodSugar(
                 title: "Check Gula Darah Puasa (GDP)",
