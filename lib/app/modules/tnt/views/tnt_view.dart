@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/tnt_controller.dart';
 
@@ -73,7 +72,9 @@ class TntView extends GetView<TntController> {
                     ),
                     LzButton(
                       text: 'Check',
-                      onTap: (control) => controller.check(),
+                      onTap: (control) async { 
+                        controller.check();
+                      },
                     ).dark().style(LzButtonStyle.shadow),
                   ])));
     });
