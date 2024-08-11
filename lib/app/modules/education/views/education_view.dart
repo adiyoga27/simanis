@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:masonry_grid/masonry_grid.dart';
-import 'package:simanis/app/core/theme/theme.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/education_controller.dart';

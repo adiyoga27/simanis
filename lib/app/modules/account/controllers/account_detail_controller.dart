@@ -22,12 +22,12 @@ class AccountDetailController extends GetxController {
     isLoading(true);
 
     try {
-          String? token = storage.read('token');
+          // String? token = storage.read('token');
       ResHandler res = await api.getProfile();
       profile = ProfileModel.fromJson(res.data);
 
       // update image in auth storage
-      Map<String, dynamic> userMap = auth.toJson();
+      // Map<String, dynamic> userMap = auth.toJson();
       // userMap['image'] = profile.avatar;
       await storage.write('profile', profile);
 

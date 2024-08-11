@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-
-import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
-import 'package:simanis/app/widgets/detail_card_widget.dart';
-import 'package:simanis/app/widgets/widget.dart';
-
-import '../modules/education_detail/controllers/education_detail_controller.dart';
 
 class ArticleView extends StatelessWidget {
   const ArticleView({
@@ -35,7 +29,7 @@ class ArticleView extends StatelessWidget {
                   LzImage(image, radius: 0.0,),
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
-                    child: Textr(title!, textAlign: TextAlign.center, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
+                    child: Textr(title!, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
                   ),
                   Padding(
                     padding: Ei.sym(v: 12.0, h: 10.0),

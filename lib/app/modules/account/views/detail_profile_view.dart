@@ -5,25 +5,25 @@ class DetailProfileView extends GetView<AccountDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    final ImagePicker picker = ImagePicker();
+    // final ImagePicker picker = ImagePicker();
 
-    void changePhoto() async {
-      final pickedFile = await picker.pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 2000,
-        maxHeight: 2000,
-        imageQuality: 90,
-      );
+    // void changePhoto() async {
+    //   final pickedFile = await picker.pickImage(
+    //     source: ImageSource.gallery,
+    //     maxWidth: 2000,
+    //     maxHeight: 2000,
+    //     imageQuality: 90,
+    //   );
 
-      if (pickedFile != null) {
-        File file = File(pickedFile.path);
-        Get.dialog(WiPhotoChangePreview(file.path)).then((ok) {
-          if (ok != null && ok) {
-            controller.changePhoto(file);
-          }
-        });
-      }
-    }
+    //   if (pickedFile != null) {
+    //     File file = File(pickedFile.path);
+    //     Get.dialog(WiPhotoChangePreview(file.path)).then((ok) {
+    //       if (ok != null && ok) {
+    //         controller.changePhoto(file);
+    //       }
+    //     });
+    //   }
+    // }
 
     final key = GlobalKey();
 

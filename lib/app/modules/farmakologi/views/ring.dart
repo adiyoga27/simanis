@@ -45,7 +45,7 @@ class ExampleAlarmRingScreen extends StatelessWidget {
                           now.day,
                           now.hour,
                           now.minute,
-                        ).add(Duration(hours: 5));
+                        ).add(const Duration(hours: 5));
 
                         // Mengupdate field 'time_at' dengan nilai baru
                         firestore.collection('alarms').doc(doc.id).update({
@@ -54,7 +54,6 @@ class ExampleAlarmRingScreen extends StatelessWidget {
                           'time_at':
                               "${timeAt.hour}:${timeAt.minute}", // contoh, update dengan waktu sekarang
                         }).then((_) {
-                          print("Field 'time_at' updated successfully");
                           Toasts.show(
                               "Alarm akan berbunyi kembali dalam kurun waktu 5 menit");
                           Alarm.set(
@@ -63,14 +62,13 @@ class ExampleAlarmRingScreen extends StatelessWidget {
                             ),
                           ).then((_) => Get.back());
                         }).catchError((error) {
-                          print("Failed to update field: $error");
                           Toasts.show("Gagal setting alarm");
                         });
                       } else {
                         Toasts.show("Tidak ada dalam database");
                       }
                     }).catchError((error) {
-                      print("Failed to get documents: $error");
+                      Toasts.show('Gagal setting alarm');
                     });
                   },
                   child: Text(

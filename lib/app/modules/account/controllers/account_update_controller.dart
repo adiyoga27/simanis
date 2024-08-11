@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide GetStringUtils;
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/fetch.dart';
@@ -10,8 +7,6 @@ import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/data/models/profile_model.dart';
 import 'package:simanis/app/data/repository/api/api.dart';
 import 'package:simanis/app/data/repository/api/response_handler.dart';
-import 'package:simanis/app/data/services/storage/storage.dart';
-import 'package:simanis/app/widgets/forms/forms.dart';
 
 import '../../../data/services/api/api.dart';
 

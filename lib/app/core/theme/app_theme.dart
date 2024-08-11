@@ -1,7 +1,8 @@
 part of 'theme.dart';
 
 ThemeData appTheme = ThemeData(
-  scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245),
+
+  scaffoldBackgroundColor: const Color.fromARGB(255, 245, 245, 245),
   appBarTheme: AppBarTheme(
     centerTitle: false,
     backgroundColor: Utils.hex('018fe3'),

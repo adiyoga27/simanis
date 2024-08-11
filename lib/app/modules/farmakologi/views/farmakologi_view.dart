@@ -1,13 +1,11 @@
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/toast.dart';
 import 'package:simanis/app/modules/farmakologi/views/shortcut_button.dart';
-import 'package:simanis/app/modules/farmakologi/views/widgets/tile.dart';
 import 'package:simanis/app/widgets/widget.dart';
 
 import '../controllers/farmakologi_controller.dart';
@@ -18,7 +16,6 @@ class FarmakologiView extends GetView<FarmakologiController> {
   @override
   Widget build(BuildContext context) {
     final forms = controller.forms;
-    final _fireStore = FirebaseFirestore.instance;
     return Scaffold(
       appBar: AppBar(title: const Text('Farmakologi')),
       body: Obx(() {
@@ -196,8 +193,8 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                     },
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                const Padding(
+                                  padding:  EdgeInsets.all(12.0),
                                   child: Center(
                                       child: Text(
                                     'Tutup',
@@ -226,7 +223,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                       children: [
                                         Text(
                                           data['title'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ],
@@ -260,7 +257,7 @@ class FarmakologiView extends GetView<FarmakologiController> {
                                       style: Gfont.fs(15.0), margin: Ei.only()),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10.0,
                               ),
                             ],
@@ -368,8 +365,8 @@ class FarmakologiView extends GetView<FarmakologiController> {
                               controller.onSubmit();
                             },
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
+                         const Padding(
+                            padding:  EdgeInsets.all(12.0),
                             child: Center(
                                 child: Text(
                               'Tutup',

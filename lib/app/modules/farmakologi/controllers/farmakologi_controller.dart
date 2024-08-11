@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:simanis/app/core/utils/toast.dart';
@@ -151,12 +149,12 @@ class FarmakologiController extends GetxController {
 
 
 await Alarm.stop(alarmID).then((_) {
-                      final now = DateTime.now();
                       _fireStore
                           .collection('alarms')
                           .where('alarm_id', isEqualTo: alarmID)
                           .get()
                           .then((QuerySnapshot querySnapshot) {
+                        // ignore: avoid_function_literals_in_foreach_calls
                         querySnapshot.docs.forEach((doc) {
                      
                      int duration = doc['duration'];
