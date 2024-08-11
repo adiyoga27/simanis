@@ -63,11 +63,12 @@ class TntController extends GetxController {
         jk = payload['jk'];
             if(payload['jk'] == 'Laki-laki'){
                 kalori = 88.4 + (13.4 * double.parse(payload['weight'])) + (4.8 * double.parse(payload['tall'])) - (5.68 * double.parse(payload['age']));
-                                bmi = (weight.toDouble() / (tall.toDouble()/100.0) );
+                bmi = (tall - 100) - ((tall - 100) * 0.1);
 
             }else{
                 kalori = 447.6 + (9.25 * double.parse(payload['weight'])) + (3.10 * double.parse(payload['tall'])) - (4.33 * double.parse(payload['age']));
-                bmi = (weight.toDouble() / (tall.toDouble()/100.0) );
+                bmi = (tall - 100) - ((tall - 100) * 0.15);
+
 
             }
 
