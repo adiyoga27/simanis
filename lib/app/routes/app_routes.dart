@@ -20,6 +20,8 @@ abstract class Routes {
   static const GDS = _Paths.GDS;
   static const FOOT_SCREENING = _Paths.FOOT_SCREENING;
   static const FARMAKOLOGI = _Paths.FARMAKOLOGI;
+  static const TNT = _Paths.TNT;
+  static const CHECK_TNM = _Paths.CHECK_TNM;
 }
 
 abstract class _Paths {
@@ -41,4 +43,6 @@ abstract class _Paths {
   static const GDS = '/gds';
   static const FOOT_SCREENING = '/foot-screening';
   static const FARMAKOLOGI = '/farmakologi';
+  static const TNT = '/tnt';
+  static const CHECK_TNM = '/check-tnm';
 }

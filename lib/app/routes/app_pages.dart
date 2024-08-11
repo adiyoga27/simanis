@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:simanis/app/modules/tnt/views/check_tnm_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
@@ -28,6 +29,8 @@ import '../modules/physical_training/bindings/physical_training_binding.dart';
 import '../modules/physical_training/views/physical_training_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
+import '../modules/tnt/bindings/tnt_binding.dart';
+import '../modules/tnt/views/tnt_view.dart';
 import '../modules/webview/bindings/webview_binding.dart';
 import '../modules/webview/views/webview_view.dart';
 
@@ -120,6 +123,16 @@ class AppPages {
       name: _Paths.FARMAKOLOGI,
       page: () => const FarmakologiView(),
       binding: FarmakologiBinding(),
+    ),
+    GetPage(
+      name: _Paths.TNT,
+      page: () => const TntView(),
+      binding: TntBinding(),
+    ),
+      GetPage(
+      name: _Paths.CHECK_TNM,
+      page: () => const CheckTNMView(),
+      binding: TntBinding(),
     ),
   ];
 }

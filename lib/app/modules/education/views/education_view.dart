@@ -39,6 +39,9 @@ class EducationView extends GetView<EducationController> {
                               case 0:
                                 Get.toNamed(Routes.EDUCATION_DETAIL);
                                 break;
+                                  case 1:
+                                Get.toNamed(Routes.TNT);
+                                break;
                                case 2:
                                 Get.toNamed(Routes.PHYSICAL_TRAINING);
                                 break;

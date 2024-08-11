@@ -11,6 +11,9 @@ class ProfileModel {
     String? phone;
     String? jk;
     int? isSmoke;
+    int? tall;
+    int? weight;
+    String? blood;
     String? medicalHistory;
     String? province;
     String? city;
@@ -32,6 +35,9 @@ class ProfileModel {
         this.birthdate,
         this.phone,
         this.jk,
+        this.tall,
+        this.weight,
+        this.blood,
         this.isSmoke,
         this.medicalHistory,
         this.province,
@@ -55,6 +61,9 @@ class ProfileModel {
         birthdate: DateTime.parse(json["birthdate"]),
         phone: json["phone"],
         jk: json["jk"],
+        tall: json["tall"],
+        weight: json["weight"],
+        blood: json["blood"],
         isSmoke: json["is_smoke"],
         medicalHistory: json["medical_history"],
         province: json["province"],
@@ -78,6 +87,9 @@ class ProfileModel {
         "birthdate": "${birthdate!.year.toString().padLeft(4, '0')}-${birthdate!.month.toString().padLeft(2, '0')}-${birthdate!.day.toString().padLeft(2, '0')}",
         "phone": phone,
         "jk": jk,
+        "tall": tall,
+        "weight": weight,
+        "blood": blood,
         "is_smoke": isSmoke,
         "medical_history": medicalHistory,
         "province": province,

@@ -12,20 +12,24 @@ import '../../../data/services/api/api.dart';
 
 class AccountUpdateController extends GetxController {
   AccountApi api = AccountApi();
+ ProfileModel profile = ProfileModel();
   final forms = LzForm.make([
       'name', 'birthdate','phone', 'jk', 'is_smoke','medical_history', 
       'email', 'provinsi', 'kota', 'kecamatan', 
-      'address','kelurahan','kode_pos']);
+      'address','kelurahan','kode_pos', 'tall','weight','blood']);
 
   RxBool isLoading = false.obs;
 
   @override
   void onInit() {
-    Utils.timer(() async {
-       ResHandler res = await api.getProfile();
-      ProfileModel profile = ProfileModel.fromJson(res.data);
-      logg(profile);
-   
+    super.onInit();
+    openInit();
+  }
+  
+  void openInit() async {
+      isLoading.value = true;
+      ResHandler res = await api.getProfile();
+      profile = ProfileModel.fromJson(res.data);
       forms.fill({
         'name': profile.name,
         'birthdate': profile.birthdate.format('dd-MM-yyyy'),
@@ -41,12 +45,14 @@ class AccountUpdateController extends GetxController {
         'address': profile.address,
         'kelurahan': profile.village,
         'kode_pos': profile.kodePos,
+        'tall': profile.tall,
+        'weight': profile.weight,
+        'blood': profile.blood,
        
       });
-    }, 500.ms);
-    super.onInit();
+      isLoading.value = false;
+      update();
   }
-  
   Future updateProfile() async {
     try {
     final form = LzForm.validate(forms,
@@ -58,6 +64,9 @@ class AccountUpdateController extends GetxController {
             'birthdate': 'Masukkan Tanggal Lahir',
             'phone': 'Masukkan nomor kontak pengguna',
             'jk': 'Masukkan jenis kelamin',
+            'blood': 'Golongan darah belum dipilih',
+            'tall': 'Masukkan tinggi badan',
+            'weight': 'Masukkan berat badan',
             'is_smoke': 'Pilih status perokok',
             'medical_history': 'Masukkan riwayat kesehatan',
             'email': 'Masukkan email ',

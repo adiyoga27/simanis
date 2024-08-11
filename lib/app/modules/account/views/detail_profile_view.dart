@@ -92,6 +92,10 @@ class DetailProfileView extends GetView<AccountDetailController> {
           {
             'label': 'Kesehatan',
             'data': [
+              ['Tinggi Badan', "${data.tall.orIf()} cm"],
+              ['Berat Badan', "${data.weight.orIf()} kg"],
+              ['Golongan Darah', data.blood.orIf()],
+
               ['Merokok', data.isSmoke.orIf() > 0 ? 'Ya' : 'Tidak'],
               ['Riwayat', data.medicalHistory.orIf()],
             ]

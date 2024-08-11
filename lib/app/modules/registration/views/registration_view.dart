@@ -42,7 +42,6 @@ class RegistrationView extends GetView<RegistrationController> {
       child: Scaffold(
         backgroundColor: secondaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
           surfaceTintColor: Colors.blueGrey[800],
           title: const Text('Member Baru'),
           actions: [
@@ -58,6 +57,8 @@ class RegistrationView extends GetView<RegistrationController> {
             style: LzFormStyle(activeColor: LzColors.dark),
             children: [
               LzFormGroup(
+                keepLabel: true,
+                            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 label: 'Data Member',
                 prefixIcon: La.user,
                 children: [
@@ -102,6 +103,8 @@ class RegistrationView extends GetView<RegistrationController> {
                 ],
               ),
               LzFormGroup(
+                keepLabel: true,
+                            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 label: 'Alamat *',
                 prefixIcon: La.mapMarked,
                 sublabel:
@@ -139,7 +142,7 @@ class RegistrationView extends GetView<RegistrationController> {
                       hint: 'Masukkan nama kelurahan',
                       model: forms['kelurahan']),
                   LzForm.input(
-                      label: 'Kode Pos',
+                      label: 'Kode Pos *',
                       hint: 'Masukkan kode pos',
                       model: forms['kode_pos'],
                       maxLength: 5,
@@ -147,9 +150,24 @@ class RegistrationView extends GetView<RegistrationController> {
                 ],
               ),
               LzFormGroup(
+                keepLabel: true,
+                            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 label: 'Kesehatan',
                 prefixIcon: La.userTie,
                 children: [
+                  LzForm.radio(
+                                  label: 'Golongan Darah *',
+                                  options: ['O', 'A', 'B', 'AB']
+                                      .generate((data, i) => Option(option: data)),
+                                  model: forms['blood']),
+                              LzForm.input(
+                                  label: 'Tinggi Badan *',
+                                  hint: 'Masukkan nama tinggi badan anda ....',
+                                  model: forms['tall']),
+                              LzForm.input(
+                                  label: 'Berat Badan *',
+                                  hint: 'Masukkan nama berat badan anda ....',
+                                  model: forms['weight']),
                   LzForm.radio(
                       label: 'Perokok *',
                       initValue: const Option(option: 'Laki-laki'),
@@ -164,6 +182,8 @@ class RegistrationView extends GetView<RegistrationController> {
                 ],
               ),
               LzFormGroup(
+                keepLabel: true,
+                            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 label: 'Akun *',
                 sublabelStyle: SublabelStyle.card,
                 prefixIcon: La.lock,

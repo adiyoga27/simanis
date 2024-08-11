@@ -13,7 +13,7 @@ class RegistrationController extends GetxController {
     final forms = LzForm.make([
       'name', 'birthdate','phone', 'jk', 'is_smoke','medical_history', 
       'email', 'username','password','provinsi', 'kota', 'kecamatan', 
-      'address','kelurahan','kode_pos', 'passwordk']);
+      'address','kelurahan','kode_pos', 'passwordk', 'blood', 'tall', 'weight']);
 
 
   /* -------------------------------------------------------------------------- 
@@ -35,7 +35,7 @@ class RegistrationController extends GetxController {
   Future onSubmit() async {
     try {
       final form = LzForm.validate(forms,
-          required: ['*','kode_pos'],
+          required: ['*'],
           messages: FormMessages(required: {
             'username': 'Masukkan ID member',
             'password': 'Masukkan password',
@@ -43,6 +43,9 @@ class RegistrationController extends GetxController {
             'birthdate': 'Masukkan Tanggal Lahir',
             'phone': 'Masukkan nomor kontak pengguna',
             'jk': 'Masukkan jenis kelamin',
+            'blood': 'Golongan darah belum dipilih',
+            'tall': 'Masukkan tinggi badan',
+            'weight': 'Masukkan berat badan',
             'is_smoke': 'Pilih status perokok',
             'medical_history': 'Masukkan riwayat kesehatan',
             'email': 'Masukkan email ',
