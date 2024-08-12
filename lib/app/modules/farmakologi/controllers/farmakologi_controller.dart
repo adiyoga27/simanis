@@ -126,7 +126,7 @@ class FarmakologiController extends GetxController {
   void onUpdate(int alarmID) async {
     isLoading.value = true;
     final form = LzForm.validate(forms,
-        required: ['*', 'kode_pos'],
+        required: ['*'],
         messages: FormMessages(required: {
           'title': 'Wajib memberikan judul',
           'description': 'Deskripsi wajib diisi',
@@ -166,6 +166,7 @@ class FarmakologiController extends GetxController {
           isLoading.value = false;
       }else{
 await Alarm.stop(alarmID).then((_) {
+  logg("stopped $alarmID");
         _fireStore
             .collection('alarms')
             .where('alarm_id', isEqualTo: alarmID)
@@ -173,6 +174,7 @@ await Alarm.stop(alarmID).then((_) {
             .then((QuerySnapshot querySnapshot) {
           // ignore: avoid_function_literals_in_foreach_calls
           querySnapshot.docs.forEach((doc) {
+  logg(doc);
 
             // Mengupdate field 'time_at' dengan nilai baru
 
@@ -182,13 +184,10 @@ await Alarm.stop(alarmID).then((_) {
               'dosis': form.value['dosis'],
               'created_by': auth.username,
               'created_at': Timestamp.now(),
-              'alarm_id': id,
               'date_at': form.value['date_at'],
               'time_at': form.value['time_at'],
               'duration': duration,
             }).then((_) {
-              Toasts.show(
-                  "Alarm minum obat berhasil diupdate");
 
               Alarm.set(
                 alarmSettings: AlarmSettings(
@@ -203,6 +202,9 @@ await Alarm.stop(alarmID).then((_) {
                         'Pengingat minum obat, Ayo Segera Minum Obat!',
                     enableNotificationOnKill: Platform.isIOS),
               );
+              
+              Toasts.show(
+                  "Alarm minum obat berhasil diupdate");
             }).catchError((error) {
               Toasts.show("Gagal setting alarm");
             });

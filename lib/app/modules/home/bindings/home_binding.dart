@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:simanis/app/modules/farmakologi/controllers/farmakologi_controller.dart';
 
 import 'package:simanis/app/modules/home/controllers/dashboard_controller.dart';
 
@@ -14,7 +15,9 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-
+ Get.lazyPut<FarmakologiController>(
+      () => FarmakologiController(),
+    );
  
   }
 }

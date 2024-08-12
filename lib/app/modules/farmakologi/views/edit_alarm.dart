@@ -95,7 +95,7 @@ class _ExampleAlarmEditScreenState extends State<ExampleAlarmEditScreen> {
       vibrate: vibrate,
       volume: volume,
       assetAudioPath: assetAudio,
-      notificationTitle: 'Alarm example',
+      notificationTitle: 'Alarm',
       notificationBody: 'Your alarm ($id) is ringing',
       enableNotificationOnKill: Platform.isIOS,
     );
