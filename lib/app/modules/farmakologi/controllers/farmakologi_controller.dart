@@ -32,14 +32,15 @@ class FarmakologiController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     if (Alarm.android) {
       checkAndroidNotificationPermission();
       checkAndroidScheduleExactAlarmPermission();
     }
     loadAlarms();
-    // subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
     getAlarms();
+    // subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
+    super.onInit();
+
   }
 
   @override
@@ -81,10 +82,10 @@ class FarmakologiController extends GetxController {
       );
       if (dateFormatter.format(dateInput).compareTo(dateFormatter.format(dateNow)) < 0) {
         // ignore: void_checks
-        return Toasts.show('Tanggal yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+         Toasts.show('Tanggal yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
       }else if (hours <= dateNow.hour && minutes <= dateNow.minute) {
         // ignore: void_checks
-        return Toasts.show('Waktu yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+         Toasts.show('Waktu yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
       }else{
 
       Alarm.set(
@@ -111,14 +112,15 @@ class FarmakologiController extends GetxController {
         'time_at': form.value['time_at'],
         'duration': duration,
       });
+    Get.back();
+
     }
 
     isLoading.value = false;
-    getAlarms();
-    Get.back();
+    // getAlarms();
     }
         isLoading.value = false;
-    getAlarms();
+    // getAlarms();
   }
 
   void onUpdate(int alarmID) async {

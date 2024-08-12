@@ -23,6 +23,7 @@ abstract class Routes {
   static const FARMAKOLOGI = _Paths.FARMAKOLOGI;
   static const TNT = _Paths.TNT;
   static const CHECK_TNM = _Paths.CHECK_TNM;
+  static const CHECK_JADWAL = _Paths.CHECK_JADWAL;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const FARMAKOLOGI = '/farmakologi';
   static const TNT = '/tnt';
   static const CHECK_TNM = '/check-tnm';
+  static const CHECK_JADWAL = '/check-jadwal';
 }

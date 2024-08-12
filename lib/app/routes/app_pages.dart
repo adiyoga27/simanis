@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:simanis/app/modules/farmakologi/views/check_jadwal.dart';
 import 'package:simanis/app/modules/foot_screening/views/survey_screening_view.dart';
 import 'package:simanis/app/modules/tnt/views/check_tnm_view.dart';
 
@@ -128,6 +129,11 @@ class AppPages {
     GetPage(
       name: _Paths.FARMAKOLOGI,
       page: () => const FarmakologiView(),
+      binding: FarmakologiBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECK_JADWAL,
+      page: () => const CheckJadwalView(),
       binding: FarmakologiBinding(),
     ),
     GetPage(
