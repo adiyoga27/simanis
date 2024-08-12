@@ -7,4 +7,7 @@ class EducationApi extends Fetch {
       await get('https://simanis.codingaja.com/api/education/latihan-fisik');
   Future<ResHandler> getFootCare() async =>
       await get('https://simanis.codingaja.com/api/education/perawatan-kaki');
+
+        Future<ResHandler> getDiets(double amount) async =>
+      await get('https://simanis.codingaja.my.id/api/diets/$amount');
 }

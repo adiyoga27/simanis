@@ -47,6 +47,7 @@ dependencies:
   sticky_headers: ^0.3.0+2
   syncfusion_flutter_calendar: ^20.4.50
   url_launcher: ^6.2.1
+  syncfusion_flutter_gauges: ^20.4.54
 
 
 dependency_overrides:

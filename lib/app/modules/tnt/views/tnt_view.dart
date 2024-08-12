@@ -59,6 +59,13 @@ class TntView extends GetView<TntController> {
                             hint: 'Masukkan umur anda ....',
                             model: forms['age']),
                         LzForm.select(
+                            label: 'Berat Badan Saat ini *',
+                            options: [
+                              'Gemuk',
+                              'Kurus',
+                            ].generate((data, i) => Option(option: data)),
+                            model: forms['status_weight']),
+                        LzForm.select(
                             label: 'Aktivitas Fisik *',
                             options: [
                               'Istirahat',
