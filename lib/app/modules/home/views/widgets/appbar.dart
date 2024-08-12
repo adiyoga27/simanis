@@ -40,7 +40,7 @@ class Appbar extends GetView<DashboardController> {
                             children: [
                               InkWell(
                                 onTap: ()=> Get.toNamed(Routes.ACCOUNT),
-                                child: const LzImage('profile.png',
+                                child:  LzImage('profile.png',
                                     size: 45, radius: 50),
                               ),
                               Padding(

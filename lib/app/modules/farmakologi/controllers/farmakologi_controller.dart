@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:alarm/alarm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,11 +25,10 @@ class FarmakologiController extends GetxController {
 
   // static StreamSubscription<AlarmSettings>? subscription;
 
-    StreamController<List<Map>> alarmStreamController =
+  StreamController<List<Map>> alarmStreamController =
       StreamController<List<Map>>.broadcast();
   Stream<List<Map>> get alarmList => alarmStreamController.stream;
   List<Map> alarm = [];
-
 
   @override
   void onInit() {
@@ -40,10 +40,9 @@ class FarmakologiController extends GetxController {
     loadAlarms();
     // subscription ??= Alarm.ringStream.stream.listen(navigateToRingScreen);
     getAlarms();
-    
   }
 
-   @override
+  @override
   void onClose() {
     super.onClose();
     alarmStreamController.close();
@@ -69,18 +68,24 @@ class FarmakologiController extends GetxController {
       int interval = int.parse(dosis.replaceAll(' Kali', ""));
       int duration = 24 ~/ interval;
       final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
-      var startAt = DateTime.now().copyWith(
+ 
+      final dateNow = DateTime.now();
+      final dateInput = DateTime.parse(form.value['date_at']);
+      final dateFormatter = DateFormat('yyyy-MM-dd');
+      var startAt = dateInput.copyWith(
         hour: hours.toInt(),
         minute: minutes.toInt(),
         second: 0,
         millisecond: 0,
         microsecond: 0,
       );
-      final dateNow = DateTime.now();
-
-      if(dateNow.hour < hours.toInt()){
-        startAt = startAt.add(Duration(hours: duration));
-      }
+      if (dateFormatter.format(dateInput).compareTo(dateFormatter.format(dateNow)) < 0) {
+        // ignore: void_checks
+        return Toasts.show('Tanggal yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+      }else if (hours <= dateNow.hour && minutes <= dateNow.minute) {
+        // ignore: void_checks
+        return Toasts.show('Waktu yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+      }else{
 
       Alarm.set(
           alarmSettings: AlarmSettings(
@@ -91,7 +96,8 @@ class FarmakologiController extends GetxController {
               volume: 1,
               assetAudioPath: 'assets/alarm.wav',
               notificationTitle: form.value['title'],
-              notificationBody: 'Your alarm ($id) is ringing, Ayoo minum obat!',
+              // notificationBody: 'Your alarm ($id) is ringing, Ayoo minum obat!',
+              notificationBody: 'Pengingat minum obat, Ayo Segera Minum Obat!',
               enableNotificationOnKill: Platform.isIOS));
 
       _fireStore.collection('alarms').add({
@@ -110,9 +116,11 @@ class FarmakologiController extends GetxController {
     isLoading.value = false;
     getAlarms();
     Get.back();
+    }
+        isLoading.value = false;
+    getAlarms();
   }
 
-  
   void onUpdate(int alarmID) async {
     isLoading.value = true;
     final form = LzForm.validate(forms,
@@ -132,74 +140,83 @@ class FarmakologiController extends GetxController {
       int minutes = int.parse(form.value['time_at'].split(':')[1]);
       int interval = int.parse(dosis.replaceAll(' Kali', ""));
       int duration = 24 ~/ interval;
+
       final id = DateTime.now().millisecondsSinceEpoch % 10000 + 1;
-      var startAt = DateTime.now().copyWith(
+
+     
+      final dateNow = DateTime.now();
+      final dateInput = DateTime.parse(form.value['date_at']);
+      final dateFormatter = DateFormat('yyyy-MM-dd');
+      var startAt = dateInput.copyWith(
         hour: hours.toInt(),
         minute: minutes.toInt(),
         second: 0,
         millisecond: 0,
         microsecond: 0,
       );
-      final dateNow = DateTime.now();
-
-      if(dateNow.hour < hours.toInt()){
-        startAt = startAt.add(Duration(hours: duration));
-      }
-
-
-
+   if (dateFormatter.format(dateInput).compareTo(dateFormatter.format(dateNow)) < 0) {
+        // ignore: void_checks
+        Toasts.show('Tanggal yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+         isLoading.value = false;
+      }else if (hours <= dateNow.hour && minutes <= dateNow.minute) {
+        // ignore: void_checks
+         Toasts.show('Waktu yang anda pilih sudah lewat, silahkan pilih waktu yang berikutnya.');
+          isLoading.value = false;
+      }else{
 await Alarm.stop(alarmID).then((_) {
-                      _fireStore
-                          .collection('alarms')
-                          .where('alarm_id', isEqualTo: alarmID)
-                          .get()
-                          .then((QuerySnapshot querySnapshot) {
-                        // ignore: avoid_function_literals_in_foreach_calls
-                        querySnapshot.docs.forEach((doc) {
-                     
-                     int duration = doc['duration'];
+        _fireStore
+            .collection('alarms')
+            .where('alarm_id', isEqualTo: alarmID)
+            .get()
+            .then((QuerySnapshot querySnapshot) {
+          // ignore: avoid_function_literals_in_foreach_calls
+          querySnapshot.docs.forEach((doc) {
 
-                          // Mengupdate field 'time_at' dengan nilai baru
-            
-                          _fireStore.collection('alarms').doc(doc.id).update({
-                            'title': form.value['title'],
-                            'description': form.value['description'],
-                            'dosis': form.value['dosis'],
-                            'created_by': auth.username,
-                            'created_at': Timestamp.now(),
-                            'alarm_id': id,
-                            'date_at': form.value['date_at'],
-                            'time_at': form.value['time_at'],
-                            'duration': duration,
-                          }).then((_) {
-                            Toasts.show(
-                                "Alarm akan berbunyi kembali dalam kurun waktu $duration jam");
+            // Mengupdate field 'time_at' dengan nilai baru
 
-                            Alarm.set(
-                              alarmSettings:AlarmSettings(
-                              id: id,
-                              dateTime: startAt,
-                              loopAudio: true,
-                              vibrate: true,
-                              volume: 1,
-                              assetAudioPath: 'assets/alarm.wav',
-                              notificationTitle: form.value['title'],
-                              notificationBody: 'Your alarm ($id) is ringing, Ayoo minum obat!',
-                              enableNotificationOnKill: Platform.isIOS),
-                            );
-                          }).catchError((error) {
-                            Toasts.show("Gagal setting alarm");
-                          });
-                        });
-                      });
-                    });
-                  
+            _fireStore.collection('alarms').doc(doc.id).update({
+              'title': form.value['title'],
+              'description': form.value['description'],
+              'dosis': form.value['dosis'],
+              'created_by': auth.username,
+              'created_at': Timestamp.now(),
+              'alarm_id': id,
+              'date_at': form.value['date_at'],
+              'time_at': form.value['time_at'],
+              'duration': duration,
+            }).then((_) {
+              Toasts.show(
+                  "Alarm minum obat berhasil diupdate");
 
+              Alarm.set(
+                alarmSettings: AlarmSettings(
+                    id: id,
+                    dateTime: startAt,
+                    loopAudio: true,
+                    vibrate: true,
+                    volume: 1,
+                    assetAudioPath: 'assets/alarm.wav',
+                    notificationTitle: form.value['title'],
+                    notificationBody:
+                        'Pengingat minum obat, Ayo Segera Minum Obat!',
+                    enableNotificationOnKill: Platform.isIOS),
+              );
+            }).catchError((error) {
+              Toasts.show("Gagal setting alarm");
+            });
+          });
+        });
+      });
+      isLoading.value = false;
+    Get.back();
     }
+        
+  }
+  
+
+      
 
     isLoading.value = false;
-    getAlarms();
-    Get.back();
   }
 
   /* ----------------------------------------------------------
@@ -211,7 +228,8 @@ await Alarm.stop(alarmID).then((_) {
   DocumentSnapshot? lastDoc;
 
   Future getAlarms({bool pagination = false}) async {
-            logg('Get Alarm');
+    isLoading.value = true;
+    logg('Get Alarm');
 
     if (isLoadMore.value || isMax) return;
     isLoadMore.value = pagination;
@@ -238,9 +256,10 @@ await Alarm.stop(alarmID).then((_) {
     } catch (e, s) {
       Errors.check(e, s);
     }
+    isLoading.value = false;
+
   }
 
-  
   /* ----------------------------------------------------------
   | HANDLE NOTIFICATION CHANGES
   --------------------------------------------- */
@@ -285,6 +304,10 @@ await Alarm.stop(alarmID).then((_) {
               Map<String, dynamic> data =
                   change.doc.data() as Map<String, dynamic>;
               alarm[io]['read_by'] = data['read_by'];
+              alarm[io]['time_at'] = data['time_at'];
+              alarm[io]['date_at'] = data['date_at'];
+              alarm[io]['dosis'] = data['dosis'];
+              alarm[io]['title'] = data['title'];
 
               List<Map> group = alarm;
               sink(group);
@@ -303,7 +326,7 @@ await Alarm.stop(alarmID).then((_) {
     }
   }
 
- void sink(List<Map> values) {
+  void sink(List<Map> values) {
     if (!alarmStreamController.isClosed) alarmStreamController.sink.add(values);
   }
 
@@ -319,8 +342,9 @@ await Alarm.stop(alarmID).then((_) {
     await Get.to(ExampleAlarmRingScreen(
       alarmSettings: alarmSettings,
     ));
-  
-  loadAlarms();
+
+    loadAlarms();
+    getAlarms();
 
     // Navigator.push(
     //   context,

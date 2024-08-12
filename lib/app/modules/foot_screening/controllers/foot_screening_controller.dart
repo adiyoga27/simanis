@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:simanis/app/core/utils/toast.dart';
+import 'package:simanis/app/modules/foot_screening/views/widgets/alert_dialog_view.dart';
+import 'package:simanis/app/routes/app_pages.dart';
 
 class FootScreeningController extends GetxController {
   final forms = LzForm.make([
@@ -47,20 +50,39 @@ class FootScreeningController extends GetxController {
         Toasts.dismiss();
 
         if (diagnosis >= 3) {
-          Get.dialog(LzConfirm(
-              title: 'RESIKO TINGGI',
-              message:
-                  'Anda memiliki resiko tinggi terhadap penyakit DM. Silahkan Hubungi Dokter untuk konsultasi',
-              confirmText: 'Rekomendasi Edukasi',
-              onConfirm: () {}));
+          Get.dialog(const AlertShowingDialogWidget(
+            title: 'RESIKO TINGGI',
+            message:
+                'Silahkan mencari rumah sakit/klinik terdekat untuk dapat tindakan khusus',
+            type: 'close',
+          ));
         } else if (diagnosis >= 1) {
-          Get.dialog(LzConfirm(
-              title: 'RESIKO RINGAN',
-              message:
-                  'Anda tergolong kategori ringan terhadap penyakit DM. Silahkan mulai edukja',
-              confirmText: 'Rekomendasi Edukasi',
-              onConfirm: () {}));
-        } else {}
+             Get.dialog(const AlertShowingDialogWidget(
+            title: 'RESIKO RINGAN',
+            message:
+                'Anda tergolong kategori ringan terhadap penyakit DM. Silahkan baca edukasi terkait penyakit DM',
+            type: 'warning',
+          ));
+          // Get.dialog(LzConfirm(
+          //     title: 'NORMAL',
+          //     message:
+          //         'Anda tergolong kategori ringan terhadap penyakit DM. Silahkan baca edukasi terkait penyakit DM',
+          //     confirmText: 'Rekomendasi Edukasi',
+          //     onConfirm: () => Get.toNamed(Routes.EDUCATION_DETAIL)));
+        } else {
+            Get.dialog(const AlertShowingDialogWidget(
+            title: 'NORMAL',
+            message:
+                'Anda tidak tergolong penyakit DM. Silahkan mulai menjaga kesehatan',
+            type: 'good',
+          ));
+          //  Get.dialog(LzConfirm(
+          //     title: 'NORMAL',
+          //     message:
+          //         'Anda tidak tergolong penyakit DM. Silahkan mulai menjaga kesehatan',
+          //     confirmText: 'Rekomendasi Edukasi',
+          //     onConfirm: () {}));
+        }
       }
     } on FirebaseException catch (e, s) {
       Errors.check(e, s);

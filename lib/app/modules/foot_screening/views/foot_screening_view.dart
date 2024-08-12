@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/routes/app_pages.dart';
 
 import '../controllers/foot_screening_controller.dart';
 
@@ -17,107 +19,22 @@ class FootScreeningView extends GetView<FootScreeningController> {
         title: const Text('Screening Kaki'),
         centerTitle: true,
       ),
-      body: LzFormList(
-        style: LzFormStyle(activeColor: LzColors.dark),
-        children: [
-          LzFormGroup(
-            label: "Sensasi terbakar, mati rasa, ataupun tajam pada kaki *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          color: Colors.white,
+          child: ListView(
             children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['sensasi_terbakar']),
+               HtmlWidget(
+                '<p style="text-align: justify; ">Deteksi dini kelainan kaki pada pasien diabetes dapat dilakukan dengan penilaian karakteristik:</p><ul><li style="text-align: justify; ">Kulit kaku yang kering, bersisik dan retak-retak serta kaku</li><li style="text-align: justify; ">Rambut kaki yang menipis</li><li style="text-align: justify; ">Kelainan bentuk dan warna kuku (kuku yang menebal, rapuh, ingrowing nail)</li><li style="text-align: justify; ">Kalus (mata ikan) terutama dibagian kelapak kaki</li><li style="text-align: justify; ">Perubahan bentuk jari-jari dan telapak kaki tulang-tulang kaki yang menonjol</li><li style="text-align: justify; ">Bekas luka atau riwayat amputasi jari-jari</li><li style="text-align: justify; ">Kaki baal, kesemutan atau terasa nyeri</li><li style="text-align: justify; ">Kaki yang terasa dingin</li><li style="text-align: justify; ">Perubahan warna kulit kaki (kemerahan, kebiruan atau kehitaman)</li></ul><p style="text-align: justify; ">Kaki diabetik dengan ulkus merupakan komplikasi diabetes yang sering terjadi. Ulkus kaki diabetik adalah luka kronik pada daerah di bawah pergelangan kaki</p>'
+              ),
             ],
           ),
-          LzFormGroup(
-            label:
-                "Sensasi sentuhan pada telapak kaki menggunakan ujung pena/pensil (tampilkan telapak kaki dan titik sensasi) *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['sensasi_sentuhan']),
-            ],
-          ),
-          LzFormGroup(
-            label:
-                "Nyeri saat malam hari atau istirahat pada kaki kanan dan kiri (Sering kesentuhan nyeri kaki saat istirahat) *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['pulsasi_nyeri']),
-            ],
-          ),
-          LzFormGroup(
-            label: "Kaki terasa dingin *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['pulsasi_kaki']),
-            ],
-          ),
-          LzFormGroup(
-            label:
-                "Pemeriksaan nadi pada dorsalis pedis dan tibial posterior kaki kanan dan kaki kiri (Penurunan denyut nadi arteri dorsalis pedis, tibialis dan poplitea) *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['pulsasi_pemeriksaan']),
-            ],
-          ),
-          LzFormGroup(
-            label: "Kulit kering dan pecah - pecah *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['bentuk_kulit']),
-            ],
-          ),
-          LzFormGroup(
-            label: "Kapalan dan kuku kaki menebal *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['bentuk_kapalan']),
-            ],
-          ),
-          LzFormGroup(
-            label: "Bentuk kaki berubah (cantumkan bentuk kaki diabetes) *",
-            labelStyle:
-                const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            children: [
-              LzForm.radio(
-                  options: ['YA', 'TIDAK']
-                      .generate((data, i) => Option(option: data)),
-                  model: forms['bentuk_kaki']),
-            ],
-          ),
-        ],
+        ),
       ),
       bottomNavigationBar: LzButton(
-        text: 'Check',
-        onTap: (control) {
-          controller.onSubmit();
-        },
+        text: 'Check Kaki Anda',
+        onTap: (control) =>Get.toNamed(Routes.SURVEY_SCREENING),
       ).dark().style(LzButtonStyle.shadow, spacing: 20),
     );
   }

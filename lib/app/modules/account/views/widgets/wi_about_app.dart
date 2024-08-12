@@ -10,8 +10,8 @@ class WiAboutApp extends StatelessWidget {
 SIMANIS, kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluruh. Aplikasi kami dirancang khusus untuk membantu Anda mengelola diabetes dengan mudah dan efektif .
 ''';
 
-    String galkaIconUrl = 'https://galkasoft.id/wp-content/uploads/elementor/thumbs/image-1-prcv4dq55z29cspaxaknlxr85m4mdqrm52ymq7w00w.png';
-    String galkaUrl = 'https://galkasoft.id';
+    String galkaIconUrl = 'https://www.indoapps.id/public/uploads/logo_230901100115_.png';
+    String galkaUrl = 'https://www.indoapps.id';
 
     return Container(
       decoration: BoxDecoration(color: Colors.white, borderRadius: Br.radiusOnly(tl: 3, tr: 3)),
@@ -59,7 +59,7 @@ SIMANIS, kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluru
                               ).margin(r: 10),
                               RichText(
                                   text: TextSpan(text: 'Developed by ', style: Gfont.normal, children: [
-                                TextSpan(text: 'Codingaja', style: Gfont.bold),
+                                TextSpan(text: 'Indo Apps Solusindo', style: Gfont.bold),
                               ])),
                             ],
                           )

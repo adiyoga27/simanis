@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:simanis/app/modules/foot_screening/views/survey_screening_view.dart';
 import 'package:simanis/app/modules/tnt/views/check_tnm_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
@@ -119,6 +120,11 @@ class AppPages {
       page: () => const FootScreeningView(),
       binding: FootScreeningBinding(),
     ),
+     GetPage(
+      name: _Paths.SURVEY_SCREENING,
+      page: () => const SurveyScreeningView(),
+      binding: FootScreeningBinding(),
+    ),
     GetPage(
       name: _Paths.FARMAKOLOGI,
       page: () => const FarmakologiView(),
@@ -134,5 +140,6 @@ class AppPages {
       page: () => const CheckTNMView(),
       binding: TntBinding(),
     ),
+   
   ];
 }
