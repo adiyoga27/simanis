@@ -9,5 +9,5 @@ class EducationApi extends Fetch {
       await get('https://simanis.codingaja.com/api/education/perawatan-kaki');
 
         Future<ResHandler> getDiets(double amount) async =>
-      await get('https://simanis.codingaja.my.id/api/diets/$amount');
+      await get('https://simanis.codingaja.com/api/diets/$amount');
 }
