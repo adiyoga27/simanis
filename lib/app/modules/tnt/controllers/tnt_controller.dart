@@ -102,16 +102,23 @@ class TntController extends GetxController {
         double bmr = hitungBmr(jk, weight, tall, age);
         logg("bmr $bmr");
         // 7. Hitung Total Kebutuhan Kalori Berdasarkan Tingkat Aktivitas
-        totalKebutuhanKalori = hitungTotalKebutuhanKalori(bmr, activity);
-        logg("totalKebutuhanKalori $totalKebutuhanKalori");
+        // totalKebutuhanKalori = hitungTotalKebutuhanKalori(bmr, activity);
+        // logg("totalKebutuhanKalori $totalKebutuhanKalori");
 
+totalKebutuhanKalori = bmr;
 
        try {
       ResHandler res = await educationApi.getDiets(totalKebutuhanKalori);
-      List data = res.data['times'] ?? [];
+      logg(res.data);
+      if( res.message == "Tidak ada rekomendasi"){
+        this.data.value = [];
+       
+      }else{
+         List data = res.data['times'] ?? [];
 
       this.data.value = [...data.map((e) => Time.fromJson(e))];
-        
+      }
+    
     } catch (e, s) {
            Errors.check(e, s);
 
@@ -171,24 +178,24 @@ double pertimbangkanUmur(double kalori, int usia) {
 }
 
 double tambahkanFaktorAktivitas(double kalori, String aktivitas) {
-  if (aktivitas == "istirahat") {
+  if (aktivitas == "Istirahat") {
     return kalori * 1.10;
-  } else if (aktivitas == "ringan") {
+  } else if (aktivitas == "Aktivitas Ringan (Kantor, Guru, Ibu Rumah Tangga)") {
     return kalori * 1.20;
-  } else if (aktivitas == "sedang") {
+  } else if (aktivitas == "Aktivitas Sedang (Pegawai Industri, Mahasiswa, Militer TIdak Berperang)") {
     return kalori * 1.30;
-  } else if (aktivitas == "berat") {
+  } else if (aktivitas == "Aktivitas Berat (petani, buruh, atlet, militer berperang)") {
     return kalori * 1.40;
-  } else if (aktivitas == "sangat_berat") {
+  } else if (aktivitas == "Aktivitas Sangat Berat (Tukang Becak, Tukang Gali)") {
     return kalori * 1.50;
   }
   return kalori;
 }
 
 double pertimbangkanBeratBadan(double kalori, String statusBB) {
-  if (statusBB == "gemuk") {
+  if (statusBB == "Gemuk") {
     return kalori * 0.70;
-  } else if (statusBB == "kurus") {
+  } else if (statusBB == "Kurus") {
     return kalori * 1.30;
   }
   return kalori;
@@ -204,15 +211,28 @@ double hitungBmr(String jenisKelamin, double bbKg, int tbCm, int usia) {
 }
 
 double hitungTotalKebutuhanKalori(double bmr, String aktivitas) {
-  if (aktivitas == "jarang") {
+  // if (aktivitas == "jarang") {
+  //   return bmr * 1.2;
+  // } else if (aktivitas == "ringan") {
+  //   return bmr * 1.375;
+  // } else if (aktivitas == "cukup") {
+  //   return bmr * 1.55;
+  // } else if (aktivitas == "sering") {
+  //   return bmr * 1.725;
+  // } else if (aktivitas == "sangat_sering") {
+  //   return bmr * 1.9;
+  // }
+  // return bmr;
+
+    if (aktivitas == "Istirahat") {
     return bmr * 1.2;
-  } else if (aktivitas == "ringan") {
+  } else if (aktivitas == "Aktivitas Ringan (Kantor, Guru, Ibu Rumah Tangga)") {
     return bmr * 1.375;
-  } else if (aktivitas == "cukup") {
+  } else if (aktivitas == "Aktivitas Sedang (Pegawai Industri, Mahasiswa, Militer TIdak Berperang)") {
     return bmr * 1.55;
-  } else if (aktivitas == "sering") {
+  } else if (aktivitas == "Aktivitas Berat (petani, buruh, atlet, militer berperang)") {
     return bmr * 1.725;
-  } else if (aktivitas == "sangat_sering") {
+  } else if (aktivitas == "Aktivitas Sangat Berat (Tukang Becak, Tukang Gali)") {
     return bmr * 1.9;
   }
   return bmr;
