@@ -198,11 +198,13 @@ class LoginController extends GetxController {
       if (!form.ok) {
         return LzToast.show('Masukkan Email');
       }
+      LzToast.overlay('Mengirim kode OTP...');
 
       failedAttempt = 0;
       ResponseHandler res = await AuthService.requestOtp(fpForms.value);
 
       email = res.data?['email'] ?? '';
+        Get.back();
 
       if (!res.status) {
         return LzToast.show(res.message ?? 'Terjadi kesalahan');
