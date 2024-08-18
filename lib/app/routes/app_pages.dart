@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:simanis/app/modules/login/views/forgot_password_view.dart';
+import 'package:simanis/app/modules/login/views/new_password_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
@@ -152,5 +153,12 @@ class AppPages {
       page: () => const ForgetPasswordView(),
       binding: LoginBinding(),
     ),
+GetPage(
+      name: _Paths.NEW_PASSWORD,
+      page: () => const NewPasswordView(),
+      binding: LoginBinding(),
+    ),
+
+    
   ];
 }

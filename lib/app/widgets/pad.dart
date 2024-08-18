@@ -164,10 +164,7 @@ class _PadWidgetState extends State<PadWidget> {
       body: Column(
         children: [
           Expanded(
-              child: Column(
-            mainAxisAlignment: Maa.center,
-            children: [
-              LzListView(
+              child: LzListView(
                 shrinkWrap: true,
                 padding: Ei.sym(v: 35),
                 scrollLimit: const [35, 35],
@@ -184,11 +181,11 @@ class _PadWidgetState extends State<PadWidget> {
                                   : '';
                               bool isFilled = value.isNotEmpty;
                               bool inFocus = state.values.length == i;
-
+              
                               if (widget.type == PadType.passcode) {
                                 return PasscodeInput(filled: isFilled);
                               }
-
+              
                               return Container(
                                 width: (context.width - 100) / notifier.length,
                                 height: 55,
@@ -251,9 +248,7 @@ class _PadWidgetState extends State<PadWidget> {
                     ],
                   ),
                 ],
-              ),
-            ],
-          )),
+              )),
           widget.footer ?? const None(),
           Container(
             decoration: BoxDecoration(border: Br.only(['t'])),

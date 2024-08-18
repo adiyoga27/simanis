@@ -14,11 +14,11 @@ import 'package:simanis/app/routes/app_pages.dart';
 import 'package:simanis/app/widgets/forms/forms.dart';
 import 'package:simanis/app/widgets/pad.dart';
 
-class LoginController extends GetxController  {
+class LoginController extends GetxController {
   final forms = LzForm.make(['username', 'password']);
   // Map<String, TextEditingController> forms = Forms.create(['username', 'password']);
   // Map<String, FocusNode> nodes = Forms.createNodes(['username', 'password']);
-
+  String email = "";
   // obsecure password
   RxBool isObsecure = true.obs;
 
@@ -29,7 +29,6 @@ class LoginController extends GetxController  {
 
   // login with username and password
   Future login(LzButtonControl state) async {
-
     try {
       final form = LzForm.validate(forms,
           required: ['*'],
@@ -42,26 +41,23 @@ class LoginController extends GetxController  {
         state.submit();
         ResponseHandler res = await AuthService.login(form.value);
 
-        if(res.code == 403){
-                  final payload = {...form.value};
-                  payload['email'] = res.data?['email'];
+        if (res.code == 403) {
+          final payload = {...form.value};
+          payload['email'] = res.data?['email'];
 
-          Get.dialog(
-            LzConfirm(
-              title: "Verifikasi Email Anda !", 
-              message: "Silahkan check email ${res.data['email']} kotak masuk atau spam email anda !!!",
-              confirmText: "Kirim Ulang Verifikasi",
-              cancelText: "Batal",
-              onConfirm: ()  async {
-
-                  ResponseHandler res = await AuthService.verifyEmail(payload);
-                  if(res.status){
-                    Toasts.show(res.message);
-                  }
-                
-              },
-            )
-          );
+          Get.dialog(LzConfirm(
+            title: "Verifikasi Email Anda !",
+            message:
+                "Silahkan check email ${res.data['email']} kotak masuk atau spam email anda !!!",
+            confirmText: "Kirim Ulang Verifikasi",
+            cancelText: "Batal",
+            onConfirm: () async {
+              ResponseHandler res = await AuthService.verifyEmail(payload);
+              if (res.status) {
+                Toasts.show(res.message);
+              }
+            },
+          ));
           return;
         }
 
@@ -102,7 +98,6 @@ class LoginController extends GetxController  {
   // OtpApi otpApi = OtpApi();
   // Map<String, TextEditingController> fpForms = Forms.create(['username']);
 
-  
   // Future<bool> verifyOtp(String otp, String username) async {
   //   bool ok = false;
 
@@ -161,7 +156,9 @@ class LoginController extends GetxController  {
     double pixel = scrollController.position.pixels;
 
     if (Utils.scrollHasMax(scrollController, [20, 40])) {
-      scrollController.animateTo(pixel, duration: const Duration(milliseconds: 250), curve: Curves.easeInBack);
+      scrollController.animateTo(pixel,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInBack);
     }
   }
 
@@ -181,16 +178,17 @@ class LoginController extends GetxController  {
       bool hadIntro = storage.read('guide_app_intro') ?? false;
 
       if (!hadIntro) {
-        Get.toNamed(Routes.APPINTRO)?.then((value) => storage.write('guide_app_intro', true));
+        Get.toNamed(Routes.APPINTRO)
+            ?.then((value) => storage.write('guide_app_intro', true));
       }
     });
   }
 
-   /* -------------------------------------------------------------------------- 
+  /* -------------------------------------------------------------------------- 
   | FORGET PASSWORD
   | -------------------------------------------------- */
-  final fpForms =  LzForm.make(['email']);
-  
+  final fpForms = LzForm.make(['email']);
+
   int failedAttempt = 0;
 
   Future requestOtp(LzButtonControl state) async {
@@ -202,9 +200,9 @@ class LoginController extends GetxController  {
       }
 
       failedAttempt = 0;
-        ResponseHandler res = await AuthService.requestOtp(fpForms.value);
+      ResponseHandler res = await AuthService.requestOtp(fpForms.value);
 
-      String email = res.data?['email'] ?? '';
+      email = res.data?['email'] ?? '';
 
       if (!res.status) {
         return LzToast.show(res.message ?? 'Terjadi kesalahan');
@@ -217,11 +215,12 @@ class LoginController extends GetxController  {
               'Silakan masukkan kode OTP yang kami kirimkan ke nomor $email untuk dapat mengganti password.',
           onCompleted: (otp) async {
         otp.pause();
-        final ok = await verifyOTP(
-            {'email': form.value['email'], 'otp': otp.value});
+        logg({'email': form.value['email'], 'otp': otp.value});
+        final ok =
+            await verifyOTP({'email': form.value['email'], 'otp': otp.value});
 
         if (ok) {
-          Get.until((route) => route.isFirst);
+          Get.toNamed(Routes.NEW_PASSWORD);
         } else {
           failedAttempt++;
           otp.reset().resume();
@@ -245,11 +244,11 @@ class LoginController extends GetxController  {
     try {
       LzToast.overlay('Memverifikasi...');
       // final res = await api.account.verifyOTPForgetPassword(payload);
-        ResponseHandler res = await AuthService.verifyOTPForgetPassword(fpForms.value);
+      ResponseHandler res = await AuthService.verifyOTPForgetPassword(payload);
 
       if (res.status) {
-        storage.write('reset-pass-token',
-            {'idmember': payload['idmember'], 'token': res.data['token']});
+        Toasts.show("OTP Berhasil terverifikasi, silakan reset Password Anda");
+        Get.back();
       } else {
         LzToast.show(res.message);
       }
@@ -264,4 +263,27 @@ class LoginController extends GetxController  {
     return false;
   }
 
+  final npForms = LzForm.make(['password', 'confirm_password']);
+
+  Future requestResetPassword(LzButtonControl state) async {
+    try {
+      final form = npForms.validate(required: ['*']);
+
+      if (!form.ok) {
+        return LzToast.show('Wajib masukkan password dan email');
+      }
+
+      ResponseHandler res = await AuthService.verifyNewPassword({'password': form.value['password'], 'confirm_password': form.value['confirm_password'], 'email': email});
+
+      if (res.status) {
+        LzToast.show(res.message);
+        Get.offAllNamed(Routes.LOGIN);
+
+      } else {
+        LzToast.show(res.message);
+      }
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
 }

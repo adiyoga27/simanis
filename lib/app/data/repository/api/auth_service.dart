@@ -70,11 +70,21 @@ class AuthService {
   // verify otp forget password
   static Future<ResponseHandler> verifyOTPForgetPassword(Map<String, dynamic> map) async {
     try {
-      Response response = await Fetch.post('verify-otp', data: FormData.fromMap(map));
+      Response response = await Fetch.post('$serverApi/auth/verify-otp', data: FormData.fromMap(map));
       return await ResponseHandler.check(response);
     } catch (e) {
       return ResponseHandler.catchResponse(e);
     }
   }
+  // new pass forget password
+  static Future<ResponseHandler> verifyNewPassword(Map<String, dynamic> map) async {
+    try {
+      Response response = await Fetch.post('$serverApi/auth/verify-new-pass', data: FormData.fromMap(map));
+      return await ResponseHandler.check(response);
+    } catch (e) {
+      return ResponseHandler.catchResponse(e);
+    }
+  }
+  
 
 }
