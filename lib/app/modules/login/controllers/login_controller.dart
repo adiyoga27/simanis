@@ -203,8 +203,8 @@ class LoginController extends GetxController {
       failedAttempt = 0;
       ResponseHandler res = await AuthService.requestOtp(fpForms.value);
 
+      LzToast.dismiss();
       email = res.data?['email'] ?? '';
-        Get.back();
 
       if (!res.status) {
         return LzToast.show(res.message ?? 'Terjadi kesalahan');
