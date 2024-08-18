@@ -50,7 +50,7 @@ class AuthService {
   static Future<ResponseHandler> requestOtp(Map<String, dynamic> map) async {
     try {
       map['group'] = group;
-      Response response = await Fetch.post('send-otp-forget', data: FormData.fromMap(map));
+      Response response = await Fetch.post('$serverApi/auth/send-otp-forget', data: FormData.fromMap(map));
       return await ResponseHandler.check(response);
     } catch (e) {
       return ResponseHandler.catchResponse(e);
