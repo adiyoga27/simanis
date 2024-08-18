@@ -85,6 +85,7 @@ flutter:
     - assets/images/good.png
     - assets/images/men.png
     - assets/images/women.png
+    - assets/images/solusiindo.png
     - assets/images/svg/rating.svg
     - assets/alarm.wav
 

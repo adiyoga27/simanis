@@ -26,7 +26,7 @@ class AppConfig {
   | */
 
   static const String version = '1.0.0';
-  static const String buildDate = '12082024.3'; 
+  static const String buildDate = '18082024.1'; 
 
 
   /* ------------------------------------------------------------

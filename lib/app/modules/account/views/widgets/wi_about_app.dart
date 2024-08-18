@@ -6,11 +6,10 @@ class WiAboutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String appDescription = '''
-SIMANIS, kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluruh. Aplikasi kami dirancang khusus untuk membantu Anda mengelola diabetes dengan mudah dan efektif .
+    String appDescription = ''' kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluruh. Aplikasi kami dirancang khusus untuk membantu Anda mengelola diabetes dengan mudah dan efektif .
 ''';
 
-    String galkaIconUrl = 'https://www.indoapps.id/public/uploads/logo_230901100115_.png';
+    String galkaIconUrl = 'solusiindo.png';
     String galkaUrl = 'https://www.indoapps.id';
 
     return Container(
@@ -34,7 +33,7 @@ SIMANIS, kami memahami betapa pentingnya menjaga kesehatan Anda secara menyeluru
                             fit: BoxFit.contain,
                           ).margin(v: 35),
                           RichText(
-                              text: TextSpan(text: 'Simanis ', style: Gfont.bold, children: [
+                              text: TextSpan(text: 'Simanis,', style: Gfont.bold, children: [
                             TextSpan(text: appDescription, style: Gfont.normal),
                           ])),
                           Textr('#ayosehat', style: Gfont.muted, margin: Ei.only(t: 25)),
