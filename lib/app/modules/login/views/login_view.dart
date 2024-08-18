@@ -12,7 +12,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
 Get.lazyPut(()=>LoginController());
-    controller.forms.fill({'username': 'adiyoga27', 'password': 'Adiyoga1996'});
+    // controller.forms.fill({'username': 'adiyoga27', 'password': 'Adiyoga1996'});
 
     return Wrapper(
       child: Scaffold(

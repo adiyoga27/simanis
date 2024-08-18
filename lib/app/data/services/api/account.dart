@@ -4,7 +4,11 @@ class AccountApi extends Fetch {
   Future<ResHandler> getProfile() async => await get('/user');
 
   Future<ResHandler> changePassword(Map<String, dynamic> data) async =>
-      await post('/ganti-password.php', data);
+      await post('https://simanis.codingaja.my.id/api/auth/reset', data);
+      
+  // Future<ResHandler> changePassword(Map<String, dynamic> data) async =>
+  //     await post('/auth/reset', data);
+      
   Future<ResHandler> changePhone(Map<String, dynamic> data) async =>
       await post('/ubah-hp/request-ubah-hp.php', data);
   Future<ResHandler> changePhoto(

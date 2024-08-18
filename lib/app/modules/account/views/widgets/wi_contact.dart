@@ -8,10 +8,10 @@ class WiContact extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> labels = ['Alamat', 'No. Telepon', 'Email', 'Website'],
         values = [
-          'Jalan. Ahmad Yani Utara, Gang Sriti No. 88, Kel. Peguyangan, Kec. Denpasar Utara, Kota Denpasar, Bali 80115.',
-          '+62 3619 0083 84',
-          'adiyoga27@codingaja.com',
-          'https://codingaja.com/'
+          'Jln. Ganetri IV No. 4 DPS 80237 Bali',
+          '+62 82340876933',
+          'partners@indoapps.id',
+          'https://www.indoapps.id'
         ];
 
     return Container(
@@ -34,7 +34,7 @@ class WiContact extends StatelessWidget {
                       physics: BounceScroll(),
                       child: Col(
                         children: List.generate(labels.length, (i) {
-                          List<String> links = ['tel:+623619008384', 'mailto:adiyoga27@codingaja.com', 'https://codingaja.com/'];
+                          List<String> links = ['tel:+6282340876933', 'mailto:partners@indoapps.id', 'https://indoapps.id/'];
 
                           return InkTouch(
                             onTap: () {

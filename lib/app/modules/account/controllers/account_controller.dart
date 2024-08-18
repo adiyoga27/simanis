@@ -40,7 +40,7 @@ class AccountController extends GetxController {
   | Change Password
   | --------------------------------------------- */
 
-  Map<String, TextEditingController> formsPassword = Forms.create(['old_pass', 'new_pass', 'confirm_pass']);
+  Map<String, TextEditingController> formsPassword = Forms.create(['old_password', 'password', 'confirm_password']);
   RxBool obsecure = true.obs;
 
   Future changePassword() async {
@@ -74,7 +74,6 @@ class AccountController extends GetxController {
       final auth = await Auth.user();
 
       map['username'] = auth.username;
-      map['group'] = Values.group;
 
       ResHandler res = await api.changePassword(map);
       Toasts.dismiss();
