@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:simanis/app/modules/farmakologi/views/check_jadwal.dart';
-import 'package:simanis/app/modules/foot_screening/views/survey_screening_view.dart';
-import 'package:simanis/app/modules/tnt/views/check_tnm_view.dart';
+import 'package:simanis/app/modules/login/views/forgot_password_view.dart';
 
 import '../modules/account/bindings/account_binding.dart';
 import '../modules/account/views/account_view.dart';
@@ -16,11 +14,13 @@ import '../modules/education/views/education_view.dart';
 import '../modules/education_detail/bindings/education_detail_binding.dart';
 import '../modules/education_detail/views/education_detail_view.dart';
 import '../modules/farmakologi/bindings/farmakologi_binding.dart';
+import '../modules/farmakologi/views/check_jadwal.dart';
 import '../modules/farmakologi/views/farmakologi_view.dart';
 import '../modules/foot_care/bindings/foot_care_binding.dart';
 import '../modules/foot_care/views/foot_care_view.dart';
 import '../modules/foot_screening/bindings/foot_screening_binding.dart';
 import '../modules/foot_screening/views/foot_screening_view.dart';
+import '../modules/foot_screening/views/survey_screening_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/initial/bindings/initial_binding.dart';
@@ -32,6 +32,7 @@ import '../modules/physical_training/views/physical_training_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
 import '../modules/tnt/bindings/tnt_binding.dart';
+import '../modules/tnt/views/check_tnm_view.dart';
 import '../modules/tnt/views/tnt_view.dart';
 import '../modules/webview/bindings/webview_binding.dart';
 import '../modules/webview/views/webview_view.dart';
@@ -121,7 +122,7 @@ class AppPages {
       page: () => const FootScreeningView(),
       binding: FootScreeningBinding(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.SURVEY_SCREENING,
       page: () => const SurveyScreeningView(),
       binding: FootScreeningBinding(),
@@ -141,11 +142,15 @@ class AppPages {
       page: () => const TntView(),
       binding: TntBinding(),
     ),
-      GetPage(
+    GetPage(
       name: _Paths.CHECK_TNM,
       page: () => const CheckTNMView(),
       binding: TntBinding(),
     ),
-   
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: LoginBinding(),
+    ),
   ];
 }

@@ -50,7 +50,7 @@ class AuthService {
   static Future<ResponseHandler> requestOtp(Map<String, dynamic> map) async {
     try {
       map['group'] = group;
-      Response response = await Fetch.post('kirim-otp.php', data: FormData.fromMap(map));
+      Response response = await Fetch.post('send-otp-forget', data: FormData.fromMap(map));
       return await ResponseHandler.check(response);
     } catch (e) {
       return ResponseHandler.catchResponse(e);
@@ -68,9 +68,9 @@ class AuthService {
   }
 
   // verify otp forget password
-  static Future<ResponseHandler> verifyWaOtp(String username, String otp) async {
+  static Future<ResponseHandler> verifyOTPForgetPassword(Map<String, dynamic> map) async {
     try {
-      Response response = await Fetch.post('verifikasi/verifikasi-otp.php', data: FormData.fromMap({'username': username, 'otp': otp}));
+      Response response = await Fetch.post('verify-otp', data: FormData.fromMap(map));
       return await ResponseHandler.check(response);
     } catch (e) {
       return ResponseHandler.catchResponse(e);

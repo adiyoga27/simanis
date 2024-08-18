@@ -63,6 +63,13 @@ Get.lazyPut(()=>LoginController());
                                                            outline: false,
                                                          ).sized(Get.width),
                              ),
+
+                              Padding(
+                               padding:  Ei.only(l:25.0, r: 25.0, t: 15.0),
+                               child: InkWell(
+                                onTap: () => Get.toNamed(Routes.FORGET_PASSWORD),
+                                child: Textr('Lupa kata sandi?', style: Gfont.fbold(true).copyWith(fontSize: 18.0, fontWeight: FontWeight.bold))),
+                             ),
                           // Touch(
                           //     onTap: () {
                           //       Get.bottomSheet(const ForgetPasswordView()).then((value) {

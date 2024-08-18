@@ -12,6 +12,7 @@ import 'package:simanis/app/data/services/storage/storage.dart';
 import 'package:simanis/app/modules/home/controllers/home_controller.dart';
 import 'package:simanis/app/routes/app_pages.dart';
 import 'package:simanis/app/widgets/forms/forms.dart';
+import 'package:simanis/app/widgets/pad.dart';
 
 class LoginController extends GetxController  {
   final forms = LzForm.make(['username', 'password']);
@@ -99,30 +100,30 @@ class LoginController extends GetxController  {
   | FORGET PASSWORD
   | -------------------------------------------------- */
   // OtpApi otpApi = OtpApi();
-  Map<String, TextEditingController> fpForms = Forms.create(['username']);
+  // Map<String, TextEditingController> fpForms = Forms.create(['username']);
 
   
-  Future<bool> verifyOtp(String otp, String username) async {
-    bool ok = false;
+  // Future<bool> verifyOtp(String otp, String username) async {
+  //   bool ok = false;
 
-    try {
-      Toasts.overlay('Memverifikasi...');
-      // ResHandler res = await otpApi.verify2(username, otp);
-      // Toasts.dismiss();
+  //   try {
+  //     Toasts.overlay('Memverifikasi...');
+  //     // ResHandler res = await otpApi.verify2(username, otp);
+  //     // Toasts.dismiss();
 
-      // if (!res.status) {
-      //   return Toasts.show(res.message);
-      // }
+  //     // if (!res.status) {
+  //     //   return Toasts.show(res.message);
+  //     // }
 
-      // ok = true;
-      // Toasts.show('Password berhasil direset, silakan cek SMS atau Whatsapp Anda');
-      // Toasts.show(res.message ?? 'Berhasil memverifikasi, periksa whatsapp Anda');
-    } catch (e, s) {
-      Errors.check(e, s);
-    }
+  //     // ok = true;
+  //     // Toasts.show('Password berhasil direset, silakan cek SMS atau Whatsapp Anda');
+  //     // Toasts.show(res.message ?? 'Berhasil memverifikasi, periksa whatsapp Anda');
+  //   } catch (e, s) {
+  //     Errors.check(e, s);
+  //   }
 
-    return ok;
-  }
+  //   return ok;
+  // }
 
   /* --------------------------------------------------------------------------
   | LOGOUT
@@ -184,4 +185,83 @@ class LoginController extends GetxController  {
       }
     });
   }
+
+   /* -------------------------------------------------------------------------- 
+  | FORGET PASSWORD
+  | -------------------------------------------------- */
+  final fpForms =  LzForm.make(['email']);
+  
+  int failedAttempt = 0;
+
+  Future requestOtp(LzButtonControl state) async {
+    try {
+      final form = fpForms.validate(required: ['*']);
+
+      if (!form.ok) {
+        return LzToast.show('Masukkan Email');
+      }
+
+      failedAttempt = 0;
+        ResponseHandler res = await AuthService.requestOtp(fpForms.value);
+
+      String email = res.data?['email'] ?? '';
+
+      if (!res.status) {
+        return LzToast.show(res.message ?? 'Terjadi kesalahan');
+      }
+
+      LzPad.show(Get.context!,
+          expired: 5.m,
+          title: 'Verifikasi Kode OTP',
+          subtitle:
+              'Silakan masukkan kode OTP yang kami kirimkan ke nomor $email untuk dapat mengganti password.',
+          onCompleted: (otp) async {
+        otp.pause();
+        final ok = await verifyOTP(
+            {'email': form.value['email'], 'otp': otp.value});
+
+        if (ok) {
+          Get.until((route) => route.isFirst);
+        } else {
+          failedAttempt++;
+          otp.reset().resume();
+
+          if (failedAttempt >= 3) {
+            LzToast.show(
+                'Anda telah melebihi batas percobaan sebanyak 3 kali, silakan coba lagi nanti.',
+                duration: 5.s);
+            failedAttempt = 0;
+            Get.back();
+            return;
+          }
+        }
+      });
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+  Future<bool> verifyOTP(Map<String, dynamic> payload) async {
+    try {
+      LzToast.overlay('Memverifikasi...');
+      // final res = await api.account.verifyOTPForgetPassword(payload);
+        ResponseHandler res = await AuthService.verifyOTPForgetPassword(fpForms.value);
+
+      if (res.status) {
+        storage.write('reset-pass-token',
+            {'idmember': payload['idmember'], 'token': res.data['token']});
+      } else {
+        LzToast.show(res.message);
+      }
+
+      return res.status;
+    } catch (e, s) {
+      Errors.check(e, s);
+    } finally {
+      LzToast.dismiss();
+    }
+
+    return false;
+  }
+
 }

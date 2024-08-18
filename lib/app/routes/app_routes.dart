@@ -24,6 +24,7 @@ abstract class Routes {
   static const TNT = _Paths.TNT;
   static const CHECK_TNM = _Paths.CHECK_TNM;
   static const CHECK_JADWAL = _Paths.CHECK_JADWAL;
+  static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const TNT = '/tnt';
   static const CHECK_TNM = '/check-tnm';
   static const CHECK_JADWAL = '/check-jadwal';
+  static const FORGET_PASSWORD = '/forget-password';
 }
