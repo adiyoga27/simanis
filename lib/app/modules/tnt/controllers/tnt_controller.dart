@@ -21,6 +21,7 @@ class TntController extends GetxController {
   String bmiNote = '';
   double weight = 0.0;
   double totalKebutuhanKalori = 0.0;
+  double beratIdeal = 0.0;
   final forms =
       LzForm.make(['tall', 'weight', 'jk', 'activity', 'age', 'status_weight']);
 
@@ -69,7 +70,6 @@ class TntController extends GetxController {
         activity = payload['activity'];
 
         bmi = weight / ((tall / 100 * tall / 100));
-
         if (bmi > 28) {
           bmiNote = 'Obesitas';
         } else if (bmi >= 25) {
@@ -82,31 +82,28 @@ class TntController extends GetxController {
 
         // 1. Hitung Berat Badan Ideal (BBI)
         double bbi = hitungBeratBadanIdeal(jk, tall);
-        logg("bbi $bbi");
         // 2. Hitung Kebutuhan Kalori Basal (KKB)
-        double kkb = hitungKebutuhanKaloriBasal(jk, bbi);
-        logg("kkb $kkb");
+        double kkJk = hitungKebutuhanKaloriBasal(jk, bbi);
         // 3. Pertimbangan Umur
-        double kkbSetelahUmur = pertimbangkanUmur(kkb, age);
-        logg("kkbSetelahUmur $kkbSetelahUmur");
+        double kkUmur = pertimbangkanUmur(kkJk, age);
         // 4. Tambah Faktor Aktivitas Fisik
-        double kkbSetelahAktivitas =
-            tambahkanFaktorAktivitas(kkbSetelahUmur, activity);
+        double kkAktivitas =
+            tambahkanFaktorAktivitas(kkUmur, kkJk, activity);
 
-        logg("kaloriAkhir $kkbSetelahAktivitas");
         // 5. Pertimbangan Berat Badan Saat Ini
-        double kaloriAkhir = pertimbangkanBeratBadan(
-            kkbSetelahAktivitas, payload['status_weight']);
-        logg("kaloriAkhir $kaloriAkhir");
-        // 6. Hitung BMR (Basal Metabolism Rate)
-        double bmr = hitungBmr(jk, weight, tall, age);
-        logg("bmr $bmr");
-        // 7. Hitung Total Kebutuhan Kalori Berdasarkan Tingkat Aktivitas
-        // totalKebutuhanKalori = hitungTotalKebutuhanKalori(bmr, activity);
-        // logg("totalKebutuhanKalori $totalKebutuhanKalori");
+        double kkBerat = pertimbangkanBeratBadan(
+            kkAktivitas, kkJk, payload['status_weight']);
 
-totalKebutuhanKalori = bmr;
-
+        totalKebutuhanKalori = kkBerat;
+        
+          logg('Berat : $weight');
+          logg('Tinggi : $tall');
+          logg('Berat Ideal : $bbi');
+          logg('IMT : $bmi');
+          logg('Kalori Jenis Kelamin : $kkJk');
+          logg('Umur : $kkUmur');
+          logg('Aktivity : $kkAktivitas');
+          logg('Berat : $kkBerat');
        try {
       ResHandler res = await educationApi.getDiets(totalKebutuhanKalori);
       logg(res.data);
@@ -166,37 +163,37 @@ double hitungKebutuhanKaloriBasal(String jenisKelamin, double bbi) {
 }
 
 double pertimbangkanUmur(double kalori, int usia) {
-  if (usia >= 49 && usia <= 59) {
-    return kalori * 0.95;
-  } else if (usia >= 60 && usia <= 69) {
-    return kalori * 0.90;
-  } else if (usia >= 70) {
-    return kalori * 0.80;
+  if (usia >= 70 ) {
+    return kalori - (kalori * 0.2);
+  } else if (usia >= 60 ) {
+    return kalori - ( kalori * 0.1 );
+  } else if (usia >= 40) {
+    return kalori - ( kalori * 0.05 );
   } else {
     return kalori;
   }
 }
 
-double tambahkanFaktorAktivitas(double kalori, String aktivitas) {
+double tambahkanFaktorAktivitas(double kkUmur, double kkJK,  String aktivitas) {
   if (aktivitas == "Istirahat") {
-    return kalori * 1.10;
+    return kkUmur + (kkJK * 0.1);
   } else if (aktivitas == "Aktivitas Ringan (Kantor, Guru, Ibu Rumah Tangga)") {
-    return kalori * 1.20;
+    return kkUmur + (kkJK * 0.2);
   } else if (aktivitas == "Aktivitas Sedang (Pegawai Industri, Mahasiswa, Militer TIdak Berperang)") {
-    return kalori * 1.30;
+    return kkUmur + (kkJK * 0.3);
   } else if (aktivitas == "Aktivitas Berat (petani, buruh, atlet, militer berperang)") {
-    return kalori * 1.40;
+    return kkUmur + (kkJK * 0.4);
   } else if (aktivitas == "Aktivitas Sangat Berat (Tukang Becak, Tukang Gali)") {
-    return kalori * 1.50;
+    return kkUmur + (kkJK * 0.5);
   }
-  return kalori;
+  return kkUmur;
 }
 
-double pertimbangkanBeratBadan(double kalori, String statusBB) {
+double pertimbangkanBeratBadan(double kalori, double kkJk ,String statusBB) {
   if (statusBB == "Gemuk") {
-    return kalori * 0.70;
+    return kalori - (kkJk * 0.25);
   } else if (statusBB == "Kurus") {
-    return kalori * 1.30;
+    return kalori + (kkJk * 0.25);
   }
   return kalori;
 }
