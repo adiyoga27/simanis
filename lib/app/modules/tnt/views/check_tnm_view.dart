@@ -68,23 +68,28 @@ class CheckTNMView extends GetView<TntController> {
                                       maximum: 40,
                                       ranges: <GaugeRange>[
                                         GaugeRange(
-                                          startValue: 0,
-                                          endValue: 15.9,
+                                          startValue: 0.0,
+                                          endValue: 16.9,
                                           color: Colors.red,
                                         ),
                                         GaugeRange(
-                                          startValue: 16,
-                                          endValue: 24.9,
-                                          color: Colors.green,
-                                        ),
-                                        GaugeRange(
-                                          startValue: 25,
-                                          endValue: 28,
+                                          startValue: 17.0,
+                                          endValue: 18.4,
                                           color: Colors.orange,
                                         ),
                                         GaugeRange(
-                                          startValue: 28.1,
-                                          endValue: 50,
+                                          startValue: 18.5,
+                                          endValue: 25.0,
+                                          color: Colors.green,
+                                        ),
+                                        GaugeRange(
+                                          startValue: 25.1,
+                                          endValue: 27.0,
+                                          color: Colors.orange,
+                                        ),
+                                        GaugeRange(
+                                          startValue: 27.1,
+                                          endValue: 40,
                                           color: Colors.red,
                                         )
                                       ],

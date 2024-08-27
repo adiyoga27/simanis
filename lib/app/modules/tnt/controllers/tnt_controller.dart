@@ -207,30 +207,3 @@ double hitungBmr(String jenisKelamin, double bbKg, int tbCm, int usia) {
   return 0.0;
 }
 
-double hitungTotalKebutuhanKalori(double bmr, String aktivitas) {
-  // if (aktivitas == "jarang") {
-  //   return bmr * 1.2;
-  // } else if (aktivitas == "ringan") {
-  //   return bmr * 1.375;
-  // } else if (aktivitas == "cukup") {
-  //   return bmr * 1.55;
-  // } else if (aktivitas == "sering") {
-  //   return bmr * 1.725;
-  // } else if (aktivitas == "sangat_sering") {
-  //   return bmr * 1.9;
-  // }
-  // return bmr;
-
-    if (aktivitas == "Istirahat") {
-    return bmr * 1.2;
-  } else if (aktivitas == "Aktivitas Ringan (Kantor, Guru, Ibu Rumah Tangga)") {
-    return bmr * 1.375;
-  } else if (aktivitas == "Aktivitas Sedang (Pegawai Industri, Mahasiswa, Militer TIdak Berperang)") {
-    return bmr * 1.55;
-  } else if (aktivitas == "Aktivitas Berat (petani, buruh, atlet, militer berperang)") {
-    return bmr * 1.725;
-  } else if (aktivitas == "Aktivitas Sangat Berat (Tukang Becak, Tukang Gali)") {
-    return bmr * 1.9;
-  }
-  return bmr;
-}
