@@ -32,8 +32,10 @@ class ArticleView extends StatelessWidget {
                     child: Textr(title!, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
                   ),
                   Padding(
-                    padding: Ei.sym(v: 12.0, h: 10.0),
-                    child: HtmlWidget(content!),
+                    padding: Ei.sym(v: 12.0, h: 14.0),
+                    child: HtmlWidget(
+                      textStyle: gfont.copyWith(fontSize: 17.0),
+                      content!),
                   ),
             
                 ],

@@ -14,13 +14,13 @@ class TntView extends GetView<TntController> {
       bool isLoading = controller.isLoading.value;
 
       if (isLoading) {
-        return LzLoader.bar(message: 'Memuat TNM...');
+        return LzLoader.bar(message: 'Memuat Nutrisi...');
       }
       return Wrapper(
           child: Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: AppBar(
-                title: const Text('TNM'),
+                title: const Text('Nutrisi'),
                 centerTitle: true,
               ),
               body: LzFormList(

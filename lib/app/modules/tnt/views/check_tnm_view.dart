@@ -43,7 +43,7 @@ class CheckTNMView extends GetView<TntController> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'BMI untuk ${controller.jk}',
+                                'Indexs massa tubuh ${controller.jk}',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
@@ -230,7 +230,7 @@ class StatusBMI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.only(left: 2.0, right: 2.0),
       child: Text(
         ' ${controller.bmiNote}',
         style: TextStyle(

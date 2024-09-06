@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:simanis/app/core/utils/fetch.dart';
 import 'package:simanis/app/core/utils/toast.dart';
+import 'package:simanis/app/data/services/api/api.dart';
 import 'package:simanis/app/modules/home/views/widgets/appbar.dart';
 
 class DashboardController extends GetxController {
@@ -30,16 +32,28 @@ class DashboardController extends GetxController {
   Future onAppInit() async {
     isLoading.value = true;
     // Toasts.show('Loading data...');
+   iniHome();
       Timer(2.s, () {
         Toasts.dismiss();
       });
     // if selected client is empty, show dialog
-   
     isLoading.value = false;
       update();
 
   }
 
+ Future iniHome() async {
+    try {
+      final api = AccountApi();
+
+      ResHandler res = await api.getHome();
+
+        
+    } catch (e, s) {
+           Errors.check(e, s);
+
+    }
+  }
 @override
   void onInit() {
     super.onInit();

@@ -53,10 +53,10 @@ class AlertShowingDialogWidget extends StatelessWidget {
             height: 10.0,
           ),
           type == 'warning' ? CardListBloodSugar(
-            title: "Tutorial Cara Perawatan Hipoglekimia",
+            title: "Tutorial Cara Perawatan Kaki",
             onTap: () => Get.toNamed(Routes.WEBVIEW,
                 arguments: Webview(
-                    title: 'Tutorial Cara Perawatan Hipoglekimia',
+                    title: 'Tutorial Cara Perawatan Kaki',
                     url: 'https://simanis.codingaja.com/recomendasi-foot')),
           ) : const SizedBox(height: 1.0,),
         ],

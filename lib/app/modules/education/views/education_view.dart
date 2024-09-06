@@ -29,7 +29,7 @@ class EducationView extends GetView<EducationController> {
                       crossAxisSpacing: 5,
                       column: 2,
                       children: List.generate(4, (i) {
-                        List<String> labels = ['Edukasi', 'TNM', 'Latihan Fisik', 'Perawatan Kaki'],
+                        List<String> labels = ['Edukasi', 'Nutrisi', 'Latihan Fisik', 'Perawatan Kaki'],
                             icons = ['edukasi.png','nutrisi.png','sport.png','foot.png'];
                         // List<String> desc = ['Lihat promo kompetisi Anda.'];
           

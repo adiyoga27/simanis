@@ -16,4 +16,7 @@ class AccountApi extends Fetch {
       await post('update-user.php?user=$username', FormData.fromMap(data));
   Future<ResHandler> updateProfile(Map<String, dynamic> data) async =>
       await put('/ahli-waris/ubah-waris.php', data);
+
+          Future<ResHandler> getHome() async =>
+      await get('https://simanis.codingaja.com/api/home');
 }
